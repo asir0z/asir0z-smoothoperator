@@ -107,4 +107,16 @@ devops-lab SSH via 127.0.0.1:2222
 
 ---
 
+## Certification Review (2026-07-23)
+
+```text
+DECISION:  APPROVED WITH CONDITIONS
+COMMIT:    0875b25
+NEXT:      WS-2 Sprint 2 — Cursor and Local Operator Workflow Validation
+```
+
+See [`certification-review-20260723.txt`](certification-review-20260723.txt)
+
+---
+
 *WS-2 Sprint 1 · SmoothOperator™ · evidence in this directory*

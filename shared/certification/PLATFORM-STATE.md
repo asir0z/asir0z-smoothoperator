@@ -89,15 +89,38 @@ Certification: [`WIN-1.md`](WIN-1.md)
 
 ---
 
+## WS-2 — Arch validation → bare metal
+
+```text
+Sprint 1   APPROVED WITH CONDITIONS ✅
+Sprint 2   Cursor + Local Operator Workflow Validation (NEXT)
+Arch VM    VALIDATION READY
+Bare-metal install   NOT AUTHORIZED
+```
+
+Sprint 1 evidence: [`shared/evidence/ws-2/readiness-audit/`](../evidence/ws-2/readiness-audit/) · commit `0875b25`
+
+**Open conditions (close in Sprint 2):**
+
+1. Cursor installation + IDE workflow validation  
+2. Timezone → `Europe/Istanbul`  
+3. GUI confirm: clipboard · audio · keyboard layout  
+
+**Backlog (not blocking):** bootstrap automount · VM-specific
+
+**SSH key policy:** private keys never in repo, bootstrap, or evidence — operator-controlled transfer only.
+
+---
+
 ## Mission 20 (DevOps Lab)
 
-Mission 20 ekosistemin en kritik dönüm noktası olarak kalıyor.
+Production cutover to Contabo executed 2026-07-23. **Observation window** active.
 
 **Başarı kriteri:**
 
 > **Production users cannot tell that infrastructure changed.**
 
-Parite, cutover ve observation window tamamlanmadan Ubuntu VM emekliye ayrılmayacak.
+Observation PASS tamamlanmadan Ubuntu VM emekliye ayrılmayacak (WIN-1A).
 
 Spec: [MISSION-20](https://github.com/asir0z/asir0z-devopslab/blob/main/missions/phase-2/MISSION-20-PRODUCTION-RUNTIME-MIGRATION.md)
 
@@ -187,9 +210,11 @@ Unless new evidence changes state:
 | Migration | **100% · CERTIFIED · FROZEN** |
 | WIN-1 Infrastructure | **100% · CERTIFIED · FROZEN BASELINE** |
 | WIN-1 Core | **OPEN** — Observed Friction driven |
+| WS-2 Sprint 1 | **APPROVED WITH CONDITIONS** |
+| WS-2 Sprint 2 | **NEXT** — Cursor + local operator workflow |
+| Mission 20 | **Observation** (Contabo cutover 2026-07-23) |
+| WIN-1A | BLOCKED until Mission 20 observation PASS |
 | Foundation / Governance / Lifecycle | **FROZEN** |
-| Mission 20 | Next major infrastructure transition |
-| WIN-1A | BLOCKED until Mission 20 + observation |
 | Review trigger | **Observed Friction** or new evidence only |
 
 Historical only (do not revert): `95% Migration` · `P0 Pending` · `WIN-1 blocked until Migration FROZEN`
@@ -198,8 +223,8 @@ Historical only (do not revert): `95% Migration` · `P0 Pending` · `WIN-1 block
 
 | Track | Focus |
 |-------|-------|
-| **SmoothOperator** | WIN-1 Infra **FROZEN ✅** · Core **OPEN** |
-| **DevOps Lab** | Mission 20 · parity · cutover · observation |
+| **SmoothOperator** | WIN-1 Infra **FROZEN ✅** · Core **OPEN** · WS-2 Sprint 1 **APPROVED WITH CONDITIONS** |
+| **DevOps Lab** | Mission 20 **Observation** |
 | **Products** | Standby until Contabo production |
 
 ---

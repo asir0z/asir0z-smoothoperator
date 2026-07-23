@@ -1,0 +1,31 @@
+WS-2 Sprint 1 — Certification Review Addendum
+Date: 2026-07-23
+Reviewer: Certification Authority
+
+DECISION
+APPROVED WITH CONDITIONS
+
+Evidence: shared/evidence/ws-2/readiness-audit/
+Commit: 0875b25
+
+Sprint goal met: Arch VM validated as transferable bare-metal validation environment.
+
+WS-1: 17 PASS / 0 FAIL
+Repository: canonical path · clean tree · cross-platform round trip PASS
+Operator: Git PASS · SSH PASS · Contabo read-only PASS
+
+Open conditions (close in Sprint 2 — do not reject Sprint 1):
+  1. Cursor installation and IDE workflow validation
+  2. Timezone Europe/Istanbul
+  3. Local GUI confirmation: clipboard · audio · keyboard layout
+
+Backlog acceptable now: bootstrap automount (VM-specific)
+
+SSH key note:
+  Sprint 1 guest key install accepted as operator fix only.
+  Private keys MUST NOT enter repo, bootstrap, or evidence.
+  Bare-metal: operator-controlled secure transfer only — no automation.
+
+Next sprint:
+  WS-2 Sprint 2 — Cursor and Local Operator Workflow Validation
+  Scope: close three conditions only. No package sprawl, VBox tuning, bare-metal install.

@@ -15,11 +15,10 @@ Arch pre-pull:
   master @ 3728e3d
   untracked linux/arch-workstation/ (scp copy, pre-commit)
 
-Post-commit verification: see git log after push
+Post-commit verification (2026-07-23):
 
-Acceptance criteria:
-  - No line-ending corruption in committed files
-  - Same commit SHA on Windows and Arch after pull
-  - Canonical remote URL unchanged
+Windows: 0875b25 docs(ws-2): complete Arch VM operational readiness audit sprint 1
+Remote:   pushed origin/master 3728e3d..0875b25
+Arch:     git pull after removing stale untracked linux/arch-workstation/ copy
 
-Note: frozen WIN-1 Infrastructure certification files not modified
+Acceptance: PASS — same commit on Windows and Arch · canonical remote unchanged
