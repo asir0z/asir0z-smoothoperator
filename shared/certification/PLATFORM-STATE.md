@@ -125,10 +125,11 @@ BOOTSTRAP:  scripts/bootstrap/mac-bootstrap.sh
 EVIDENCE:   shared/evidence/mac-1/mac-1-evidence-20260724.md
 COLLECTOR:  shared/evidence/mac-1/verification-20260724-023724.txt
 CERT:       MAC-1.md
-MAC-2:      DEFERRED · scope expansion APPROVED (complete engineering workstation)
+MAC-2:      DEFERRED · scope + software baseline APPROVED
             → after OFFLINE-1 · Arch install · Arch bootstrap
             → shared/missions/MAC-2-DEVELOPMENT-EXPERIENCE.md
             → expansion: MAC-2-SCOPE-EXPANSION-ENGINEERING-WORKSTATION.md
+            → baseline:  MAC-2-SOFTWARE-BASELINE.md
 ```
 
 **Split:** Mac = wrappers/aliases · Ubuntu = canonical production scripts · Arch = on-demand compute.
