@@ -1,0 +1,23 @@
+﻿=== ssh-config.txt ===
+Collected: 2026-07-23 19:03:50
+
+ssh : OpenSSH_for_Windows_9.5p2, LibreSSL 3.8.2
+At C:\Projects\asir0z-smoothoperator\scripts\collect-win1-infrastructure.ps1:44 char:5
++     ssh -V 2>&1
++     ~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (OpenSSH_for_Win... LibreSSL 3.8.2:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+--- config (hosts only, no IdentityFile values) ---
+Host contabo
+  HostName 169.58.62.107
+  User root
+Host arch-ws
+  HostName 127.0.0.1
+  Port 2223
+  User asir0z
+Host devops-lab
+  HostName 127.0.0.1
+  Port 2222
+  User asir0z

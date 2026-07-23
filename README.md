@@ -16,21 +16,14 @@ SmoothOperator™
 
 ---
 
-## Status (2026-07-23)
+## Status
 
-> **P0 Close-out is PRIORITY 1.** No execution sprint until Migration **100% · FROZEN**. See `P0-CLOSEOUT.md`.
+**Canonical:** [`shared/certification/PLATFORM-STATE.md`](shared/certification/PLATFORM-STATE.md)
 
-| Initiative | Status |
-|------------|--------|
-| **P0** Migration close-out | ⏳ **PRIORITY 1** — `P0-CLOSEOUT.md` |
-| **Migration** | 95% · APPROVED — FROZEN gate open |
-| **WS-1** | ✅ CERTIFIED · FROZEN |
-| **WIN-0** | ✅ APPROVED |
-| **Transition Infrastructure** | ✅ APPROVED |
-| **WIN-1** | 🟢 AUTHORIZED · **exec blocked** until Migration FROZEN |
-| **WIN-1A** | 🚫 BLOCKED (Mission 20 + observation) |
-| **WIN-2.5** | 📋 SPEC APPROVED · **WAITING FOR WIN-1** |
-| **WS-2** Developer Experience | 🔒 waiting |
+```text
+Foundation · Governance · Lifecycle · Migration  →  FROZEN ✅
+Execution  →  ACTIVE (WIN-1 OPEN · Mission 20 Ready)
+```
 
 ---
 
@@ -60,7 +53,7 @@ VBox share `bootstrap` → host path `C:\Projects\asir0z-smoothoperator\linux\bo
 ## Windows roadmap
 
 ```text
-P0 FROZEN → WIN-1 (Core ∥ Infra) → WIN-2.5 → WS-2 → Mission 20 → WIN-1A
+Migration FROZEN ✅ → WIN-1 (Core ∥ Infra) 🟢 → WIN-2.5 → WS-2 → Mission 20 → WIN-1A
 ```
 
 | Sprint | Doc |
@@ -93,4 +86,4 @@ Legacy name `engineering-platform` appears only in migration history (`MIGRATION
 
 **Pending (operational):** close Cursor → run `scripts/complete-migration.ps1` → GitHub create/push.
 
-See `MIGRATION.md` and `shared/certification/MIGRATION.md`. **Close-out:** [`P0-CLOSEOUT.md`](P0-CLOSEOUT.md).
+See `MIGRATION.md` (historical checklist). Migration **FROZEN ✅** — see [`shared/certification/MIGRATION.md`](shared/certification/MIGRATION.md).

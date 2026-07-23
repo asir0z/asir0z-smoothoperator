@@ -1,6 +1,6 @@
 # Migration — engineering-platform → SmoothOperator™
 
-> **Status:** 95% complete · see `shared/certification/MIGRATION.md`
+> **Status:** **100% COMPLETE · CERTIFIED · FROZEN** · see [`shared/certification/MIGRATION.md`](shared/certification/MIGRATION.md)
 
 **Date:** 2026-07-23
 

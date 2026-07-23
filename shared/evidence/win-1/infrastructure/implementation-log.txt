@@ -1,0 +1,19 @@
+2026-07-23 — WIN-1 Infrastructure implementation log
+
+| Time (local) | Action | Result |
+|--------------|--------|--------|
+| Sprint start | Operator priority: Infrastructure → Core → Mission 20 | Accepted |
+| Baseline | Read-only inventory (Git, SSH, WSL, Docker, VBox, toolchain) | PASS |
+| Fix | Removed broken repo-root junction `bootstrap/` → stale `asir0z-engineering-platform` target | PASS — git status clean of bootstrap warning |
+| Fix | SSH alias `devops-lab` (127.0.0.1:2222, user asir0z) | PASS — hostname `asir0z-devopslab` |
+| Verify | VBox Arch shared folder | PASS — `C:\Projects\asir0z-smoothoperator\linux\bootstrap` |
+| Verify | Git remote smoothoperator | PASS — origin @ ASIR0Z/asir0z-smoothoperator |
+| Verify | Docker Desktop engine | PASS — context desktop-linux, server 29.6.1 |
+| Verify | WSL | PASS — Ubuntu (default, stopped), docker-desktop (running) |
+| Verify | Windows Terminal default | PASS — PowerShell 7 (574e775e profile) |
+| Verify | `ssh contabo` | PASS — hostname `vmi3459972` |
+| Verify | `ssh arch-ws` | EXPECTED FAIL — VM powered off, connection refused |
+| Skip | Ubuntu VM removal | WIN-1A blocked |
+| Skip | Startup / app cleanup | WIN-1 Core (post daily use) |
+
+Mutations performed: junction removal, SSH config alias only. No production changes.

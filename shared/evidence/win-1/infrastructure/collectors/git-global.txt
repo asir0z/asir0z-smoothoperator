@@ -1,0 +1,13 @@
+﻿=== git-global.txt ===
+Collected: 2026-07-23 19:03:50
+
+git version 2.53.0.windows.3
+filter.lfs.required=true
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+user.name=As─▒r
+user.email=asir01oz@gmail.com
+core.pager=cat
+core.autocrlf=false
+core.eol=lf

@@ -1,0 +1,23 @@
+﻿=== git-projects.txt ===
+Collected: 2026-07-23 19:03:50
+
+=== C:\Projects\asir0z-smoothoperator ===
+origin	https://github.com/ASIR0Z/asir0z-smoothoperator.git (fetch)
+origin	https://github.com/ASIR0Z/asir0z-smoothoperator.git (push)
+## master...origin/master
+
+=== C:\Projects\asir0z-devopslab ===
+origin	git@github.com:asir0z/asir0z-devopslab.git (fetch)
+origin	git@github.com:asir0z/asir0z-devopslab.git (push)
+## main...origin/main
+
+=== C:\Projects\asir0z-web ===
+origin	git@github.com:asir0z/asir0z-web.git (fetch)
+origin	git@github.com:asir0z/asir0z-web.git (push)
+## main...origin/main
+
+=== C:\Projects\asir0z-product-intelligence ===
+origin	git@github.com:asir0z/asir0z-product-intelligence.git (fetch)
+origin	git@github.com:asir0z/asir0z-product-intelligence.git (push)
+## cursor/asir0z-web-dashboard...origin/cursor/asir0z-web-dashboard
+

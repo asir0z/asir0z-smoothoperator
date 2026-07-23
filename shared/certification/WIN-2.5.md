@@ -28,7 +28,7 @@ Official status — no execution until WIN-1 certified and operator opens execut
 ```text
 WAITING FOR WIN-1
 
-  ⏳ Migration FROZEN (P0)
+  ✅ Migration FROZEN
   ⏳ WIN-1 Complete + certified
   ❌ Explicit execution authorization
 ```

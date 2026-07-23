@@ -1,0 +1,15 @@
+﻿=== virtualbox.txt ===
+Collected: 2026-07-23 19:03:50
+
+7.2.12r174389
+
+"DevOps-Lab-Ubuntu" {6a49270b-aa1f-42d8-9c49-cc6620342e30}
+"Arch-Engineering-Workstation" {ec60718f-cfde-4738-95bc-9339a575669b}
+
+
+VMState="poweroff"
+VMStateChangeTime="2026-07-23T03:41:40.823000000"
+SharedFolderNameMachineMapping1="bootstrap"
+SharedFolderPathMachineMapping1="C:\\Projects\\asir0z-smoothoperator\\linux\\bootstrap"
+
+

@@ -1,0 +1,22 @@
+P0 Close-out validation — 2026-07-23
+=====================================
+
+Path: C:\Projects\asir0z-smoothoperator
+Test-Path .git: True
+Legacy path asir0z-engineering-platform: False (removed)
+
+git remote -v:
+  origin  https://github.com/ASIR0Z/asir0z-smoothoperator.git (fetch)
+  origin  https://github.com/ASIR0Z/asir0z-smoothoperator.git (push)
+
+git branch -vv:
+  * master 02bdb7a [origin/master] chore: complete SmoothOperator migration
+
+git log --oneline -5:
+  02bdb7a chore: complete SmoothOperator migration
+  e7d2ee4 docs: migration junction notes and win-1.1 evidence placeholder
+  665912e docs(win-1): add legacy Ubuntu VM removal spec with DevOps Lab gate
+  d9262b7 refactor: migrate to SmoothOperator layout (windows/linux/shared) and archive WS-1 evidence
+  940fac1 fix(ws-1): copy bootstrap scripts to /tmp before sed (vboxsf)
+
+Certification: shared/certification/MIGRATION.md → 100% · CERTIFIED · FROZEN

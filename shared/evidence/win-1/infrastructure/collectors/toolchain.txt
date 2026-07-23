@@ -1,0 +1,12 @@
+﻿=== toolchain.txt ===
+Collected: 2026-07-23 19:03:50
+
+v1.29.280
+
+Major  Minor  Patch  PreReleaseLabel BuildLabel
+-----  -----  -----  --------------- ----------
+7      6      3                      
+
+v22.20.0
+Python 3.13.14
+git-lfs/3.7.1 (GitHub; windows amd64; go 1.25.1; git b84b3384)

@@ -1,0 +1,17 @@
+﻿=== ssh-connectivity.txt ===
+Collected: 2026-07-23 19:03:50
+
+=== ssh devops-lab ===
+asir0z-devopslab
+
+=== ssh contabo ===
+vmi3459972
+
+=== ssh arch-ws (expected FAIL when VM off) ===
+ssh : banner exchange: Connection to UNKNOWN port -1: Connection refused
+At C:\Projects\asir0z-smoothoperator\scripts\collect-win1-infrastructure.ps1:97 char:5
++     ssh -o BatchMode=yes -o ConnectTimeout=5 arch-ws 'hostname' 2>&1
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (banner exchange...nection refused:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

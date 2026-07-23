@@ -2,28 +2,34 @@
 
 ```text
 INITIATIVE:  engineering-platform → SmoothOperator™ (asir0z-smoothoperator)
-STATUS:      95% COMPLETE · APPROVED (P0 close-out PRIORITY 1)
-LIFECYCLE:   OPEN — FROZEN after 100% gate
-PRIORITY:    1 — block WIN-1 execution until FROZEN
+STATUS:      100% COMPLETE · CERTIFIED ✅
+LIFECYCLE:   FROZEN
 DATE:        2026-07-23
-REVIEWER:    Operator + DevOps Lab ChatGPT review
+REVIEWER:    Certification Authority
+CLOSE-OUT:   P0 complete
 ```
 
-## Discipline rule
-
-**No new execution sprint starts on a 95% migration.**
-
-WIN-1, WIN-2.5 evaluation, and Mission 20 **implementation** wait for:
-
-```text
-Rename → Remote → Push → Validation → 100% → FROZEN
-```
-
-Operator checklist: [`P0-CLOSEOUT.md`](../../P0-CLOSEOUT.md) · `scripts/complete-migration.ps1`
+Bootstrap era closed. Canonical path and remote verified.
 
 ---
 
-## Certification review (2026-07-23)
+## Validation evidence
+
+Path: `C:\Projects\asir0z-smoothoperator` · `.git` → **True**
+
+```text
+origin  https://github.com/ASIR0Z/asir0z-smoothoperator.git
+branch  master @ 02bdb7a [origin/master]
+HEAD    chore: complete SmoothOperator migration
+```
+
+Full capture: `shared/evidence/migration/p0-closeout-20260723.txt`
+
+Legacy name `engineering-platform` → **migration history only** (`MIGRATION.md`).
+
+---
+
+## Certification history
 
 ```text
 Repository Migration     APPROVED ✅
@@ -31,37 +37,22 @@ Certification Layer      APPROVED ✅
 WIN-1 / WIN-1A Split     APPROVED ✅
 Migration Script         APPROVED ✅
 Canonical Naming         APPROVED ✅
+P0 Close-out             COMPLETE ✅
+Migration FROZEN         CERTIFIED ✅
 ```
 
-Legacy name `engineering-platform` → **migration history only**.
+---
+
+## Post-FROZEN focus
+
+| Track | Next |
+|-------|------|
+| SmoothOperator | **WIN-1** execution OPEN (Core ∥ Infrastructure) |
+| DevOps Lab | **Mission 20** — parity · cutover · observation |
+| WIN-1A | BLOCKED until Mission 20 + observation PASS |
+
+No further migration reviews required.
 
 ---
 
-## Complete ✅ (engineering)
-
-| Item | Status |
-|------|--------|
-| Layout · evidence · certification layers | ✅ |
-| Transition Infrastructure review | ✅ |
-| Migration script | ✅ |
-| VBox interim path | ✅ |
-
-## Pending ⏳ (operator — Cursor workspace lock)
-
-| Step | Action |
-|------|--------|
-| Rename | Close IDE → `P0-CLOSEOUT.md` |
-| Remote + push | After rename |
-| Validation paste | `git status` · `remote -v` · `branch -vv` · `log -5` |
-
----
-
-## 100% FROZEN gate
-
-Path: `C:\Projects\asir0z-smoothoperator` · `.git` → True · `origin` → `asir0z-smoothoperator`
-
-When approved → **STATUS: 100% COMPLETE · FROZEN** → unlock WIN-1 execution.
-
----
-
-*Certification · SmoothOperator™*
+*Certification · SmoothOperator™ · FROZEN*

@@ -3,7 +3,7 @@
 > **Status:** Working Note  
 > **Date:** 2026-07-23  
 > **Scope:** SmoothOperator™ · DevOps Lab™  
-> **Not:** This does **not** introduce a new methodology. It defines when architectural synchronization should stop and execution should resume.
+> **Update (2026-07-23):** Migration **100% · FROZEN ✅** — this note's "95% waiting" example is historical. See [`../certification/PLATFORM-STATE.md`](../certification/PLATFORM-STATE.md).
 
 ---
 
@@ -83,18 +83,16 @@ Typical signs include:
 - no implementation work
 - increasingly detailed confirmations
 
-Example:
+Example (historical — resolved 2026-07-23):
 
 ```text
 Migration 95%
   ↓
 Still 95%
   ↓
-Still waiting
+P0 close-out
   ↓
-Still waiting
-  ↓
-Still waiting
+Migration FROZEN ✅ → WIN-1 execution OPEN
 ```
 
 Nothing is wrong. Nothing is progressing either.
