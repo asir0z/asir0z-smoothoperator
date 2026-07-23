@@ -15,7 +15,8 @@
 ✅ Hardware audit
 ✅ Phase A (admin)
 ✅ Disk shrink plan (operator-approved)
-⏸️ Fast Startup off · shrink execution
+✅ Windows online shrink attempted — exhausted (EDR)
+⏸️ Offline NTFS shrink → partition validation
 ```
 
 ---
@@ -27,8 +28,8 @@
 PHASE 1 — PREP (Windows, no rush)
 ────────────────────────────
 
-1. BIOS/UEFI checklist          ← active
-2. C: shrink + unallocated space
+1. BIOS/UEFI checklist          ✅ Phase A
+2. Offline C: shrink + unallocated (Windows online exhausted — see decisions/)
 3. Arch bare-metal installation
 4. SmoothOperator bootstrap
 5. Hyprland + NVIDIA + Cursor + Git validation
@@ -87,7 +88,8 @@ Arch = canonical engineering laboratory. Windows = utility + fallback — not pr
 | Inventory | [hardware-audit.md](hardware-audit.md) | ✅ Complete |
 | Prep | [bios-uefi-checklist.md](bios-uefi-checklist.md) | ✅ Phase A complete |
 | Prep | [disk-shrink-plan.md](disk-shrink-plan.md) | ✅ Operator-approved |
-| Prep | [shrink-evidence.txt](shrink-evidence.txt) | ⏸️ Shrink day |
+| Prep | [shrink-evidence.txt](shrink-evidence.txt) | ✅ Online attempt recorded |
+| Decision | [decisions/WINDOWS-ONLINE-SHRINK-EXHAUSTED.md](decisions/WINDOWS-ONLINE-SHRINK-EXHAUSTED.md) | ✅ Accepted |
 | Install | [arch-install-spec.md](arch-install-spec.md) | ✅ **Canonical install spec** |
 | Install | [installation-evidence/](installation-evidence/) | ⏸️ Install day |
 | Archive | [CURSOR-SESSION-ARCHIVE-da3c00b3.md](../working-notes/CURSOR-SESSION-ARCHIVE-da3c00b3.md) | ✅ Full Cursor chat summary |
@@ -110,8 +112,8 @@ Arch = canonical engineering laboratory. Windows = utility + fallback — not pr
 
 **Parallel tracks:**
 
-1. **Operator:** Fast Startup OFF → shrink → post-shrink 3-check → `shrink-evidence.txt`
-2. **Repo:** ✅ [arch-install-spec.md](arch-install-spec.md) complete — install after shrink PASS
+1. **Operator:** Offline NTFS shrink → partition validation → evidence update
+2. **Repo:** ✅ [arch-install-spec.md](arch-install-spec.md) — install after offline shrink PASS
 
 See [disk-shrink-plan.md](disk-shrink-plan.md) · [bios-uefi-checklist.md](bios-uefi-checklist.md).
 

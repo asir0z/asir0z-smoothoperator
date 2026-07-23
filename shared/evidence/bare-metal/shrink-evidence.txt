@@ -2,32 +2,77 @@
 # Append operator output here. Do not shrink until pre-shrink checklist PASS in disk-shrink-plan.md
 
 === BEFORE SHRINK ===
-Date:
+Date: 2026-07-24 01:26:34 (+03)
 Operator: asir0z
+Host: MLD M700 NVMe SSD · GPT · Disk 0
 
-(paste Get-Partition / Get-Volume output)
+--- Get-Disk 0 ---
+
+Number            : 0
+FriendlyName      : MLD M700 NVMe SSD
+SerialNumber      : 6479_A77E_BAC0_04F3.
+Size              : 1000204886016  (~931.51 GB)
+PartitionStyle    : GPT
+OperationalStatus : Online
+HealthStatus      : Healthy
+
+--- Get-Partition -DiskNumber 0 ---
+
+PartitionNumber Type     DriveLetter SizeGB OffsetGB
+--------------- ----     ----------- ------ --------
+              1 System                0.10     0.00
+              2 Reserved              0.02     0.10
+              3 Basic              C 930.56     0.11
+              4 Recovery              0.84   930.67
+
+Layout note: No unallocated space before shrink (expected).
+
+--- Get-Volume C ---
+
+DriveLetter     : C
+FileSystem      : NTFS
+DriveType       : Fixed
+HealthStatus    : Healthy
+SizeGB          : 930.56
+FreeGB          : 351.72
+
+--- Max shrink query (read-only) ---
+
+Get-PartitionSupportedSize -DriveLetter C
+Result: FAILED — CIM access denied (non-elevated session).
+Action: Optional re-run in Administrator PowerShell before shrink; Disk Management shrink dialog also reports max.
 
 === FAST STARTUP DISABLED ===
-Date:
-HiberbootEnabled: (expect 0x0)
+Date: 2026-07-24 01:26:34 (+03)
+HiberbootEnabled: 0x0  (PASS — already disabled before BEFORE evidence)
 
-=== SHRINK EXECUTED ===
-Date:
-Requested shrink (GB):
-Actual unallocated (GB):
-Method: diskmgmt.msc / PowerShell
+=== SHRINK EXECUTED (Windows online) ===
+Date: 2026-07-24
+Requested shrink (GB): 350 (358400 MB) target · 300 (307200 MB) minimum
+Actual unallocated (GB): NOT ACHIEVED — Disk Management max ~84 GB only
+Method: diskmgmt.msc · defrag /X · defrag /D /U /V · pagefile off · system protection off
 
-=== AFTER SHRINK ===
-(paste Get-Partition / Get-Volume output)
+Windows optimizations attempted:
+- Fast Startup OFF (HiberbootEnabled 0x0)
+- Hibernation OFF (powercfg /h off)
+- Pagefile disabled
+- System Protection disabled · restore points removed
+- Multiple reboots
+- Defrag: fragmentation 22% → 0%; largest free space 65.38 GB; 12 unmovable items
+
+=== AFTER SHRINK (Windows online) ===
+No successful shrink to target. Online path exhausted.
+Decision: shared/evidence/bare-metal/decisions/WINDOWS-ONLINE-SHRINK-EXHAUSTED.md
 
 === WINDOWS BOOT TEST ===
-Reboot after shrink: PASS / FAIL
-Notes:
+Reboot after optimization attempts: PASS
+Notes: Windows healthy; NTFS clean; BitLocker off
 
-=== POST-SHRINK GATE (all three required) ===
-1. Windows boots:        PASS / FAIL
-2. Explorer normal:      PASS / FAIL
-3. Unallocated ~350 GB:  PASS / FAIL  (actual: ___ GB)
+=== POST-SHRINK GATE (Windows online — N/A) ===
+1. Windows boots:        PASS
+2. Explorer normal:      PASS
+3. Unallocated ~350 GB:  FAIL (max ~84 GB shrinkable online)
 
 === RESULT ===
-PENDING
+WINDOWS ONLINE SHRINK EXHAUSTED — Accepted EDR 2026-07-24
+Next: Offline NTFS shrink (GParted Live or Arch ISO) — workflow TBD

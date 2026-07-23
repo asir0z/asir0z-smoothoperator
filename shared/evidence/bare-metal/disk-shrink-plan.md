@@ -3,8 +3,8 @@
 > **Date:** 2026-07-24  
 > **Host:** MLD M700 NVMe · ASUS PRIME A620M-K · Windows 11 Pro  
 > **Prerequisites:** [Phase A PASS](bios-uefi-checklist.md) · [hardware-audit.md](hardware-audit.md)  
-> **Status:** **APPROVED FOR EXECUTION** — operator action required  
-> **Next:** Physical shrink → [arch-install-spec.md](arch-install-spec.md) (pending)
+> **Status:** Windows online shrink **exhausted** (2026-07-24) — see [decisions/WINDOWS-ONLINE-SHRINK-EXHAUSTED.md](decisions/WINDOWS-ONLINE-SHRINK-EXHAUSTED.md)  
+> **Next:** Offline NTFS shrink → [arch-install-spec.md](arch-install-spec.md) (after partition validation)
 
 **Rule:** This is the **first irreversible-ish step** on bare metal. Execute only after pre-shrink checklist PASS. Record evidence before and after.
 
