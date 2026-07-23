@@ -13,7 +13,8 @@
 |---------|--------|-------|
 | [MAC-1](MAC-1-OPERATOR-CONSOLE-BOOTSTRAP.md) | **CERTIFIED ✅** | Full operator console baseline |
 | [MAC-1 amendment](MAC-1-SCOPE-AMENDMENT-TERMINAL-SHELL-SCRIPTS.md) | **Approved** | Terminal · shell · scripts · remote ops |
-| [MAC-2](MAC-2-DEVELOPMENT-EXPERIENCE.md) | **DEFERRED** | After Arch install + bootstrap |
+| [MAC-2](MAC-2-DEVELOPMENT-EXPERIENCE.md) | **DEFERRED** · scope expansion **Approved** | Complete engineering workstation (after Arch bootstrap) |
+| [MAC-2 expansion](MAC-2-SCOPE-EXPANSION-ENGINEERING-WORKSTATION.md) | **Approved** | Daily engineering env · runtimes · Tailscale · AI clients |
 
 Architecture: [`../architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md`](../architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md)
 

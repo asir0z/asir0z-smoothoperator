@@ -72,9 +72,13 @@ Wrappers call `scripts/ops/*` in this repo or SSH into Ubuntu — they do **not*
 
 ---
 
-## MAC-2
+## MAC-2 (deferred)
 
-Starship, zoxide, syntax highlighting, autosuggestions, Tailscale, and enhanced terminals are out of scope here.
+Complete engineering workstation scope is approved and deferred until after Arch bootstrap.
+
+See: [`../missions/MAC-2-DEVELOPMENT-EXPERIENCE.md`](../missions/MAC-2-DEVELOPMENT-EXPERIENCE.md) · [`../missions/MAC-2-SCOPE-EXPANSION-ENGINEERING-WORKSTATION.md`](../missions/MAC-2-SCOPE-EXPANSION-ENGINEERING-WORKSTATION.md)
+
+Starship, zoxide, Ghostty, Tailscale, `uv`/`mise`, etc. land here — not in the MAC-1 baseline.
 
 ---
 

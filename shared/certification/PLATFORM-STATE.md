@@ -125,7 +125,10 @@ BOOTSTRAP:  scripts/bootstrap/mac-bootstrap.sh
 EVIDENCE:   shared/evidence/mac-1/mac-1-evidence-20260724.md
 COLLECTOR:  shared/evidence/mac-1/verification-20260724-023724.txt
 CERT:       MAC-1.md
-MAC-2:      DEFERRED until after Arch install + bootstrap
+MAC-2:      DEFERRED · scope expansion APPROVED (complete engineering workstation)
+            → after OFFLINE-1 · Arch install · Arch bootstrap
+            → shared/missions/MAC-2-DEVELOPMENT-EXPERIENCE.md
+            → expansion: MAC-2-SCOPE-EXPANSION-ENGINEERING-WORKSTATION.md
 ```
 
 **Split:** Mac = wrappers/aliases · Ubuntu = canonical production scripts · Arch = on-demand compute.
@@ -142,7 +145,7 @@ Operator priority *(updated 2026-07-24)*:
 3. Arch install (arch-install-spec.md)
 4. Arch bootstrap
 5. Mission 20 observation        ← DevOps Lab (parallel)
-6. MAC-2 development experience  ← DEFERRED (after Arch bootstrap)
+6. MAC-2 engineering workstation  ← DEFERRED (scope approved; after Arch bootstrap)
 7. WIN-1 Core                    ← friction-driven on Windows fallback
 ```
 
