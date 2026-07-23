@@ -3,7 +3,7 @@
 > **Yapıştır:** Yeni ChatGPT chat'inin ilk mesajına  
 > **Tarih:** 2026-07-24  
 > **Repo:** `https://github.com/asir0z/asir0z-smoothoperator.git`  
-> **Remote HEAD:** `658a0cf`  
+> **Remote HEAD:** `b09ab3f`  
 > **Canonical state:** `shared/certification/PLATFORM-STATE.md`
 
 ---
@@ -28,7 +28,7 @@ The engineering laboratory must not.
 
 ```text
 Migration / WIN-1 Infra     CERTIFIED · FROZEN
-WS-2 Sprint 2               CLOSED (658a0cf)
+WS-2 Sprint 2               CLOSED (658a0cf · merged ef3da7f)
 Arch VM                     Referans / fallback only — yeni geliştirme yok
 Bare-metal Arch               ACTIVE PREP — ilk kurulum hazırlığı
 Mission 20                    Observation (Contabo)
@@ -221,7 +221,7 @@ asir0z-cortex          (deferred — repo yok)
 ```text
 SmoothOperator bare-metal prep assistant olarak çalış.
 
-Repo: asir0z-smoothoperator @ 658a0cf
+Repo: asir0z-smoothoperator @ b09ab3f
 Track: Bare-metal Arch install prep
 Durum: Prep docs complete — shrink execution next
 
