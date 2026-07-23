@@ -19,6 +19,9 @@ Activate reproducible Arch development workstation: Cursor, Git, SSH, repositori
 | [repository-inventory.md](repository-inventory.md) | 3 — Repositories |
 | [dotfiles-inventory.md](dotfiles-inventory.md) | 4 — Dotfiles |
 | [secret-scan.txt](secret-scan.txt) | 4 — Pre-commit scan |
+| [timezone-verification.txt](timezone-verification.txt) | 4 — Timezone |
+| [keyboard-verification.txt](keyboard-verification.txt) | 4 — Keyboard |
+| [display-scaling-investigation.md](display-scaling-investigation.md) | 2 — Display scaling |
 | [gui-validation.md](gui-validation.md) | 5 — GUI checklist |
 | [development-round-trip.md](development-round-trip.md) | 5 — Git round-trip |
 | [final-report.md](final-report.md) | 6 — Certification decision |

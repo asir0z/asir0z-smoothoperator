@@ -1,0 +1,14 @@
+WS-2 Sprint 2 — Timezone Verification
+Collected: 2026-07-23T21:48:42 +03 (operator fix confirmed)
+
+=== timedatectl ===
+Local time: Thu 2026-07-23 21:48:42 +03
+Universal time: Thu 2026-07-23 18:48:42 UTC
+Time zone: Europe/Istanbul (+03, +0300)
+System clock synchronized: yes
+NTP service: active
+
+=== METHOD ===
+Operator (root session): timedatectl set-timezone Europe/Istanbul
+
+RESULT: PASS

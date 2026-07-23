@@ -2,13 +2,27 @@
 
 > **Date:** 2026-07-23  
 > **Sprint:** WS-2 Sprint 2 — Arch Development Workstation Activation  
-> **Reviewer:** Certification Authority (evidence-based)
+> **Status:** Engineering COMPLETE · Certification PENDING (GUI only)
 
 ---
 
 ## Executive summary
 
-Arch VM is activated as a **validation development workstation** with reproducible Cursor install, Git/SSH tooling, cloned active repositories, and repo-managed dotfiles under `linux/arch-workstation/dotfiles/`. Windows remains synchronized fallback via shared GitHub remotes.
+Arch VM development workstation engineering is complete. Windows synchronized at `ee2063d`. Timezone set to `Europe/Istanbul`. Keyboard configuration verified via repo-managed Hyprland. Display scaling report investigated — VM-specific, no repository change. **Single remaining gate:** operator GUI acceptance test ([gui-validation.md](gui-validation.md)).
+
+---
+
+## Current status
+
+| Area | Status |
+|------|--------|
+| Windows sync | PASS |
+| Keyboard | PASS |
+| Display investigation | PASS (VM-specific observation) |
+| Timezone | PASS |
+| Evidence | Updated |
+| GUI interactive tests | Operator pending |
+| Certification | Pending GUI completion |
 
 ---
 
@@ -16,44 +30,60 @@ Arch VM is activated as a **validation development workstation** with reproducib
 
 | Question | Answer |
 |----------|--------|
-| Can Arch be used as primary development machine? | **Yes, with conditions** — full IDE workflow operational; timezone + GUI checklist need one operator pass |
-| Is Cursor fully operational? | **Yes** — AppImage 3.12.30, terminal + wofi + desktop launchers |
-| Are repositories migrated correctly? | **Yes** — clone-via-Git only; 4/5 repos active; cortex deferred |
-| Are dotfiles reproducible? | **Yes** — `apply-config.sh` + `dotfiles/` + install scripts |
-| Are secrets excluded? | **Yes** — secret scan PASS; keys/tokens not in repo |
-| Can Windows remain fallback? | **Yes** — same remotes, pull/push parity |
-| Portable to bare-metal? | **Yes** — VM profile auto-detect; bare-metal overlay ready |
+| Can Arch be used as primary development machine? | **Yes** — pending GUI sign-off |
+| Is Cursor fully operational? | Install verified; GUI launch pending operator |
+| Are repositories migrated correctly? | **Yes** |
+| Are dotfiles reproducible? | **Yes** |
+| Are secrets excluded? | **Yes** |
+| Can Windows remain fallback? | **Yes** |
+| Portable to bare-metal? | **Yes** |
+| Display scaling regression from repo? | **No** |
 
 ---
 
-## Decision
+## Engineering (closed)
+
+- Cursor installation + launchers
+- Repository clone to `~/Projects/`
+- Dotfiles architecture
+- Development round-trip (`6afa57e`, `ee2063d`)
+- Secret scan PASS
+- Keyboard verification
+- Display scaling investigation
+- Timezone `Europe/Istanbul`
+
+---
+
+## Certification gate
+
+| Blocker | Status |
+|---------|--------|
+| GUI acceptance test (incl. reboot) | **PENDING** |
+
+No technical blockers remain. DevOps Lab certification review after operator marks [gui-validation.md](gui-validation.md) PASS.
+
+---
+
+## Decision (current)
 
 ```text
 APPROVED WITH CONDITIONS
 ```
 
-### Conditions (operator, non-blocking backlog)
-
-1. Run `sudo bash linux/arch-workstation/scripts/set-operator-timezone.sh` once  
-2. Sign off GUI checklist: clipboard · audio · keyboard (gui-validation.md)  
-3. Restore or create `asir0z-cortex` GitHub repo when product work resumes  
-
-### Closed in Sprint 2
-
-- Cursor installation + IDE workflow  
-- Repository clone to `~/Projects/`  
-- Dotfiles architecture  
-- Development round-trip (see development-round-trip.md)  
-- Secret scan  
+Upgrade to **APPROVED · CLOSED** via DevOps Lab certification review after GUI PASS.
 
 ---
 
 ## Artifacts
 
-- Evidence: `shared/evidence/ws-2/sprint-2/`  
-- Dotfiles: `linux/arch-workstation/dotfiles/`  
-- Scripts: `linux/arch-workstation/scripts/install-cursor.sh`, `set-operator-timezone.sh`  
-- Commit: `feat(ws-2): activate Arch development workstation`
+| File | Purpose |
+|------|---------|
+| [gui-validation.md](gui-validation.md) | Operator acceptance test |
+| [timezone-verification.txt](timezone-verification.txt) | Timezone PASS |
+| [keyboard-verification.txt](keyboard-verification.txt) | Keyboard PASS |
+| [display-scaling-investigation.md](display-scaling-investigation.md) | VM observation |
+| [development-round-trip.md](development-round-trip.md) | Git round-trip |
+| [secret-scan.txt](secret-scan.txt) | Pre-commit scan |
 
 ---
 

@@ -1,0 +1,30 @@
+WS-2 Sprint 2 — Keyboard Verification
+Collected: 2026-07-23 post operator logout/login
+
+=== localectl status ===
+System Locale: LANG=en_US.UTF-8
+VC Keymap: us
+X11 Layout: us,tr
+X11 Options: grp:alt_shift_toggle
+
+=== Repository (Hyprland — authoritative in Wayland session) ===
+# dotfiles/hypr/hyprland.base.conf
+kb_layout = tr,us
+kb_options = grp:alt_shift_toggle
+
+=== hyprctl devices (active session) ===
+at-translated-set-2-keyboard:
+  rules: l "tr,us", o "grp:alt_shift_toggle"
+  active layout index: 0   # index 0 = tr (first layout in tr,us)
+
+=== Analysis ===
+Hyprland applies repo-managed tr,us + Alt+Shift toggle.
+localectl us,tr order differs but Hyprland overrides in session (by design).
+No ad-hoc local fix applied.
+
+=== Operator confirm (interactive) ===
+[ ] Type US characters (@, [, ]) — layout index 1
+[ ] Type Turkish characters (ğ, ş, ı) — layout index 0
+[ ] Alt+Shift toggles between layouts
+
+RESULT: PASS (remote config verified) · interactive toggle pending operator sign-off in gui-validation.md
