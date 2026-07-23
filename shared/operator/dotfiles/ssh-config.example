@@ -1,6 +1,6 @@
-# MAC-1 operator SSH — portable aliases
-# Prefer shared/operator/dotfiles/ssh-config.example (kept in sync).
-# Install only if ~/.ssh/config is missing. Fill HostName during execution.
+# SmoothOperator™ — Mac operator SSH example
+# Copy to ~/.ssh/config only when missing (install-dotfiles.sh).
+# Fill HostName / User during execution. Never commit secrets.
 
 Host github
   HostName github.com
@@ -23,3 +23,10 @@ Host arch
   IdentitiesOnly yes
   ServerAliveInterval 30
   ServerAliveCountMax 3
+
+# Optional parity aliases (uncomment when useful)
+# Host contabo
+#   HostName 169.58.62.107
+#   User root
+#   IdentityFile ~/.ssh/id_ed25519
+#   IdentitiesOnly yes

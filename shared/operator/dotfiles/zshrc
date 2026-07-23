@@ -1,0 +1,127 @@
+# SmoothOperator™ zsh baseline (MAC-1)
+# Secret-free. No large plugin framework.
+
+# Homebrew (Apple Silicon / Intel)
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+export EDITOR="${EDITOR:-nvim}"
+export VISUAL="${VISUAL:-$EDITOR}"
+export PROJECTS_DIR="${PROJECTS_DIR:-$HOME/Projects}"
+export SMOOTHOPERATOR_ROOT="${SMOOTHOPERATOR_ROOT:-$PROJECTS_DIR/asir0z-smoothoperator}"
+
+# History
+HISTFILE="${HOME}/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE EXTENDED_HISTORY
+
+# Completion
+autoload -Uz compinit
+compinit -C
+zstyle ':completion:*' menu select
+
+# Git-aware prompt (no external framework)
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats ' (%b)'
+setopt PROMPT_SUBST
+PROMPT='%F{cyan}%n@%m%f %F{yellow}%1~%f%F{green}${vcs_info_msg_0_}%f %# '
+
+# fzf (when installed)
+if command -v fzf >/dev/null 2>&1; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git"'
+  # Keybindings optional — installed via brew fzf install helper
+  [[ -f "$(brew --prefix 2>/dev/null)/opt/fzf/shell/key-bindings.zsh" ]] && \
+    source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+  [[ -f "$(brew --prefix 2>/dev/null)/opt/fzf/shell/completion.zsh" ]] && \
+    source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+fi
+
+# Safe aliases
+alias ll='ls -lah'
+alias la='ls -la'
+alias gs='git status -sb'
+alias gd='git diff'
+alias gff='git pull --ff-only'
+alias gfa='git fetch --all --prune'
+
+# Navigation
+proj() { cd "${PROJECTS_DIR}" || return 1; }
+so() { cd "${SMOOTHOPERATOR_ROOT}" || return 1; }
+
+# Resolve SmoothOperator scripts root
+_so_scripts() {
+  if [[ -d "${SMOOTHOPERATOR_ROOT}/scripts" ]]; then
+    printf '%s\n' "${SMOOTHOPERATOR_ROOT}/scripts"
+  else
+    return 1
+  fi
+}
+
+# Operator wrappers — call repo scripts / remote canonical ops
+lab-ssh() { ssh lab "$@"; }
+arch-ssh() { ssh arch "$@"; }
+
+lab-health() {
+  local s
+  s="$(_so_scripts)/ops/production-health-check.sh"
+  if [[ -x "$s" ]]; then
+    bash "$s" "$@"
+  else
+    ssh lab '~/scripts/ops/production-health-check.sh' "$@"
+  fi
+}
+
+lab-status() {
+  local s
+  s="$(_so_scripts)/ops/server-status.sh"
+  if [[ -x "$s" ]]; then
+    bash "$s" lab "$@"
+  else
+    ssh lab 'hostname; uptime; whoami'
+  fi
+}
+
+repos-status() {
+  local s root="${1:-$PROJECTS_DIR}"
+  s="$(_so_scripts)/ops/repo-status.sh"
+  if [[ -x "$s" ]]; then
+    bash "$s" "$root"
+  else
+    echo "repo-status.sh missing — open SmoothOperator repo" >&2
+    return 1
+  fi
+}
+
+repos-pull() {
+  local root="${1:-$PROJECTS_DIR}" d
+  [[ -d "$root" ]] || { echo "missing $root" >&2; return 1; }
+  for d in "$root"/*/.git; do
+    [[ -d "$d" ]] || continue
+    d="$(dirname "$d")"
+    echo "=== $(basename "$d") ==="
+    if [[ -n "$(git -C "$d" status --porcelain 2>/dev/null || true)" ]]; then
+      echo "SKIP dirty working tree"
+      continue
+    fi
+    git -C "$d" pull --ff-only || echo "FAIL pull"
+  done
+}
+
+deploy-web() {
+  local s
+  s="$(_so_scripts)/deploy/remote-deploy-wrapper.sh"
+  [[ -x "$s" ]] || { echo "deploy wrapper missing" >&2; return 1; }
+  SO_DEPLOY_CONFIRM="${SO_DEPLOY_CONFIRM:-}" bash "$s" web "$@"
+}
+
+deploy-pi() {
+  local s
+  s="$(_so_scripts)/deploy/remote-deploy-wrapper.sh"
+  [[ -x "$s" ]] || { echo "deploy wrapper missing" >&2; return 1; }
+  SO_DEPLOY_CONFIRM="${SO_DEPLOY_CONFIRM:-}" bash "$s" pi "$@"
+}

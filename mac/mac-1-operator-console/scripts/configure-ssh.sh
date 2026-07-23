@@ -4,7 +4,12 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TEMPLATE="$SCRIPT_DIR/../config/ssh/config.template"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+# Prefer shared operator example; fall back to package template
+TEMPLATE="${REPO_ROOT}/shared/operator/dotfiles/ssh-config.example"
+if [[ ! -f "$TEMPLATE" ]]; then
+  TEMPLATE="$SCRIPT_DIR/../config/ssh/config.template"
+fi
 SSH_DIR="${HOME}/.ssh"
 KEY="${SSH_DIR}/id_ed25519"
 CONFIG="${SSH_DIR}/config"

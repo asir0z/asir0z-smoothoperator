@@ -264,9 +264,12 @@ Operator-console bootstrap is authorized as **MAC-1** (macOS only · no infrastr
 
 | Artifact | Path |
 |----------|------|
-| Spec | `mac/mac-1-operator-console/MAC-1-SPEC.md` |
-| Setup guide | `mac/mac-1-operator-console/SETUP-GUIDE.md` |
-| Verify | `mac/mac-1-operator-console/verify/verify-mac1.sh` |
+| Mission | `shared/missions/MAC-1-OPERATOR-CONSOLE-BOOTSTRAP.md` |
+| Amendment | `shared/missions/MAC-1-SCOPE-AMENDMENT-TERMINAL-SHELL-SCRIPTS.md` |
+| Bootstrap | `scripts/bootstrap/mac-bootstrap.sh` |
+| Operator dotfiles | `shared/operator/` |
+| Ops wrappers | `scripts/ops/` (Mac) → Ubuntu canonical scripts |
+| Package / runbook | `mac/mac-1-operator-console/` |
 | Evidence | `shared/evidence/mac-1/` |
 | Certification | `shared/certification/MAC-1.md` |
 
