@@ -1,115 +1,77 @@
 # MAC-1 Setup Guide — Operator Runbook
 
-> **Run on the Mac only.**  
-> **Spec:** [`MAC-1-SPEC.md`](MAC-1-SPEC.md)  
-> **Verify:** [`verify/verify-mac1.sh`](verify/verify-mac1.sh)
-
-No Ubuntu / Arch / Contabo changes in this guide.
+> **Run on the Mac only.** Do not mutate production hosts.  
+> **Canonical mission:** [`shared/missions/MAC-1-OPERATOR-CONSOLE-BOOTSTRAP.md`](../../shared/missions/MAC-1-OPERATOR-CONSOLE-BOOTSTRAP.md)  
+> **Amendment:** [`shared/missions/MAC-1-SCOPE-AMENDMENT-TERMINAL-SHELL-SCRIPTS.md`](../../shared/missions/MAC-1-SCOPE-AMENDMENT-TERMINAL-SHELL-SCRIPTS.md)
 
 ---
 
 ## Before you start
 
-1. Mac is powered on with admin access
-2. Apple ID available for App Store / software updates if required
-3. GitHub account `asir0z` accessible
-4. Existing SSH private key available **or** willingness to generate a new key and add it to GitHub
-5. Cursor download available from [cursor.com](https://cursor.com)
+1. Mac with admin access; Terminal.app available
+2. GitHub account `asir0z`
+3. SSH private key available **or** generate new + add to GitHub
+4. Cursor download from [cursor.com](https://cursor.com)
+5. Lab HostName/User known (fill into `~/.ssh/config` later — not committed)
 
 ---
 
 ## Phase 1 — Operating System
-
-### Updates
 
 ```bash
 softwareupdate --list
 sudo softwareupdate --install --all --agree-to-license
 ```
 
-Or: **System Settings → General → Software Update → Update Now**.
-
-### Hardening (GUI)
-
-| Setting | Path | Target |
-|---------|------|--------|
-| FileVault | System Settings → Privacy & Security → FileVault | **On** |
-| Firewall | System Settings → Network → Firewall | **On** |
-| Auto security updates | System Settings → General → Software Update → Automatic Updates | Security responses + system files **On** |
-
-### Identity / time
+GUI: FileVault **On** · Firewall **On** · Automatic security updates **On**.
 
 ```bash
-# Hostname (pick one durable name)
 sudo scutil --set ComputerName "asir0z-mac"
 sudo scutil --set LocalHostName "asir0z-mac"
 sudo scutil --set HostName "asir0z-mac"
-
-# Timezone
 sudo systemsetup -settimezone Europe/Istanbul
-
-# Time sync
 sudo systemsetup -setusingnetworktime on
-sntp -sS time.apple.com 2>/dev/null || true
-
-# Verify
-scutil --get ComputerName
-scutil --get LocalHostName
-scutil --get HostName
-systemsetup -gettimezone
-systemsetup -getusingnetworktime
-date
 ```
 
-**PASS:** updates applied · FileVault on · Firewall on · timezone `Europe/Istanbul` · network time on.
+Shell check (keep zsh as default):
+
+```bash
+echo "$SHELL"          # expect .../zsh
+zsh --version
+bash --version
+```
+
+**Do not** change the login shell away from zsh during MAC-1.
 
 ---
 
 ## Phase 2 — Homebrew
 
 ```bash
-# Install (official)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Apple Silicon — add brew to PATH for this shell (installer prints the exact lines)
 if [[ -x /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+  grep -q 'brew shellenv' ~/.zprofile 2>/dev/null || \
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 fi
 
 brew doctor
 brew update
-brew upgrade
 ```
-
-**PASS:** `brew doctor` reports no blocking issues (warnings about optional PATH tweaks are OK if documented).
 
 ---
 
-## Phase 3 — Development tools
-
-Automated (preferred):
+## Phase 3 — CLI toolchain
 
 ```bash
-cd ~/Projects/asir0z-smoothoperator
-bash mac/mac-1-operator-console/scripts/bootstrap-mac1.sh
+cd ~/Projects/asir0z-smoothoperator   # after initial clone
+bash scripts/bootstrap/mac-packages.sh
 ```
 
-Manual equivalent:
+Required set includes: git, gh, jq, yq, ripgrep, fd, fzf, tmux, rsync, coreutils, gnu-sed, findutils, gawk, make, shellcheck, shfmt, …
 
-```bash
-brew install git gh wget curl jq tree htop ripgrep fd tmux neovim
-```
-
-Verify:
-
-```bash
-for c in git gh wget curl jq tree htop rg fd tmux nvim; do
-  command -v "$c" && "$c" --version 2>&1 | head -n1
-done
-```
-
-(`rg` = ripgrep, `fd` = fd, `nvim` = neovim.)
+GNU tools stay **prefixed** (`gsed`, `gawk`, …) unless you explicitly document overrides.
 
 ---
 
@@ -117,35 +79,21 @@ done
 
 ```bash
 bash mac/mac-1-operator-console/scripts/configure-ssh.sh
+# or copy shared/operator/dotfiles/ssh-config.example → ~/.ssh/config
 ```
 
-What the script does:
-
-1. Creates `~/.ssh` (`700`)
-2. Generates `~/.ssh/id_ed25519` if missing (ed25519, no overwrite)
-3. Installs `config/ssh/config.template` → `~/.ssh/config` if missing
-4. Prints next steps for GitHub key upload
-
-Then edit `~/.ssh/config` and fill **HostName** for `lab` and `arch` (operator knowledge — not committed as secrets).
+Edit HostName for `lab` / `arch`. Fix permissions:
 
 ```bash
-# Add public key to GitHub (interactive)
-gh auth login -p ssh -h github.com
-# or paste ~/.ssh/id_ed25519.pub at https://github.com/settings/keys
-
-ssh -T git@github.com
-# expect: Hi asir0z! You've successfully authenticated...
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/config ~/.ssh/id_ed25519
+chmod 644 ~/.ssh/id_ed25519.pub
 ```
 
-Aliases prepared:
-
-| Host | Use |
-|------|-----|
-| `github` | Git over SSH |
-| `lab` | Ubuntu Server / DevOps Lab |
-| `arch` | Arch workstation |
-
-**Do not** change server `authorized_keys` from this mission unless the operator already owns that key path of trust. Prefer uploading the Mac public key via existing admin access when ready.
+```bash
+gh auth login -p ssh -h github.com
+ssh -T git@github.com
+```
 
 ---
 
@@ -153,36 +101,18 @@ Aliases prepared:
 
 ```bash
 bash mac/mac-1-operator-console/scripts/configure-git.sh
+# or rely on shared/operator/dotfiles/gitconfig via install-dotfiles.sh
 gh auth status
+git fetch --all --prune
 ```
-
-Round-trip proof (uses this repo):
-
-```bash
-cd ~/Projects/asir0z-smoothoperator
-git fetch origin
-git status
-# push only when you have a real commit on a feature branch
-```
-
-**PASS:** `user.name` / `user.email` set · `gh auth status` OK · `git fetch` OK · push demonstrated once.
 
 ---
 
 ## Phase 6 — Cursor
 
-1. Install Cursor from [cursor.com/downloads](https://cursor.com/downloads) → drag to `/Applications`
-2. Launch once; sign in
-3. Enable / confirm: Git integration, integrated terminal
-4. Install Shell Command: **Cursor → Command Palette → “Install 'cursor' command in PATH”** (optional but recommended)
-5. Open workspace:
+Install Cursor.app → open `~/Projects/asir0z-smoothoperator` → confirm Git + Terminal.
 
-```bash
-cursor ~/Projects/asir0z-smoothoperator
-# or: open -a Cursor ~/Projects/asir0z-smoothoperator
-```
-
-**PASS:** Cursor opens the repo; terminal + git UI functional.
+Optional: Command Palette → Install `cursor` command in PATH.
 
 ---
 
@@ -190,87 +120,93 @@ cursor ~/Projects/asir0z-smoothoperator
 
 ```bash
 bash mac/mac-1-operator-console/scripts/clone-repos.sh
+# or: bash scripts/bootstrap/mac-bootstrap.sh  (includes packages + clones + dotfiles)
 ```
-
-Target layout:
 
 ```text
 ~/Projects/
 ├── asir0z-smoothoperator/
 ├── asir0z-devopslab/
-├── asir0z-product-intelligence/
 ├── asir0z-web/
-├── asir0z-project-pulse/     # skipped if remote 404
-└── asir0z-cortex/            # deferred until restored
+├── asir0z-product-intelligence/
+└── …
 ```
-
-Git remains the synchronization authority — no manual copy from Windows/Arch.
 
 ---
 
-## Phase 8 — Remote operations
+## Phase 8 — Dotfiles / zsh baseline
 
 ```bash
-ssh -o BatchMode=yes -o ConnectTimeout=8 lab 'hostname && whoami'
-ssh -o BatchMode=yes -o ConnectTimeout=8 arch 'hostname && whoami'
+bash shared/operator/scripts/install-dotfiles.sh
+exec zsh -l
 ```
 
-Document results in evidence:
-
-| Target | Expected |
-|--------|----------|
-| `lab` | PASS when HostName filled and key authorized |
-| `arch` | PASS when powered on; **OFF is acceptable** — note it |
-| Infrastructure mutate | **Not in MAC-1** |
-
-Mac must be able to operate without Arch powered on.
+Expect: Git-aware prompt, history, completion, safe aliases, `lab-health` / `repos-status` helpers.  
+No large plugin framework in MAC-1. Terminal.app remains the recovery terminal.
 
 ---
 
-## Phase 9 — Evidence
+## Phase 9 — Remote operations (wrappers)
 
 ```bash
-cd ~/Projects/asir0z-smoothoperator
+bash scripts/ops/ssh-check.sh
+bash scripts/ops/repo-status.sh ~/Projects
+
+# Only after lab HostName + key authorization are safe:
+ssh lab 'hostname'
+lab-health
+# equivalent: bash scripts/ops/production-health-check.sh
+```
+
+Production health logic stays on the server:
+
+```bash
+ssh lab '~/scripts/ops/production-health-check.sh'
+```
+
+---
+
+## Phase 10 — Evidence
+
+```bash
 mkdir -p shared/evidence/mac-1
-bash mac/mac-1-operator-console/verify/verify-mac1.sh \
-  | tee shared/evidence/mac-1/verification-$(date +%Y%m%d).txt
+bash scripts/bootstrap/mac-verify.sh | tee shared/evidence/mac-1/verification-$(date +%Y%m%d).txt
 ```
 
-Also capture (append or separate files):
+Also fill `shared/evidence/mac-1/MAC-1-EVIDENCE.template.md` → dated report.
 
-* `brew doctor`
-* `git --version`
-* `gh auth status`
-* `ssh -T git@github.com`
-* Cursor launch confirmation (one-line operator note)
-* `ls ~/Projects`
-* clone / push proof
-
-Fill [`shared/evidence/mac-1/MAC-1-EVIDENCE.template.md`](../../shared/evidence/mac-1/MAC-1-EVIDENCE.template.md) → dated report.
-
-Commit evidence from the Mac (or via Cursor cloud after sync):
+Script lint (on Mac after packages):
 
 ```bash
-git checkout -b cursor/mac-1-evidence-7f72   # or continue current branch
-git add shared/evidence/mac-1/
-git commit -m "evidence(mac-1): operator console bootstrap verification"
-git push -u origin HEAD
+bash -n scripts/bootstrap/mac-bootstrap.sh
+find scripts -name '*.sh' -print0 | xargs -0 -n1 shellcheck
 ```
+
+---
+
+## One-shot bootstrap (after Homebrew + clone)
+
+```bash
+bash scripts/bootstrap/mac-bootstrap.sh
+```
+
+Still complete Phase 1 GUI hardening, Cursor install, `gh auth login`, and SSH HostName fills manually.
 
 ---
 
 ## Completion checklist
 
-- [ ] Phase 1 OS hardening
-- [ ] Phase 2 Homebrew healthy
-- [ ] Phase 3 tools verified
-- [ ] Phase 4 SSH + GitHub auth
-- [ ] Phase 5 Git round-trip
-- [ ] Phase 6 Cursor
-- [ ] Phase 7 `~/Projects` clones
-- [ ] Phase 8 remote SSH documented
-- [ ] Phase 9 evidence committed
-- [ ] Certification Authority review → `shared/certification/MAC-1.md`
+- [ ] zsh default · Terminal.app usable
+- [ ] Homebrew + required CLI tools
+- [ ] SSH aliases · GitHub auth
+- [ ] Git round-trip
+- [ ] Cursor
+- [ ] `~/Projects` required repos
+- [ ] Dotfiles installed
+- [ ] `ssh lab` (or documented blocker)
+- [ ] Remote health wrapper tested **or** deferred with reason
+- [ ] Evidence committed
+- [ ] Certification review
 
 ---
 

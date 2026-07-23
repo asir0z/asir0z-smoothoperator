@@ -117,23 +117,30 @@ Sprint 2 evidence: [`shared/evidence/ws-2/sprint-2/`](../evidence/ws-2/sprint-2/
 
 ```text
 STATUS:     AUTHORIZED ✅ · AWAITING macOS EVIDENCE
-SCOPE:      Operator environment only (no infra mutation)
-SPEC:       mac/mac-1-operator-console/MAC-1-SPEC.md
+SCOPE:      Full operator console (shell · CLI · SSH · wrappers · Git · Cursor)
+AMENDMENT:  Terminal/shell/scripts — Approved
+MISSION:    shared/missions/MAC-1-OPERATOR-CONSOLE-BOOTSTRAP.md
+PACKAGE:    mac/mac-1-operator-console/
+BOOTSTRAP:  scripts/bootstrap/mac-bootstrap.sh
 EVIDENCE:   shared/evidence/mac-1/
 CERT:       MAC-1.md
+MAC-2:      PLANNED (shared/missions/MAC-2-DEVELOPMENT-EXPERIENCE.md)
 ```
 
-Architecture destination remains Mac as primary operator console ([`MAC-PRIMARY-OPERATOR-CONSOLE.md`](../architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md)).
+**Split:** Mac = wrappers/aliases · Ubuntu = canonical production scripts · Arch = on-demand compute.
+
+Architecture: [`MAC-PRIMARY-OPERATOR-CONSOLE.md`](../architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md) · Missions: [`../missions/README.md`](../missions/README.md)
 
 Windows stays the **current daily console** until MAC-1 evidence is certified. Arch bare-metal remains separately gated.
 
 Operator priority *(updated)*:
 
 ```text
-1. MAC-1 bootstrap on Mac     ← AUTHORIZED (operator execution)
-2. WIN-1 Core                 ← friction-driven on Windows fallback
-3. Arch bare-metal            ← when authorized (independent)
-4. Mission 20 observation     ← DevOps Lab
+1. MAC-1 full console bootstrap  ← AUTHORIZED (operator execution)
+2. WIN-1 Core                    ← friction-driven on Windows fallback
+3. Arch bare-metal               ← when authorized (independent)
+4. Mission 20 observation        ← DevOps Lab
+5. MAC-2 development experience  ← after MAC-1 PASS
 ```
 
 ---

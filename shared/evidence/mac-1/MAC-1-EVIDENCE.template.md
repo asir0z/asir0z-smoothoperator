@@ -1,14 +1,14 @@
 # MAC-1 Evidence Report
 
 ```text
-MISSION:     MAC-1 — Operator Console Bootstrap
+MISSION:     MAC-1 — Operator Console Bootstrap (amended)
 HOST:        (ComputerName / LocalHostName)
 DATE:        YYYY-MM-DD
 OPERATOR:    asir0z
 RESULT:      PASS | FAIL | PARTIAL
 ```
 
-Copy to `mac-1-evidence-YYYYMMDD.md` and fill. Attach `verification-YYYYMMDD.txt`.
+Copy to `mac-1-evidence-YYYYMMDD.md` and fill. Attach `verification-YYYYMMDD.txt` from `scripts/bootstrap/mac-verify.sh`.
 
 ---
 
@@ -23,11 +23,11 @@ Copy to `mac-1-evidence-YYYYMMDD.md` and fill. Attach `verification-YYYYMMDD.txt
 | Timezone `Europe/Istanbul` | ☐ | |
 | Network time On | ☐ | |
 | Hostname set | ☐ | |
-
-Commands / screenshots notes:
+| Default shell is zsh | ☐ | `echo $SHELL` |
+| Terminal.app usable | ☐ | recovery terminal |
 
 ```text
-(paste scutil / systemsetup / fdesetup summary — no secrets)
+(paste scutil / systemsetup / fdesetup / shell versions — no secrets)
 ```
 
 ---
@@ -40,27 +40,28 @@ Commands / screenshots notes:
 | `brew doctor` | ☐ | blocking issues? |
 | `brew update` / `upgrade` | ☐ | |
 
-```text
-(paste brew doctor summary)
-```
-
 ---
 
-## Phase 3 — Development tools
+## Phase 3 — CLI toolchain
 
 | Tool | Present | Version |
 |------|---------|---------|
 | git | ☐ | |
 | gh | ☐ | |
-| wget | ☐ | |
-| curl | ☐ | |
-| jq | ☐ | |
+| ssh (`ssh -V`) | ☐ | |
+| curl / wget | ☐ | |
+| jq / yq | ☐ | |
 | tree | ☐ | |
-| htop | ☐ | |
-| ripgrep (`rg`) | ☐ | |
-| fd | ☐ | |
+| ripgrep (`rg`) / fd / fzf | ☐ | |
 | tmux | ☐ | |
-| neovim (`nvim`) | ☐ optional | |
+| htop | ☐ | |
+| rsync | ☐ | |
+| coreutils / gnu-sed / findutils / gawk | ☐ | prefixed OK |
+| make | ☐ | |
+| shellcheck / shfmt | ☐ | |
+| bat / eza / btop (optional) | ☐ | |
+
+GNU override policy documented: ☐ no silent PATH override / ☐ documented exception
 
 ---
 
@@ -68,16 +69,13 @@ Commands / screenshots notes:
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| `~/.ssh` exists (700) | ☐ | |
-| Public key present | ☐ | filename only |
-| Config hosts `github` `lab` `arch` | ☐ | |
+| `~/.ssh` mode 700 | ☐ | |
+| config mode 600 | ☐ | |
+| private key 600 · pub 644 | ☐ | |
+| hosts `github` `lab` `arch` | ☐ | |
 | `ssh -T git@github.com` | ☐ | |
 
 **Do not paste private keys.**
-
-```text
-(paste public key fingerprint or ssh -T greeting)
-```
 
 ---
 
@@ -85,10 +83,10 @@ Commands / screenshots notes:
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| `user.name` / `user.email` | ☐ | |
+| identity | ☐ | |
 | `gh auth status` | ☐ | |
-| `git fetch` | ☐ | |
-| `git push` demonstrated | ☐ | branch / commit |
+| fetch / pull --ff-only | ☐ | |
+| push demonstrated | ☐ | |
 
 ---
 
@@ -96,9 +94,9 @@ Commands / screenshots notes:
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| Cursor.app installed | ☐ | |
-| Opens `~/Projects/asir0z-smoothoperator` | ☐ | |
-| Git + Terminal usable | ☐ | |
+| Cursor.app | ☐ | |
+| Opens smoothoperator | ☐ | |
+| Git + Terminal | ☐ | |
 
 ---
 
@@ -115,17 +113,47 @@ Commands / screenshots notes:
 
 ---
 
-## Phase 8 — Remote operations
+## Phase 8 — Dotfiles / zsh
 
-| Target | Result | Notes |
-|--------|--------|-------|
-| `ssh lab` | ☐ PASS / ☐ blocked pending HostName / key | |
-| `ssh arch` | ☐ PASS / ☐ OFF (acceptable) | |
-| Infra mutation | **NONE** (required) | |
+| Check | Result | Notes |
+|-------|--------|-------|
+| `install-dotfiles.sh` run | ☐ | |
+| operator zshrc active | ☐ | |
+| `lab-health` / `repos-status` defined | ☐ | |
+| No secrets in dotfiles | ☐ | |
 
 ---
 
-## Phase 9 — Collector
+## Phase 9 — Remote operations
+
+| Target | Result | Notes |
+|--------|--------|-------|
+| `ssh lab 'hostname'` | ☐ | |
+| `lab-health` / remote production-health-check | ☐ / deferred | only after safe SSH |
+| `ssh arch` | ☐ PASS / ☐ OFF OK | |
+| Infra mutation | **NONE** | required |
+
+---
+
+## Phase 10 — Collector / lint
+
+```text
+zsh --version
+bash --version
+ssh -V
+rsync --version
+jq --version
+shellcheck --version
+shfmt --version
+tmux -V
+git --version
+gh auth status
+```
+
+```text
+bash -n scripts/bootstrap/mac-bootstrap.sh
+find scripts -name '*.sh' -print0 | xargs -0 -n1 shellcheck
+```
 
 Verification log: `verification-YYYYMMDD.txt`
 
@@ -140,7 +168,7 @@ RESULT:
 
 ```text
 Requested decision: MAC-1 APPROVED | CHANGES REQUIRED | REJECTED
-Evidence pack complete: YES / NO
+Full operator console (not Git/Cursor only): YES / NO
 Windows replaced as daily operator console: YES / NO / PARTIAL
 ```
 

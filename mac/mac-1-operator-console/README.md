@@ -1,71 +1,56 @@
-# MAC-1 — Mac Operator Console
+# MAC-1 — Mac Operator Console (package)
 
 > **Status:** AUTHORIZED ✅ · OPERATOR EXECUTION  
-> **Host:** macOS (primary operator console target)  
-> **Spec:** [`MAC-1-SPEC.md`](MAC-1-SPEC.md)
+> **Canonical mission:** [`shared/missions/MAC-1-OPERATOR-CONSOLE-BOOTSTRAP.md`](../../shared/missions/MAC-1-OPERATOR-CONSOLE-BOOTSTRAP.md)  
+> **Amendment:** terminal · shell · operator scripts (Approved)
 
-Bootstrap package for the Mac operator workstation. Run everything on the Mac — this directory is the source of truth, not a cloud-agent execution target.
+Full operator console — zsh, Terminal.app, CLI toolchain, SSH, Git, Cursor, Git-tracked dotfiles, and **Mac wrappers** that call Ubuntu canonical ops over SSH.
 
 ---
 
 ## Quick start (on the Mac)
 
 ```bash
-# 1) Clone this repo (HTTPS first-time is fine)
 mkdir -p ~/Projects
 cd ~/Projects
 git clone https://github.com/asir0z/asir0z-smoothoperator.git
 cd asir0z-smoothoperator
 
-# 2) Follow the operator runbook
-open mac/mac-1-operator-console/SETUP-GUIDE.md   # or read in Cursor
+# Prefer canonical bootstrap:
+bash scripts/bootstrap/mac-bootstrap.sh
 
-# 3) Automated phases (2–5, 7) after Homebrew exists
-bash mac/mac-1-operator-console/scripts/bootstrap-mac1.sh
-
-# 4) Verify + capture evidence
-bash mac/mac-1-operator-console/verify/verify-mac1.sh | tee shared/evidence/mac-1/verification-$(date +%Y%m%d).txt
+# Evidence:
+bash scripts/bootstrap/mac-verify.sh | tee shared/evidence/mac-1/verification-$(date +%Y%m%d).txt
 ```
 
-Phases 1 (macOS UI settings), 6 (Cursor.app install), and interactive `gh auth login` remain operator-driven.
+Runbook: [`SETUP-GUIDE.md`](SETUP-GUIDE.md)
 
 ---
 
 ## Layout
 
 ```text
-mac/mac-1-operator-console/
-├── MAC-1-SPEC.md
-├── SETUP-GUIDE.md
-├── README.md
-├── config/
-│   ├── git/gitconfig.fragment
-│   └── ssh/config.template
-├── scripts/
-│   ├── bootstrap-mac1.sh
-│   ├── configure-git.sh
-│   ├── configure-ssh.sh
-│   └── clone-repos.sh
-└── verify/
-    └── verify-mac1.sh
+mac/mac-1-operator-console/     # this package (runbook + legacy helpers)
+scripts/bootstrap/              # canonical Mac bootstrap / verify
+scripts/ops/                    # Mac wrappers (remote authority on Ubuntu)
+scripts/lib/                    # shared shell helpers
+shared/operator/                # secret-free dotfiles
+shared/missions/                # MAC-1 / MAC-2 mission text
 ```
-
-Evidence → `shared/evidence/mac-1/`  
-Certification → `shared/certification/MAC-1.md`
 
 ---
 
-## Architecture
+## Responsibility split
 
-```text
-Operator Console (Mac)
-        │
-        ├─ GitHub
-        ├─ ssh lab     → Ubuntu Server
-        └─ ssh arch    → Arch (on-demand)
+| Side | Role |
+|------|------|
+| Mac | Wrappers, aliases, local verify, Git, Cursor |
+| Ubuntu | Canonical production scripts |
+| Arch | On-demand compute — not required daily |
+
+```bash
+lab-health   # → ssh lab '~/scripts/ops/production-health-check.sh'
 ```
-
-See [`shared/architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md`](../../shared/architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md).
 
 ---
 

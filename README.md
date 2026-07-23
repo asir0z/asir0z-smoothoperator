@@ -54,16 +54,16 @@ VBox share `bootstrap` → host path `C:\Projects\asir0z-smoothoperator\linux\bo
 
 ## Mac — primary operator console (target)
 
-**MAC-1** bootstraps the Mac as the portable operator workstation (Git · SSH · Cursor · remote ops). No infrastructure mutation.
+**MAC-1** bootstraps a **full** Mac operator console: zsh, Terminal.app, CLI toolchain, SSH, Git, Cursor, Git-tracked dotfiles, and wrappers that call Ubuntu canonical ops over SSH. No infrastructure mutation.
 
 ```bash
 # On the Mac:
 cd ~/Projects/asir0z-smoothoperator
-bash mac/mac-1-operator-console/scripts/bootstrap-mac1.sh
-bash mac/mac-1-operator-console/verify/verify-mac1.sh | tee shared/evidence/mac-1/verification-$(date +%Y%m%d).txt
+bash scripts/bootstrap/mac-bootstrap.sh
+bash scripts/bootstrap/mac-verify.sh | tee shared/evidence/mac-1/verification-$(date +%Y%m%d).txt
 ```
 
-Spec: [`mac/mac-1-operator-console/MAC-1-SPEC.md`](mac/mac-1-operator-console/MAC-1-SPEC.md) · Architecture: [`shared/architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md`](shared/architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md)
+Missions: [`shared/missions/README.md`](shared/missions/README.md) · Package: [`mac/mac-1-operator-console/`](mac/mac-1-operator-console/) · Architecture: [`shared/architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md`](shared/architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md)
 
 ---
 

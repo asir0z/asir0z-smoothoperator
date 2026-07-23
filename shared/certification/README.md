@@ -80,7 +80,8 @@ Review questions:
 | [PLATFORM-STATE.md](PLATFORM-STATE.md) | **Current canonical state** |
 | [MIGRATION.md](MIGRATION.md) | **100% · CERTIFIED · FROZEN ✅** |
 | [WIN-1.md](WIN-1.md) | AUTHORIZED · Infra **FROZEN** · Core **OPEN** |
-| [MAC-1.md](MAC-1.md) | AUTHORIZED ✅ · awaiting macOS evidence |
+| [MAC-1.md](MAC-1.md) | AUTHORIZED ✅ · amended full console · awaiting macOS evidence |
+| Missions index | [`../missions/README.md`](../missions/README.md) |
 | [WIN-2.5.md](WIN-2.5.md) | SPEC APPROVED · WAITING FOR WIN-1 |
 | [TRANSITION-INFRASTRUCTURE-REVIEW.md](TRANSITION-INFRASTRUCTURE-REVIEW.md) | APPROVED ✅ |
 
