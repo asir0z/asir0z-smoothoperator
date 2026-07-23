@@ -1,0 +1,28 @@
+WS-2 Sprint 2 — Cursor Installation
+Date: 2026-07-23
+
+=== METHOD ===
+Script: linux/arch-workstation/scripts/install-cursor.sh
+Source: https://www.cursor.com/api/download?platform=linux-x64&releaseTrack=stable
+
+=== CANONICAL PATHS ===
+AppImage:  ~/.local/opt/cursor/Cursor.AppImage
+Version:   ~/.local/opt/cursor/VERSION
+Terminal:  ~/.local/bin/cursor  -> AppImage symlink
+Desktop:   ~/.local/share/applications/cursor.desktop
+Icon:      ~/.local/share/icons/hicolor/256x256/apps/cursor.png (best effort)
+
+=== INSTALL OUTPUT ===
+Version: 3.12.30
+Download size: 283.4M
+Installed: /home/asir0z/.local/opt/cursor/Cursor.AppImage
+Launcher: /home/asir0z/.local/bin/cursor
+Desktop entry: OK
+
+=== NOTES ===
+- Headless SSH: AppImage --version segfaults (expected for Electron GUI apps without display)
+- Desktop file uses --no-sandbox (common for VM/AppImage)
+- Re-run install-cursor.sh to upgrade (idempotent)
+- CRLF on scripts from Windows copy blocked first run; fixed with sed -i 's/\r$//' — repo now has .gitattributes *.sh eol=lf
+
+RESULT: PASS

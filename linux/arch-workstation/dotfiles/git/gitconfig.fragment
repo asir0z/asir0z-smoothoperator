@@ -1,0 +1,7 @@
+# Fragment — apply-config.sh sets these only when global git identity is unset
+[user]
+	name = Asır
+	email = asir01oz@gmail.com
+[core]
+	autocrlf = false
+	eol = lf

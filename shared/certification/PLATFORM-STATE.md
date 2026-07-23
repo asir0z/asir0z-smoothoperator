@@ -93,18 +93,21 @@ Certification: [`WIN-1.md`](WIN-1.md)
 
 ```text
 Sprint 1   APPROVED WITH CONDITIONS ✅
-Sprint 2   Cursor + Local Operator Workflow Validation (NEXT)
-Arch VM    VALIDATION READY
+Sprint 2   APPROVED WITH CONDITIONS ✅
+Arch VM    DEVELOPMENT WORKSTATION (validation)
 Bare-metal install   NOT AUTHORIZED
 ```
 
-Sprint 1 evidence: [`shared/evidence/ws-2/readiness-audit/`](../evidence/ws-2/readiness-audit/) · commit `0875b25`
+Sprint 1 evidence: [`shared/evidence/ws-2/readiness-audit/`](../evidence/ws-2/readiness-audit/) · commit `0875b25`  
+Sprint 2 evidence: [`shared/evidence/ws-2/sprint-2/`](../evidence/ws-2/sprint-2/)
 
-**Open conditions (close in Sprint 2):**
+**Sprint 2 closed:** Cursor · repositories · dotfiles · dev round-trip · secret scan
 
-1. Cursor installation + IDE workflow validation  
-2. Timezone → `Europe/Istanbul`  
-3. GUI confirm: clipboard · audio · keyboard layout  
+**Open conditions (operator):**
+
+1. Timezone → `Europe/Istanbul` (`scripts/set-operator-timezone.sh`)  
+2. GUI confirm: clipboard · audio · keyboard layout  
+3. `asir0z-cortex` repo unavailable on GitHub — defer until restored  
 
 **Backlog (not blocking):** bootstrap automount · VM-specific
 
@@ -211,7 +214,7 @@ Unless new evidence changes state:
 | WIN-1 Infrastructure | **100% · CERTIFIED · FROZEN BASELINE** |
 | WIN-1 Core | **OPEN** — Observed Friction driven |
 | WS-2 Sprint 1 | **APPROVED WITH CONDITIONS** |
-| WS-2 Sprint 2 | **NEXT** — Cursor + local operator workflow |
+| WS-2 Sprint 2 | **APPROVED WITH CONDITIONS** |
 | Mission 20 | **Observation** (Contabo cutover 2026-07-23) |
 | WIN-1A | BLOCKED until Mission 20 observation PASS |
 | Foundation / Governance / Lifecycle | **FROZEN** |

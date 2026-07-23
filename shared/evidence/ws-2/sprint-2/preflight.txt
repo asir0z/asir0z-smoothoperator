@@ -1,0 +1,47 @@
+WS-2 Sprint 2 — Phase 1 Preflight
+Collected: 2026-07-23T18:21:36Z (UTC) via ssh arch-ws
+
+=== ARCHITECTURE ===
+x86_64
+
+=== TIMEZONE ===
+Local time: Thu 2026-07-23 18:21:36 UTC
+Time zone: UTC (UTC, +0000)
+ACTION: Operator must run: sudo bash linux/arch-workstation/scripts/set-operator-timezone.sh
+Target: Europe/Istanbul (Sprint 1 condition)
+
+=== MEMORY ===
+Mem: 7.7Gi total, 953Mi used, 6.8Gi available
+Swap: 3.9Gi
+
+=== DISK ===
+/dev/sda2  32G  5.8G  24G  20% /
+
+=== FAILED SERVICES ===
+0 loaded units listed.
+
+=== GIT ===
+git version 2.55.0
+gh auth status: Logged in to github.com as asir0z
+Git operations protocol: https
+
+=== SSH ===
+Public key: ~/.ssh/id_ed25519.pub present
+Private key: present (not inspected — SECRET)
+BatchMode github.com: Host key verification failed (known_hosts not populated for github.com SSH; HTTPS git unaffected)
+
+=== EXISTING REPOSITORIES (~/Projects) ===
+asir0z-smoothoperator  6a780ee  https://github.com/asir0z/asir0z-smoothoperator.git
+asir0z-devopslab       728ed37  https://github.com/asir0z/asir0z-devopslab.git  (cloned Sprint 2)
+asir0z-web             4eb21fd  https://github.com/asir0z/asir0z-web.git        (cloned Sprint 2)
+asir0z-product-intelligence  a6e1eaa  https://github.com/asir0z/asir0z-product-intelligence.git (cloned Sprint 2)
+asir0z-cortex          NOT FOUND on GitHub (private or does not exist)
+
+=== HYPRLAND ===
+Session active on operator GUI (validated Sprint 1)
+
+=== BACKUP ===
+No existing Cursor install on Arch prior to Sprint 2.
+No dotfiles replaced without repo-managed source in linux/arch-workstation/dotfiles/
+
+RESULT: PASS with timezone condition (requires operator sudo once)

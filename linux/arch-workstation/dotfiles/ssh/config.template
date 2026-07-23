@@ -1,0 +1,15 @@
+# Operator SSH — mirrors Windows ~/.ssh/config where applicable
+# Copy: apply-config.sh installs if ~/.ssh/config missing
+
+Host contabo
+  HostName 169.58.62.107
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+
+# DevOps Lab transition VM — reachable from Windows host NAT only
+# On bare-metal Arch: use Tailscale or direct IP instead of 127.0.0.1:2222
+Host devops-lab
+  HostName 127.0.0.1
+  Port 2222
+  User asir0z
+  IdentityFile ~/.ssh/id_ed25519
