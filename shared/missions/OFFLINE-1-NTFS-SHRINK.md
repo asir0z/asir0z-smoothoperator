@@ -33,17 +33,30 @@ Perform **offline NTFS shrink** and create **raw unallocated space** between Win
 
 ### What this mission does **not** do
 
-- Does not install Arch (that is `arch-install-spec.md` — same ISO session, separate phase)
+- Does **not** install Arch (separate mission: `arch-install-spec.md` — **new boot session after OFFLINE-1 CERTIFIED**)
 - Does not modify Ubuntu / Contabo infrastructure
 - Does not require a second USB stick when using the Arch install medium
 
+### Execution phases (single responsibility)
+
+```text
+OFFLINE-1
+│
+├── Phase A — WINDOWS BEFORE evidence
+├── Phase B — Offline NTFS resize (Arch ISO live)
+├── Phase C — Live partition validation
+└── Phase D — Windows boot + gates → OFFLINE-1 CERTIFIED
+```
+
+Do **not** start Arch installation in the shrink live session. Certify OFFLINE-1 first.
+
 ### Phase outcome
 
-When OFFLINE-1 **PASS**:
+When OFFLINE-1 **PASS / CERTIFIED**:
 
 ```text
 Bare-Metal Preparation  →  COMPLETE
-Arch Installation       →  AUTHORIZED (arch-install-spec.md)
+Arch Installation       →  AUTHORIZED (arch-install-spec.md · separate session)
 ```
 
 ---
@@ -81,7 +94,7 @@ Record Windows-side baseline **before** live boot → [`offline-shrink-evidence.
 ### Why Arch ISO is primary
 
 - Arch installation is already planned on `ARCH_202607`
-- **One USB · one live session:** shrink → validate → reboot Windows → later boot same ISO for install
+- Same USB (`ARCH_202607`) used later for install — **different boot session** after OFFLINE-1 CERTIFIED
 - Aligns with [`arch-install-spec.md`](../evidence/bare-metal/arch-install-spec.md) and existing bare-metal pipeline
 - Avoids maintaining a separate GParted USB
 
@@ -226,7 +239,7 @@ p1 EFI → p2 MSR → p3 NTFS (smaller) → [unallocated ≥300 GB] → p4 Recov
 reboot
 ```
 
-Remove USB if prompted · boot **Windows** first — do **not** start Arch install until Windows validation gates PASS.
+Remove USB if prompted · boot **Windows** first — complete Phase D gates → **CERTIFY OFFLINE-1** — only then schedule a **new** Arch ISO boot for `arch-install-spec.md`.
 
 ---
 
@@ -305,20 +318,22 @@ Unallocated space left unused does **not** harm Windows if C: boots.
 Mission closes **only** when all five gates **PASS**.
 
 ```text
-OFFLINE-1 = PASS
+OFFLINE-1 = PASS · CERTIFIED
         ↓
 Bare-Metal Preparation = COMPLETE
         ↓
-arch-install-spec.md (Phase 1 — same ARCH_202607 USB, new boot session)
+STOP — do not install Arch in this chain
+        ↓
+arch-install-spec.md (separate mission · new ARCH_202607 boot)
 ```
 
 Record in evidence:
 
 ```text
 === RESULT ===
-OFFLINE-1: PASS
+OFFLINE-1: PASS · CERTIFIED
 Bare-Metal Prep: COMPLETE
-Next: arch-install-spec.md
+Next (separate): arch-install-spec.md
 ```
 
 ---
@@ -326,16 +341,18 @@ Next: arch-install-spec.md
 ## 11. Post-mission roadmap
 
 ```text
-Arch Installation     (arch-install-spec.md)
+OFFLINE-1 CERTIFIED
         ↓
-Bootstrap + validation
+Arch Installation     (arch-install-spec.md · new session)
         ↓
-Mac Operator Console  (MAC-1 / MAC-2)
+Arch Bootstrap + validation
+        ↓
+MAC-2 (deferred until then)
         ↓
 Normal Development
 ```
 
-Windows remains **emergency fallback** until Arch validation completes.
+Windows remains **emergency fallback** until Arch validation completes. Mac remains primary operator console.
 
 ---
 
@@ -346,7 +363,8 @@ Windows remains **emergency fallback** until Arch validation completes.
 | Format unallocated during OFFLINE-1 | Arch installer creates `/` and `/home` |
 | Create new EFI partition | Reuse `p1` |
 | Delete / move Recovery | Windows recovery lost |
-| Install Arch before Windows gates PASS | Evidence-first |
+| Install Arch before OFFLINE-1 CERTIFIED | Evidence-first · separate mission |
+| Chain Arch install into shrink live session | Blurs failure attribution |
 | Continue tweaking Windows online settings | EDR — exhausted |
 | Second USB for GParted when Arch ISO suffices | Operational simplicity |
 

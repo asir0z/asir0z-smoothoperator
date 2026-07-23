@@ -37,7 +37,7 @@ Bare-metal install is reproducible when:
 | Hardware known | hardware-audit.md | ✅ |
 | Phase A admin | phase-a-output.txt | ✅ |
 | Fast Startup off | bios-uefi-checklist.md | ✅ (online prep) |
-| Offline shrink + 5 gates | [offline-shrink-evidence.txt](offline-shrink-evidence.txt) · [OFFLINE-1](../../missions/OFFLINE-1-NTFS-SHRINK.md) | ⏸️ |
+| OFFLINE-1 CERTIFIED (Phases A–D · 5 gates) | [offline-shrink-evidence.txt](offline-shrink-evidence.txt) · [OFFLINE-1](../../missions/OFFLINE-1-NTFS-SHRINK.md) | ⏸️ **required before this mission** |
 | BIOS Secure Boot **off** | bios-uefi-checklist.md | ⏸️ install day |
 | USB boot | ARCH_202607 | ✅ |
 | This spec read end-to-end | — | ⏸️ operator |

@@ -1,33 +1,99 @@
 # OFFLINE-1 Evidence — Offline NTFS Shrink
 # Mission: shared/missions/OFFLINE-1-NTFS-SHRINK.md
 # Authorizing EDR: shared/evidence/bare-metal/decisions/WINDOWS-ONLINE-SHRINK-EXHAUSTED.md
+#
+# Phases (single responsibility — Arch install is NOT part of OFFLINE-1):
+#   A = WINDOWS BEFORE
+#   B = Offline NTFS resize (Arch ISO live)
+#   C = Live partition validation
+#   D = Windows boot + gate validation → CERTIFY OFFLINE-1
+# Then (separate mission): arch-install-spec.md
 
-=== WINDOWS BEFORE LIVE BOOT ===
-Date:
+=== PHASE A — WINDOWS BEFORE LIVE BOOT ===
+Date: 2026-07-24 (baseline from shrink-evidence.txt 01:26:34 +03)
 Operator: asir0z
+Host: DESKTOP-P53S8B0 · MLD M700 NVMe SSD · GPT · Disk 0
+Source: shared/evidence/bare-metal/shrink-evidence.txt (post online-shrink-exhausted; no layout change since)
+Fresh re-capture: optional — run collect-offline-1-before.ps1 on Windows immediately before Arch ISO boot if desired
 
-(paste Get-Disk / Get-Partition / Get-Volume C)
+--- Get-Disk 0 ---
 
-=== LIVE BEFORE (Arch ISO) ===
+Number            : 0
+FriendlyName      : MLD M700 NVMe SSD
+SerialNumber      : 6479_A77E_BAC0_04F3.
+Size              : 1000204886016  (~931.51 GB)
+PartitionStyle    : GPT
+OperationalStatus : Online
+HealthStatus      : Healthy
+
+--- Get-Partition -DiskNumber 0 ---
+
+PartitionNumber Type     DriveLetter SizeGB OffsetGB
+--------------- ----     ----------- ------ --------
+              1 System                0.10     0.00
+              2 Reserved              0.02     0.10
+              3 Basic              C 930.56     0.11
+              4 Recovery              0.84   930.67
+
+Layout note: No unallocated space before offline shrink (expected).
+Expected Linux names: nvme0n1p1 EFI · p2 MSR · p3 Windows NTFS · p4 Recovery
+
+--- Get-Volume C ---
+
+DriveLetter     : C
+FileSystem      : NTFS
+DriveType       : Fixed
+HealthStatus    : Healthy
+SizeGB          : 930.56
+FreeGB          : 351.72
+
+--- Preconditions (from EDR + shrink-evidence) ---
+
+fsutil dirty query C:     NOT Dirty
+CHKDSK                    PASS (no errors)
+BitLocker                 Protection Off · Fully Decrypted
+Fast Startup              HiberbootEnabled = 0x0
+Hibernation               OFF (powercfg /h off)
+Pagefile                  disabled
+System Protection         disabled
+Defrag                    0% fragmented · 12 unmovable structures remain
+Windows online shrink     EXHAUSTED (~84 GB max) — EDR accepted
+Windows boots             PASS (post-optimization)
+
+--- Operator confirms at execution time ---
+
+[ ] Backup / recovery posture OK (no unique data at risk)
+[ ] AC power connected
+[ ] USB ARCH_202607 ready (UEFI)
+[ ] Secure Boot OFF for live session (install-day policy)
+[ ] Will reboot to Windows after shrink — will NOT start Arch install in same session
+
+=== PHASE B — LIVE BEFORE + OFFLINE NTFS RESIZE (Arch ISO) ===
 Date:
 
+--- LIVE BEFORE ---
 (paste lsblk -f /dev/nvme0n1)
 (paste fdisk -l /dev/nvme0n1)
 (paste ntfsresize --info --no-action /dev/nvme0n1p3)
 
-=== LIVE RESIZE EXECUTED ===
-Date:
-Tool: Arch ISO ntfsresize + parted / GParted Live
-Target unallocated (GB):
+--- LIVE RESIZE EXECUTED ---
+Tool: Arch ISO ntfsresize + parted / GParted Live (fallback only)
+Target unallocated (GB): 350 (min 300)
 NEW_SIZE_MiB used:
 Commands executed:
 
-=== LIVE AFTER ===
+=== PHASE C — LIVE PARTITION VALIDATION ===
+Date:
 
-(paste lsblk -f)
-(paste parted print)
+(paste lsblk -f /dev/nvme0n1)
+(paste parted /dev/nvme0n1 print)
 
-=== WINDOWS AFTER REBOOT ===
+Expected:
+p1 EFI → p2 MSR → p3 NTFS (smaller) → [unallocated ≥300 GB] → p4 Recovery
+
+Then: reboot to Windows (remove USB). Do NOT start Arch install.
+
+=== PHASE D — WINDOWS AFTER REBOOT + GATES ===
 Date:
 
 (paste Get-Disk / Get-Partition / Get-Volume C)
@@ -44,7 +110,8 @@ Date:
 === RESULT ===
 PENDING
 
-=== ON PASS ===
-OFFLINE-1: PASS
+=== ON PASS (OFFLINE-1 CERTIFIED) ===
+OFFLINE-1: PASS · CERTIFIED
 Bare-Metal Preparation: COMPLETE
-Next: shared/evidence/bare-metal/arch-install-spec.md
+Next (SEPARATE mission / new boot session): shared/evidence/bare-metal/arch-install-spec.md
+Do NOT chain Arch install into the shrink live session.

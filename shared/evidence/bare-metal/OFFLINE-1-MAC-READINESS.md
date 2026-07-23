@@ -7,33 +7,33 @@ Role:       Mac documents · tracks · does not execute shrink
 Execution:  Windows host + Arch ISO live environment
 ```
 
-## Gate status (from existing evidence)
+## Phase model (do not merge with Arch install)
 
-| # | Precondition | Mac-visible status |
-|---|--------------|-------------------|
-| 1–3 | NTFS clean · CHKDSK · BitLocker OFF | PASS — EDR `WINDOWS-ONLINE-SHRINK-EXHAUSTED.md` |
-| 4–6 | Boot · Fast Startup · Hibernate OFF | PASS — prior Windows evidence |
-| 7–8 | Backup posture · AC power | Operator confirm at execution time |
-| 9 | Recovery layout recorded | Fill `offline-shrink-evidence.txt` BEFORE live boot |
-| 10 | Install USB `ARCH_202607` | Operator — UEFI boot test if possible |
+```text
+A BEFORE → B offline shrink → C live validate → D Windows gates → OFFLINE-1 CERTIFIED
+                                                                    ↓
+                                              arch-install-spec.md (new session)
+```
+
+## Phase A status
+
+| Item | Status |
+|------|--------|
+| `offline-shrink-evidence.txt` Phase A filled | ✅ seeded from `shrink-evidence.txt` (same-day layout) |
+| Fresh Windows re-capture | Optional — `collect-offline-1-before.ps1` immediately before ISO boot |
+| Operator confirm checkboxes | ⏸️ on Windows at execution |
+
+## Next physical steps (Windows / ISO — not Mac)
+
+1. On Windows: tick Phase A operator confirms · optional fresh `collect-offline-1-before.ps1`
+2. Boot `ARCH_202607` UEFI · Phase B per mission §5
+3. Phase C live validate · reboot to Windows
+4. Phase D gates · stamp PASS · certify OFFLINE-1
+5. **Only then** schedule Arch install session
 
 ## Do not reopen
 
-Windows online shrink is **exhausted**. Next resize is offline only (this mission).
-
-## Operator sequence
-
-1. On Windows: capture BEFORE block into `shared/evidence/bare-metal/offline-shrink-evidence.txt`
-2. Boot Arch ISO live (`ARCH_202607`)
-3. Execute OFFLINE-1 per `shared/missions/OFFLINE-1-NTFS-SHRINK.md`
-4. Reboot Windows → validate gates → stamp PASS
-5. Proceed to `shared/evidence/bare-metal/arch-install-spec.md` (same ISO session OK)
-
-## Mac responsibilities during OFFLINE-1
-
-* Keep mission + evidence in Git
-* Do **not** invent alternate partition tooling
-* After PASS: update PLATFORM-STATE + certification when evidence lands
+Windows online shrink is **exhausted**. Next resize is offline only.
 
 ---
 
