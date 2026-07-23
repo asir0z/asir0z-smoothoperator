@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 # Developer CLI stack for Arch-Engineering-Workstation.
 # Spec: asir0z-devopslab/docs/cross-project/DEVOPS-CHATGPT-WORKSTATION-DEVSTACK.md
-# Root scope: pacman + usermod only. No writes under /home — user config is section 6 (as asir0z).
+#
+# DevOps Lab standard:
+#   System mutations run as root. User state runs as the operator.
+#
+# This script: SYSTEM LAYER ONLY (pacman, usermod).
+# Must NOT run: gh auth, git config, pip/npm global, or any write under /home.
+# User layer: directive section 6 — run as asir0z after this script exits.
 set -euo pipefail
 
 if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
-  echo "Run as root: sudo bash $0" >&2
+  echo "System layer: sudo bash $0" >&2
   exit 1
 fi
 
@@ -14,7 +20,7 @@ TARGET_USER="${TARGET_USER:-asir0z}"
 echo "[1/4] sync"
 pacman -Syu --noconfirm
 
-echo "[2/4] core packages"
+echo "[2/4] core packages (system)"
 pacman -S --needed --noconfirm \
   base-devel linux-headers git curl wget jq \
   openssh inetutils \
@@ -24,7 +30,7 @@ pacman -S --needed --noconfirm \
   python python-pip \
   nodejs npm
 
-echo "[3/4] user groups (docker optional later)"
+echo "[3/4] groups"
 usermod -aG wheel "$TARGET_USER"
 
 echo "[4/4] verify"
@@ -37,5 +43,5 @@ for cmd in git curl jq rg fd bat eza fzf nvim gh python node npm; do
   fi
 done
 
-echo "done — capture evidence per DEVOPS-CHATGPT-WORKSTATION-DEVSTACK.md section 7"
-echo "next: run section 6 as $TARGET_USER (gh auth, git config, pip --user)"
+echo "system layer done — capture evidence (directive section 7)"
+echo "user layer next — as $TARGET_USER, not root (directive section 6)"
