@@ -1,11 +1,16 @@
-# ARCHITECTURE NOTE — Mac as the Primary Operator Console
+# Platform Architecture Decision — Primary Operator Console
 
 ```text
 Status: Accepted Architecture Direction
 Scope: Long-Term Platform Architecture
 Priority: Informational
 Implementation: Incremental
+Type: Platform Architecture Decision
 ```
+
+This document is **not** an operating-system preference. It describes the **long-term operational model** of the ecosystem — responsibility separation, not machine loyalty.
+
+This is **not** a mission. It introduces no immediate implementation work. It defines the architectural direction that future engineering decisions should follow.
 
 ---
 
@@ -13,9 +18,9 @@ Implementation: Incremental
 
 The long-term goal is **not** to make the Arch Linux workstation mandatory.
 
-The goal is to make the entire ecosystem manageable from the Mac regardless of whether the Arch machine is powered on.
+The goal is to make the entire ecosystem manageable from a portable operator console regardless of whether the Arch machine is powered on.
 
-The Mac should become the **primary operator console**, while the server remains the always-on infrastructure.
+The Mac is the **long-term target** for that role. The server remains the always-on infrastructure layer.
 
 ---
 
@@ -26,8 +31,8 @@ The Mac should become the **primary operator console**, while the server remains
                        │
         ┌──────────────┴──────────────┐
         │                             │
-     MacBook                    Arch Linux
- Primary Operator            AI Workstation
+  Operator Console              Arch Linux
+  (Mac — steady state)          AI Workstation
         │                             │
         └──────────────┬──────────────┘
                        │
@@ -40,13 +45,27 @@ The Mac should become the **primary operator console**, while the server remains
       Telegram · APIs · Public Services
 ```
 
+During bare-metal preparation, Windows temporarily holds the operator console role. See [Relationship with WIN-1](#relationship-with-win-1).
+
 ---
 
-## System Roles
+## Architectural Principles
 
-### Mac
+The long-term platform is based on **responsibility separation** rather than machine preference.
 
-Primary responsibilities:
+### Operator Console
+
+A portable client device acts as the primary operator console.
+
+| Phase | Operator console |
+|-------|------------------|
+| Bare-metal prep (now) | Windows |
+| Post-install validation | Arch + Windows fallback |
+| Steady state (target) | Mac |
+
+Changing the operator device must **not** require changes to the infrastructure architecture.
+
+Typical responsibilities (regardless of which device holds the role):
 
 * Daily development
 * Cursor
@@ -60,15 +79,14 @@ Primary responsibilities:
 * Monitoring
 * Documentation
 
-The Mac is the default operator environment.
-
 ---
 
-### Ubuntu Server
+### Infrastructure
 
-Primary responsibilities:
+Ubuntu Server remains the permanent infrastructure layer.
 
-* Always-on infrastructure
+Responsibilities include:
+
 * Docker
 * Reverse Proxy
 * n8n
@@ -78,93 +96,58 @@ Primary responsibilities:
 * Scheduled jobs
 * Telegram bots
 
-The server must continue operating independently from both Mac and Arch.
+Infrastructure must operate independently from both operator devices and compute workstations.
 
 ---
 
-### Arch Linux
+### Compute Layer
 
-Primary responsibilities:
+Arch Linux is a dedicated compute workstation.
 
-* AI development
-* CUDA workloads
-* Heavy builds
+Typical responsibilities include:
+
+* AI workloads
+* CUDA
 * Local LLMs
+* Heavy builds
 * Experimental environments
 * High-performance engineering work
 
-Arch is a compute workstation, **not** infrastructure.
+Arch is intentionally **not** part of the production infrastructure.
 
 The ecosystem must continue functioning even if Arch remains powered off for extended periods.
 
 ---
 
-## Synchronization Strategy
+### Synchronization
 
-### Source of Truth
-
-Git repositories remain the canonical source.
+Git remains the canonical source of truth.
 
 ```text
 GitHub
    │
  ┌─┴───────────────┐
  │                 │
-Mac            Arch
+Operator         Arch
+console
 ```
 
-No manual file duplication.
+No manual file duplication. Repositories synchronize through Git.
 
-Repositories synchronize through Git.
-
----
-
-### Large Files
-
-For non-Git assets:
-
-Possible options:
-
-* Syncthing
-* Tailscale + rsync
-* External storage if required
-
-Selection will be evidence-based when the need arises.
+Future synchronization technologies (Syncthing, Tailscale + rsync, external storage) are **implementation choices** — introduce only when operational evidence justifies them.
 
 ---
 
-## Remote Operations
+### Failure Independence
 
-The Mac should be capable of managing every system remotely.
+The architecture should satisfy the following properties:
 
-Examples:
+* Arch may remain powered off indefinitely without affecting production services.
+* Operator devices may change without affecting infrastructure.
+* Infrastructure restarts must not affect development workstations.
+* Production services must remain independent from local development environments.
 
-```bash
-ssh lab
-ssh arch
-ssh nas
-```
-
-The operator should be able to:
-
-* deploy
-* monitor
-* update
-* troubleshoot
-* review logs
-* restart services
-
-without physically accessing any machine.
-
----
-
-## Failure Independence
-
-Desired behaviour:
-
-### If Arch is OFF
-
-System continues operating.
+#### If Arch is OFF
 
 * Website remains online
 * Telegram bots continue
@@ -174,21 +157,29 @@ System continues operating.
 
 No infrastructure outage.
 
+#### If the operator console is unavailable
+
+Infrastructure continues running. Operator access can later be restored from another device.
+
+#### If the server restarts
+
+Operator devices and Arch remain unaffected. Responsibilities stay separated.
+
 ---
 
-### If Mac is unavailable
+## Remote Operations
 
-Infrastructure continues running.
+The operator console should manage every system remotely.
 
-Operator access can later be restored from another device.
+Examples:
 
----
+```bash
+ssh lab
+ssh arch
+ssh nas
+```
 
-### If Server restarts
-
-Mac and Arch remain unaffected.
-
-Responsibilities stay separated.
+The operator should be able to deploy, monitor, update, troubleshoot, review logs, and restart services without physically accessing any machine.
 
 ---
 
@@ -210,7 +201,7 @@ Ubuntu Server
 Telegram
 ```
 
-The Apple ecosystem naturally integrates through the Mac.
+The Apple ecosystem naturally integrates through the Mac (steady-state operator console).
 
 Arch should not become a dependency for personal health or operational workflows.
 
@@ -218,19 +209,58 @@ Arch should not become a dependency for personal health or operational workflows
 
 ## Engineering Principles
 
-1. Mac is the operator console.
+1. A portable operator console holds daily operations (Windows now → Mac steady state).
 2. Ubuntu Server is the production infrastructure.
 3. Arch is the compute workstation.
 4. Git is the synchronization authority.
 5. Infrastructure must not depend on Arch being powered on.
-6. Every operational task should be executable from the Mac.
+6. Every operational task should be executable from the operator console.
 7. Compute and infrastructure responsibilities remain separated.
+
+---
+
+## Relationship with WIN-1
+
+This document does **not** replace WIN-1.
+
+WIN-1 correctly defines Windows as the current operator environment during migration and bare-metal preparation.
+
+Long-term evolution:
+
+```text
+Today
+  Windows
+    ↓
+Bare-metal preparation
+    ↓
+Arch bootstrap
+    ↓
+Mac becomes primary operator console
+    ↓
+Steady-state platform
+```
+
+No migration work is introduced by this document. It only records the intended destination.
+
+Reference: `windows/win-1-baseline/WIN-1-INFRASTRUCTURE-SPEC.md`
+
+---
+
+## Relationship to Current Operations
+
+| Phase | Operator environment | Notes |
+|-------|---------------------|-------|
+| Bare-metal prep (now) | Windows | Disk shrink, install USB — per `shared/evidence/bare-metal/` |
+| Post-install validation | Arch + Windows fallback | Arch bootstrap; Windows secondary |
+| Steady state (target) | Mac | Primary operator console per this document |
+
+Bare-metal install spec and shrink plan are **unchanged**. This document is reviewed and committed independently from disk shrink, Arch installation, bootstrap missions, and operational evidence.
 
 ---
 
 ## Future Work
 
-Potential future improvements include:
+Potential improvements (incremental, evidence-justified only):
 
 * SSH configuration simplification
 * Unified terminal profiles
@@ -241,32 +271,26 @@ Potential future improvements include:
 * Infrastructure dashboards
 * Project Pulse integration with Apple ecosystem
 
-These enhancements should be implemented incrementally and only when justified by operational needs.
-
 ---
 
 ## Target State
 
-The desired long-term operating model is:
-
 > **Mac becomes the primary operator console. Ubuntu Server provides continuous infrastructure. Arch Linux serves as an on-demand high-performance workstation.**
 
-This architecture minimizes operational risk, improves flexibility, and ensures the ecosystem remains fully manageable regardless of the power state of the Arch workstation.
+This minimizes operational risk, improves flexibility, and ensures the ecosystem remains fully manageable regardless of the power state of the Arch workstation.
 
 ---
 
-## Relationship to Current Operations
+## Operational Roadmap (unchanged)
 
-This document defines **long-term direction**, not immediate execution.
+1. Disk shrink
+2. Arch installation (`arch-install-spec.md`)
+3. Arch bootstrap
+4. Production validation
+5. Gradual transition of operator role from Windows to Mac
 
-| Phase | Operator environment | Notes |
-|-------|---------------------|-------|
-| Bare-metal prep (now) | Windows | Disk shrink, install USB, transient operator shell |
-| Post-install validation | Arch + Windows fallback | Arch bootstrap; Windows secondary |
-| Long-term target | Mac | Primary operator console per this document |
-
-Bare-metal install spec and shrink plan are unchanged. Arch remains a compute workstation from day one; operator role migration to Mac is incremental.
+This document formalizes the long-term architectural destination while preserving the existing bare-metal execution plan.
 
 ---
 
-*SmoothOperator™ · Accepted Architecture Direction · Informational*
+*SmoothOperator™ · Accepted Architecture Direction · Platform Architecture Decision · Informational*
