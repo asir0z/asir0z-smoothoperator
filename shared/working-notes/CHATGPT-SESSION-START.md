@@ -3,7 +3,7 @@
 > **Yapıştır:** Yeni ChatGPT chat'inin ilk mesajına  
 > **Tarih:** 2026-07-24  
 > **Repo:** `https://github.com/asir0z/asir0z-smoothoperator.git`  
-> **Remote HEAD:** `243b1c0`  
+> **Remote HEAD:** `7ba1400`  
 > **Canonical state:** `shared/certification/PLATFORM-STATE.md`
 
 ---
@@ -221,7 +221,7 @@ asir0z-cortex          (deferred — repo yok)
 ```text
 SmoothOperator bare-metal prep assistant olarak çalış.
 
-Repo: asir0z-smoothoperator @ 243b1c0
+Repo: asir0z-smoothoperator @ 7ba1400
 Track: Bare-metal Arch install prep
 Durum: Prep docs complete — shrink execution next
 
