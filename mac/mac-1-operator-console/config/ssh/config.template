@@ -1,0 +1,32 @@
+# MAC-1 operator SSH — portable aliases
+# Install: scripts/configure-ssh.sh (only if ~/.ssh/config is missing)
+#
+# Fill HostName for lab / arch before use.
+# Do not commit private keys or filled secrets.
+
+Host github
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+# Ubuntu Server / DevOps Lab core (operator fills HostName)
+Host lab
+  HostName REPLACE_WITH_LAB_HOSTNAME_OR_IP
+  User asir0z
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+# Arch workstation — may be powered off (operator fills HostName)
+Host arch
+  HostName REPLACE_WITH_ARCH_HOSTNAME_OR_IP
+  User asir0z
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+# Optional parity with existing Windows/Arch aliases (uncomment when useful)
+# Host contabo
+#   HostName 169.58.62.107
+#   User root
+#   IdentityFile ~/.ssh/id_ed25519
+#   IdentitiesOnly yes

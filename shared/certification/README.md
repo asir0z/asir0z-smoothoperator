@@ -61,13 +61,13 @@ Review questions:
 
 | Track | Status | Focus |
 |-------|--------|-------|
-| **SmoothOperator** | WIN-1 **execution OPEN** | Core ∥ Infrastructure · real friction |
-| **DevOps Lab** | Mission 20 **Ready** | Parity · cutover · observation |
+| **SmoothOperator** | WIN-1 Core **OPEN** · **MAC-1 AUTHORIZED** | Mac operator bootstrap · Windows friction |
+| **DevOps Lab** | Mission 20 **Observation** | Contabo cutover observation |
 | **Products** | Standby | After Contabo production |
 
 **Mission 20 goal:** *Production users cannot tell that infrastructure changed.*
 
-**Bottleneck today:** Windows operator environment (WIN-1) · Contabo runtime parity (Mission 20)
+**Operator console:** MAC-1 authorized on Mac — Windows remains daily console until MAC-1 certified.
 
 ---
 
