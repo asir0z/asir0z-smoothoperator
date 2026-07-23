@@ -1,0 +1,26 @@
+WS-2 Sprint 1 — System Baseline
+Collected: 2026-07-23T17:54:38 UTC (Arch guest)
+
+Static hostname: arch-workstation
+Chassis: vm (VirtualBox)
+OS: Arch Linux rolling
+Kernel: Linux 7.1.4-arch1-1
+Architecture: x86-64
+
+Disk:
+  /dev/sda2  32G  5.8G used  24G free  20%  /
+  /dev/sda3  31G  home partition
+  /dev/sda1  1G   /boot
+
+Memory: 7.7 GiB total · 6.8 GiB available · swap unused
+
+systemctl --failed: 0 units
+
+Time:
+  Time zone: UTC (UTC, +0000)
+  System clock synchronized: yes
+  NTP service: active
+  NOTE: Operator target is Europe/Istanbul — not yet set on guest
+
+RESULT: PASS — boots, no failed units, sufficient disk/memory, NTP active
+CONDITION: timezone not aligned with operator locale

@@ -1,0 +1,23 @@
+WS-2 Sprint 1 — Operator SSH Validation
+
+=== Initial state ===
+~/.ssh/config: present (from apply-config.sh template)
+  Host contabo → 169.58.62.107 root
+  Host devops-lab → 127.0.0.1:2222 (VM-only NAT note)
+
+First test: Host key verification failed (no known_hosts entry)
+Second test: Permission denied — no id_ed25519 on Arch guest
+
+=== Fix applied (transferable blocker) ===
+Installed operator ed25519 key pair to ~/.ssh/ (from Windows host)
+Added contabo to known_hosts via ssh-keyscan
+
+=== Post-fix verification ===
+ssh contabo "hostname && uptime"
+  → vmi3459972 · load normal  PASS
+
+No secrets committed to repository.
+
+devops-lab (127.0.0.1:2222): NOT tested from Arch — expected VM-only via Windows NAT
+
+RESULT: PASS for contabo operator client access

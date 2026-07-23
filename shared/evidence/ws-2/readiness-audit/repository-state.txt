@@ -1,0 +1,18 @@
+WS-2 Sprint 1 — Canonical Repository
+Path: ~/Projects/asir0z-smoothoperator
+
+origin  https://github.com/asir0z/asir0z-smoothoperator.git (fetch/push)
+branch  master @ 3728e3d tracking origin/master
+remote  canonical lowercase URL  PASS
+
+Working tree (pre-audit commit):
+  ?? linux/arch-workstation/  (local WS-2 config — not yet on remote)
+  NOTE: No duplicate clone at ~/asir0z-smoothoperator after move to Projects/
+
+git fetch: OK
+git pull: not needed (tracking origin/master)
+
+Legacy path ~/asir0z-smoothoperator: absent (moved to Projects/)
+
+RESULT: PASS WITH CONDITION
+CONDITION: untracked arch-workstation/ pending commit to remote

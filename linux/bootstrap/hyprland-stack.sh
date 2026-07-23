@@ -83,7 +83,6 @@ animations {
 }
 
 dwindle {
-    pseudotile = true
     preserve_split = true
 }
 
@@ -91,8 +90,7 @@ bind = SUPER, Return, exec, kitty
 bind = SUPER, Q, killactive,
 bind = SUPER, M, exit,
 bind = SUPER, E, exec, wofi --show drun
-bind = SUPER, P, pseudo,
-bind = SUPER, J, togglesplit,
+bind = SUPER, J, layoutmsg, togglesplit,
 bind = SUPER, left, movefocus, l
 bind = SUPER, right, movefocus, r
 bind = SUPER, up, movefocus, u

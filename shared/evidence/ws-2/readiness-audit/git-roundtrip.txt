@@ -1,0 +1,25 @@
+WS-2 Sprint 1 — Git Round Trip
+
+Planned workflow:
+  Windows: commit evidence + linux/arch-workstation/
+  push origin/master
+  Arch: git pull
+  verify same commit on both hosts
+
+Pre-commit Windows state:
+  M linux/bootstrap/hyprland-stack.sh (Hyprland 0.56 compat)
+  ?? linux/arch-workstation/
+  ?? shared/evidence/ws-2/readiness-audit/
+
+Arch pre-pull:
+  master @ 3728e3d
+  untracked linux/arch-workstation/ (scp copy, pre-commit)
+
+Post-commit verification: see git log after push
+
+Acceptance criteria:
+  - No line-ending corruption in committed files
+  - Same commit SHA on Windows and Arch after pull
+  - Canonical remote URL unchanged
+
+Note: frozen WIN-1 Infrastructure certification files not modified

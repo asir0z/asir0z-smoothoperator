@@ -1,0 +1,27 @@
+WS-2 Sprint 1 — Bootstrap Access
+
+=== VirtualBox share ===
+Host path (Windows): C:\Projects\asir0z-smoothoperator\linux\bootstrap
+Guest mount: /mnt/bootstrap
+vboxsf module: loaded
+vboxservice: active (running)
+
+=== Mount state at audit ===
+findmnt /mnt/bootstrap: NOT MOUNTED
+sudo mount without password: FAIL (password required)
+
+Manual mount command (operator):
+  sudo mount -t vboxsf bootstrap /mnt/bootstrap
+
+=== Validation bypass (transferable) ===
+Bootstrap scripts accessible via repo clone (no mount required for verify):
+  ~/Projects/asir0z-smoothoperator/linux/bootstrap/run-ws1-system.sh  EXISTS
+  ~/Projects/asir0z-smoothoperator/linux/bootstrap/verify/verify-ws1.sh  EXISTS
+
+=== Classification ===
+Friction: bootstrap share does not auto-mount after boot
+Type: real WS-2 friction · previously observed
+Blocks validation: NO (repo path sufficient for verify; mount required for run-ws1-system.sh from share)
+Permanent fix: NOT authorized in this sprint (no fstab/systemd unit)
+
+RESULT: PASS WITH CONDITION — manual mount inconvenient, not blocking audit verify path
