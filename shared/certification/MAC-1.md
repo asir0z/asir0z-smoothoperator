@@ -44,6 +44,7 @@ RESULT:             APPROVED
 LIFECYCLE:          CERTIFIED
 DATE:               2026-07-24
 EVIDENCE:           mac-1-evidence-20260724.md
+COMMIT:             4ea7e3d · origin/master
 COLLECTOR:          verification-20260724-023724.txt
 VERIFY:             PASS=56 FAIL=0 WARN=4 SKIP=2
 ```
