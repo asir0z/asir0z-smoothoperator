@@ -1,0 +1,80 @@
+WS-2 Sprint 2 — Audio Investigation
+Collected: 2026-07-23 (Windows host + SSH arch-ws)
+
+=== SYMPTOM ===
+Operator GUI acceptance item #8 (audio playback) not yet validated.
+No sound during test sound or video playback in Hyprland session.
+
+=== GUEST STACK (SSH — Hyprland session active) ===
+
+Packages:
+  pipewire 1:1.6.8-1           INSTALLED
+  wireplumber 0.5.15-1        INSTALLED
+  pipewire-pulse 1:1.6.8-1    INSTALLED
+  pipewire-alsa 1:1.6.8-1     INSTALLED
+  virtualbox-guest-utils 7.2.14-1  INSTALLED
+  alsa-utils                  NOT INSTALLED (aplay unavailable)
+
+User services:
+  pipewire         active
+  wireplumber      active
+  pipewire-pulse   active
+
+pactl info:
+  Server: PulseAudio (on PipeWire 1.6.8)
+  Default Sink: alsa_output.pci-0000_00_05.0.analog-stereo
+  Default Source: alsa_input.pci-0000_00_05.0.analog-stereo
+  Mute: no
+  Volume: 40%
+
+pactl list sinks:
+  51  alsa_output.pci-0000_00_05.0.analog-stereo  PipeWire  SUSPENDED
+
+wpctl status:
+  Device: Built-in Audio [alsa]
+  Default Sink: Built-in Audio Analog Stereo [vol: 0.40]
+
+ALSA card (/proc/asound/cards):
+  0 [I82801AAICH]: Intel 82801AA-ICH (VirtualBox emulated ICH AC97)
+
+/dev/snd: present (controlC0, pcmC0D0p, pcmC0D0c, …)
+vboxguest / vboxsf modules loaded.
+
+Playback test (before host fix):
+  pw-play /usr/share/sounds/...  →  error: open failed: Input/output error
+  Sink remains SUSPENDED
+
+=== HOST (VirtualBox) ===
+
+VBoxManage showvminfo Arch-Engineering-Workstation --machinereadable:
+  audio="null"
+  audio_out="off"
+  audio_in="off"
+
+Repository create-vm.ps1 (line 12, pre-fix):
+  --audio-driver none
+
+=== ROOT CAUSE ===
+
+VirtualBox VM audio disabled at hypervisor level (audio driver null, output off).
+Guest PipeWire stack is healthy; playback fails because host routes no audio device.
+
+Not a PipeWire/WirePlumber misconfiguration.
+Not a Hyprland or dotfiles issue.
+
+=== FIX (smallest reproducible) ===
+
+1. Power off VM
+2. Windows: bash linux/install/enable-vm-audio.ps1
+   (or: VBoxManage modifyvm Arch-Engineering-Workstation --audio-driver default --audio-out on)
+3. Start VM · log in to Hyprland
+4. Verify: wpctl status + pw-play test tone
+
+Repository reproducibility:
+  linux/install/create-vm.ps1 updated: --audio-driver default --audio-out on (new VMs)
+  linux/install/enable-vm-audio.ps1 added (existing VM one-shot)
+
+No shared dotfiles change required.
+
+=== POST-FIX VERIFICATION ===
+See audio-verification.txt (after enable-vm-audio.ps1 applied)

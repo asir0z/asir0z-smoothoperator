@@ -1,0 +1,65 @@
+WS-2 Sprint 2 — Audio Verification
+Collected: 2026-07-23 (post enable-vm-audio.ps1)
+
+=== HOST FIX APPLIED ===
+
+Script: linux/install/enable-vm-audio.ps1
+Action: VBoxManage modifyvm Arch-Engineering-Workstation --audio-driver default --audio-out on
+
+VBoxManage showvminfo (after fix, VM powered off):
+  audio="default"
+  audio_out="on"
+  audio_in="off"
+
+Repository reproducibility:
+  linux/install/create-vm.ps1 — new VMs use --audio-driver default --audio-out on
+  (replaces prior --audio-driver none)
+
+RESULT (host): PASS
+
+=== GUEST — PRE-FIX (Hyprland session active, VBox audio null) ===
+
+Reference: audio-investigation.txt
+
+  pipewire / wireplumber / pipewire-pulse: active
+  Default Sink: alsa_output.pci-0000_00_05.0.analog-stereo (Built-in Audio / ICH)
+  pw-play test: Input/output error (sink SUSPENDED, no host audio route)
+
+Conclusion: guest stack healthy; hypervisor blocked output.
+
+=== GUEST — POST-FIX WITHOUT HYPRLAND (SSH-only boot) ===
+
+  /proc/asound/cards: I82801AAICH present
+  wpctl status: Dummy Output only (no Built-in Audio device node)
+  pw-play: no target node available
+
+Note: WirePlumber exposes VBox ICH device in graphical PipeWire session (Hyprland).
+SSH-only boot is insufficient for playback verification.
+
+=== GUEST — POST-FIX HYPRLAND VERIFICATION (operator) ===
+
+Run inside Hyprland kitty after SDDM login:
+
+  cd ~/Projects/asir0z-smoothoperator
+  git pull
+  bash linux/arch-workstation/scripts/verify-audio.sh
+
+Expected:
+  Default Sink: Built-in Audio Analog Stereo (ICH)
+  pw-play exit: 0
+  Operator hears test tone or video audio
+
+Operator script output replaces this section when complete.
+
+=== VERIFICATION SCRIPT ===
+
+  linux/arch-workstation/scripts/verify-audio.sh
+  Writes: shared/evidence/ws-2/sprint-2/audio-verification.txt (append/overwrite via tee)
+
+=== OVERALL AUDIO STATUS ===
+
+  Root cause identified: PASS
+  Host fix applied: PASS
+  Guest playback in Hyprland: PENDING operator login + verify-audio.sh
+
+Upgrade to full PASS when verify-audio.sh completes with ICH sink + pw-play exit 0.

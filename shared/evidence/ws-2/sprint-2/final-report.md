@@ -19,9 +19,11 @@ Arch VM development workstation engineering is complete. Windows synchronized at
 | Windows sync | PASS |
 | Keyboard | PASS |
 | Display investigation | PASS (VM-specific observation) |
+| Audio investigation + host fix | PASS |
+| Audio playback (Hyprland) | Operator pending |
 | Timezone | PASS |
 | Evidence | Updated |
-| GUI interactive tests | Operator pending |
+| GUI interactive tests | Operator pending (SDDM login + audio playback) |
 | Certification | Pending GUI completion |
 
 ---
@@ -50,6 +52,7 @@ Arch VM development workstation engineering is complete. Windows synchronized at
 - Secret scan PASS
 - Keyboard verification
 - Display scaling investigation
+- Audio investigation + VirtualBox host fix (`enable-vm-audio.ps1`)
 - Timezone `Europe/Istanbul`
 
 ---
@@ -58,7 +61,8 @@ Arch VM development workstation engineering is complete. Windows synchronized at
 
 | Blocker | Status |
 |---------|--------|
-| GUI acceptance test (incl. reboot) | **PENDING** |
+| GUI acceptance test (incl. reboot, Hyprland login) | **PENDING** |
+| Hyprland audio playback confirm | **PENDING** (`verify-audio.sh`) |
 
 No technical blockers remain. DevOps Lab certification review after operator marks [gui-validation.md](gui-validation.md) PASS.
 
@@ -82,6 +86,8 @@ Upgrade to **APPROVED · CLOSED** via DevOps Lab certification review after GUI 
 | [timezone-verification.txt](timezone-verification.txt) | Timezone PASS |
 | [keyboard-verification.txt](keyboard-verification.txt) | Keyboard PASS |
 | [display-scaling-investigation.md](display-scaling-investigation.md) | VM observation |
+| [audio-investigation.txt](audio-investigation.txt) | Audio root cause |
+| [audio-verification.txt](audio-verification.txt) | Audio host fix + playback gate |
 | [development-round-trip.md](development-round-trip.md) | Git round-trip |
 | [secret-scan.txt](secret-scan.txt) | Pre-commit scan |
 
