@@ -13,16 +13,20 @@ Personal engineering workstation — reproducible bootstrap, separate from [asir
 **Principle:** system mutations as root; user state as operator.
 
 ```bash
-# system layer (root)
-sudo mkdir -p /mnt/bootstrap
-sudo mount -t vboxsf bootstrap /mnt/bootstrap
-sudo bash /mnt/bootstrap/dev-stack.sh
+# system layer (root TTY or sudo)
+mount -t vboxsf bootstrap /mnt/bootstrap 2>/dev/null || true
+sudo bash /mnt/bootstrap/run-ws1-system.sh
+
+# evidence (asir0z — not root)
+bash /mnt/bootstrap/verify/verify-ws1.sh | tee ~/ws-1-evidence.txt
 
 # user layer (asir0z — not root)
 gh auth login
 git config --global user.name "Asır"
 git config --global user.email "asir01oz@gmail.com"
 ```
+
+`run-ws1-system.sh` strips CRLF, runs `dev-stack.sh`, installs Windows SSH pubkey for passwordless `ssh arch-ws`.
 
 Shared folder `bootstrap` maps to this repo's `bootstrap/` directory only — not the repo root.
 

@@ -30,8 +30,22 @@ pacman -S --needed --noconfirm \
   python python-pip \
   nodejs npm
 
-echo "[3/4] groups"
+echo "[3/4] groups + ssh key"
 usermod -aG wheel "$TARGET_USER"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PUB="$SCRIPT_DIR/windows_id_ed25519.pub"
+if [[ -f "$PUB" ]]; then
+  AUTH_KEYS="$TARGET_HOME/.ssh/authorized_keys"
+  install -d -m 700 -o "$TARGET_USER" -g "$TARGET_USER" "$TARGET_HOME/.ssh"
+  touch "$AUTH_KEYS"
+  chown "$TARGET_USER:$TARGET_USER" "$AUTH_KEYS"
+  chmod 600 "$AUTH_KEYS"
+  if ! grep -qF "$(cat "$PUB")" "$AUTH_KEYS" 2>/dev/null; then
+    cat "$PUB" >>"$AUTH_KEYS"
+    echo "installed SSH pubkey for $TARGET_USER"
+  fi
+fi
 
 echo "[4/4] verify"
 for cmd in git curl jq rg fd bat eza fzf nvim gh python node npm; do
