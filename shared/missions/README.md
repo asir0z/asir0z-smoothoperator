@@ -53,17 +53,21 @@ lab-health   # → ssh lab '~/scripts/ops/production-health-check.sh'
 
 ---
 
-## Bare-metal track (unchanged)
+## Bare-metal track
+
+| Mission | Status | Focus |
+|---------|--------|-------|
+| [OFFLINE-1](OFFLINE-1-NTFS-SHRINK.md) | **AUTHORIZED** | Arch ISO offline NTFS shrink → unallocated space |
 
 ```text
-Windows disk shrink
-→ gate evaluation
-→ shrink evidence
-→ arch-install-spec
+Windows online shrink exhausted (EDR)
+→ OFFLINE-1 (Arch ISO · ntfsresize + parted)
+→ gate PASS → Bare-Metal Prep COMPLETE
+→ arch-install-spec.md
 → Arch installation
 ```
 
-Mac bootstrap proceeds independently and may become the active operator console before Arch installation.
+Mac bootstrap proceeds independently.
 
 ---
 

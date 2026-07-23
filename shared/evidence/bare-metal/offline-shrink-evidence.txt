@@ -1,0 +1,50 @@
+# OFFLINE-1 Evidence — Offline NTFS Shrink
+# Mission: shared/missions/OFFLINE-1-NTFS-SHRINK.md
+# Authorizing EDR: shared/evidence/bare-metal/decisions/WINDOWS-ONLINE-SHRINK-EXHAUSTED.md
+
+=== WINDOWS BEFORE LIVE BOOT ===
+Date:
+Operator: asir0z
+
+(paste Get-Disk / Get-Partition / Get-Volume C)
+
+=== LIVE BEFORE (Arch ISO) ===
+Date:
+
+(paste lsblk -f /dev/nvme0n1)
+(paste fdisk -l /dev/nvme0n1)
+(paste ntfsresize --info --no-action /dev/nvme0n1p3)
+
+=== LIVE RESIZE EXECUTED ===
+Date:
+Tool: Arch ISO ntfsresize + parted / GParted Live
+Target unallocated (GB):
+NEW_SIZE_MiB used:
+Commands executed:
+
+=== LIVE AFTER ===
+
+(paste lsblk -f)
+(paste parted print)
+
+=== WINDOWS AFTER REBOOT ===
+Date:
+
+(paste Get-Disk / Get-Partition / Get-Volume C)
+(diskmgmt.msc screenshot path or note)
+
+=== VALIDATION GATES ===
+| Gate             | PASS / FAIL | Notes |
+| Boot             |             |       |
+| NTFS             |             |       |
+| Partition Layout |             |       |
+| Recovery         |             |       |
+| Unallocated Size |             | actual: ___ GB |
+
+=== RESULT ===
+PENDING
+
+=== ON PASS ===
+OFFLINE-1: PASS
+Bare-Metal Preparation: COMPLETE
+Next: shared/evidence/bare-metal/arch-install-spec.md

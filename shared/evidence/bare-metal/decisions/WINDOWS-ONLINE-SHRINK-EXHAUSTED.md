@@ -130,14 +130,11 @@ Future partition resizing should be performed **offline**.
 
 ## Approved Next Step
 
-Use an offline partitioning environment before Arch installation.
+Mission specification: [`shared/missions/OFFLINE-1-NTFS-SHRINK.md`](../../missions/OFFLINE-1-NTFS-SHRINK.md)
 
-Preferred options:
+**Primary tool:** Arch install ISO live environment — `ntfsresize` + `parted` (same USB as installation).
 
-1. GParted Live
-2. Arch ISO + `ntfsresize` + `parted` (advanced)
-
-The offline workflow will be specified separately.
+**Alternative:** GParted Live — only if Arch live tools fail or operator requires GUI rescue.
 
 ---
 
@@ -150,7 +147,7 @@ Windows verification (complete)
 Offline NTFS shrink
         │
         ▼
-Partition validation
+Mission OFFLINE-1 (Arch ISO · ntfsresize + parted)
         │
         ▼
 Arch installation (arch-install-spec.md)
