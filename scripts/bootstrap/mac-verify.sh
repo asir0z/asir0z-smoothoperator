@@ -73,15 +73,20 @@ else
   record SKIP "hostname" "scutil unavailable"
 fi
 
+# systemsetup needs admin; fall back to /etc/localtime when it returns empty.
+tz=""
 if have systemsetup; then
   tz="$(systemsetup -gettimezone 2>/dev/null | awk -F': ' '{print $2}' || true)"
-  if [[ "$tz" == "Europe/Istanbul" ]]; then
-    record PASS "timezone" "$tz"
-  else
-    record WARN "timezone" "${tz:-unknown} (want Europe/Istanbul)"
-  fi
+fi
+if [[ -z "$tz" ]] && [[ -L /etc/localtime ]]; then
+  tz="$(readlink /etc/localtime 2>/dev/null | sed -n 's|.*/zoneinfo/||p' || true)"
+fi
+if [[ "$tz" == "Europe/Istanbul" ]]; then
+  record PASS "timezone" "$tz"
+elif [[ -n "$tz" ]]; then
+  record WARN "timezone" "$tz (want Europe/Istanbul)"
 else
-  record SKIP "timezone" "systemsetup unavailable"
+  record WARN "timezone" "unknown (want Europe/Istanbul)"
 fi
 
 if have fdesetup; then
@@ -311,8 +316,11 @@ if ssh -o BatchMode=yes -o ConnectTimeout=8 lab 'hostname' >/dev/null 2>&1; then
   echo "$out"
   if [[ $rc -eq 0 ]]; then
     record PASS "remote.lab.health" "ok"
+  elif echo "$out" | grep -q 'RESULT='; then
+    # Wrapper reached canonical Ubuntu script; non-zero is production status, not Mac failure.
+    record WARN "remote.lab.health" "rc=$rc (canonical script ran; production RESULT non-zero — Ubuntu authority)"
   else
-    record WARN "remote.lab.health" "rc=$rc (server script may be absent)"
+    record WARN "remote.lab.health" "rc=$rc (wrapper/SSH failure or missing remote script)"
   fi
 else
   record SKIP "remote.lab.health" "lab not reachable — configure SSH first"
