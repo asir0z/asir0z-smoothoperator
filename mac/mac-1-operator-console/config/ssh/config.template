@@ -1,0 +1,25 @@
+# MAC-1 operator SSH — portable aliases
+# Prefer shared/operator/dotfiles/ssh-config.example (kept in sync).
+# Install only if ~/.ssh/config is missing. Fill HostName during execution.
+
+Host github
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+Host lab
+  HostName REPLACE_WITH_LAB_HOSTNAME_OR_TAILSCALE_NAME
+  User asir0z
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
+
+Host arch
+  HostName REPLACE_WITH_ARCH_HOSTNAME_OR_TAILSCALE_NAME
+  User asir0z
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  ServerAliveInterval 30
+  ServerAliveCountMax 3

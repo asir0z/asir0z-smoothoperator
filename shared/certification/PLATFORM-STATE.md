@@ -113,6 +113,38 @@ Sprint 2 evidence: [`shared/evidence/ws-2/sprint-2/`](../evidence/ws-2/sprint-2/
 
 ---
 
+## MAC-1 — Mac Operator Console
+
+```text
+STATUS:     AUTHORIZED ✅ · AWAITING macOS EVIDENCE
+SCOPE:      Full operator console (shell · CLI · SSH · wrappers · Git · Cursor)
+AMENDMENT:  Terminal/shell/scripts — Approved
+MISSION:    shared/missions/MAC-1-OPERATOR-CONSOLE-BOOTSTRAP.md
+PACKAGE:    mac/mac-1-operator-console/
+BOOTSTRAP:  scripts/bootstrap/mac-bootstrap.sh
+EVIDENCE:   shared/evidence/mac-1/
+CERT:       MAC-1.md
+MAC-2:      PLANNED (shared/missions/MAC-2-DEVELOPMENT-EXPERIENCE.md)
+```
+
+**Split:** Mac = wrappers/aliases · Ubuntu = canonical production scripts · Arch = on-demand compute.
+
+Architecture: [`MAC-PRIMARY-OPERATOR-CONSOLE.md`](../architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md) · Missions: [`../missions/README.md`](../missions/README.md)
+
+Windows stays the **current daily console** until MAC-1 evidence is certified. Arch bare-metal remains separately gated.
+
+Operator priority *(updated)*:
+
+```text
+1. MAC-1 full console bootstrap  ← AUTHORIZED (operator execution)
+2. WIN-1 Core                    ← friction-driven on Windows fallback
+3. Arch bare-metal               ← when authorized (independent)
+4. Mission 20 observation        ← DevOps Lab
+5. MAC-2 development experience  ← after MAC-1 PASS
+```
+
+---
+
 ## Mission 20 (DevOps Lab)
 
 Production cutover to Contabo executed 2026-07-23. **Observation window** active.
@@ -215,6 +247,7 @@ Unless new evidence changes state:
 | WS-2 Sprint 2 | **APPROVED** |
 | Mission 20 | **Observation** (Contabo cutover 2026-07-23) |
 | WIN-1A | BLOCKED until Mission 20 observation PASS |
+| MAC-1 | **AUTHORIZED** — awaiting macOS operator evidence |
 | Foundation / Governance / Lifecycle | **FROZEN** |
 | Review trigger | **Observed Friction** or new evidence only |
 
@@ -224,7 +257,7 @@ Historical only (do not revert): `95% Migration` · `P0 Pending` · `WIN-1 block
 
 | Track | Focus |
 |-------|-------|
-| **SmoothOperator** | WIN-1 Infra **FROZEN ✅** · Core **OPEN** · WS-2 Sprint 2 **APPROVED ✅** |
+| **SmoothOperator** | WIN-1 Infra **FROZEN ✅** · Core **OPEN** · WS-2 Sprint 2 **APPROVED ✅** · **MAC-1 AUTHORIZED** |
 | **DevOps Lab** | Mission 20 **Observation** |
 | **Products** | Standby until Contabo production |
 

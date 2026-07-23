@@ -1,204 +1,151 @@
-# MISSION — MAC-2 DEVELOPMENT EXPERIENCE
+# MAC-2 — Development Experience
 
 ```text
-Status: Planned
-Scope: Operator Environment
-Priority: High (after MAC-1)
-Type: Operator Console Enhancement (not infrastructure)
-Prerequisite: MAC-1 PASS
+Status:     PLANNED
+Depends on: MAC-1 PASS (or operator waiver with evidence)
+Scope:      Operator UX · private network · runtimes
+Platform:   SmoothOperator™ · Mac
+Type:       Workstation enhancement — not infrastructure
+Date:       2026-07-23
+Amendment:  MAC-1-SCOPE-AMENDMENT-TERMINAL-SHELL-SCRIPTS.md (Approved)
 ```
-
-**Architecture reference:** [`shared/architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md`](../architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md)  
-**Prerequisite:** [`MAC-1-OPERATOR-CONSOLE-BOOTSTRAP.md`](MAC-1-OPERATOR-CONSOLE-BOOTSTRAP.md)
 
 ---
 
 ## Purpose
 
-Transform the Mac from a **working machine** into a **professional engineering workstation**.
-
-This mission improves daily operator ergonomics, tooling, and local development velocity. It does **not** deploy production infrastructure.
+Elevate the Mac from a certified operator baseline (MAC-1) to a polished, reproducible **daily development experience** — still without hosting production infrastructure.
 
 ---
 
-## Success Criteria
+## Completion criteria
 
-At completion, the Mac provides:
+MAC-2 is not complete until:
 
-- Fast launcher and window management
-- Polished terminal experience
-- Secure SSH key workflow (optional 1Password agent)
-- Tailscale mesh access to lab/arch/server
-- Local language runtimes (Node, Python) when needed
-- Modern shell (Zsh + Starship + fzf)
-- Optional AI CLI assistants for terminal workflows
+* Enhanced terminal and shell UX are **reproducible** from Git-tracked config
+* **Tailscale** access is verified to Ubuntu Server, Arch (when on), future NAS, private dashboards
+* Runtime managers are **documented and working**
+* Optional AI CLI tools are installed only when justified
+* Local development dependencies remain **separate** from production infrastructure
 
 ---
 
-## Mission Scope
+## Enhanced terminal (optional)
 
-### Included
+Install **at most one** primary enhanced terminal after evaluation:
 
-| Category | Tools |
-|----------|--------|
-| Launcher | Raycast |
-| Terminal | iTerm2 **or** Ghostty |
-| Security / SSH | 1Password SSH Agent (optional) |
-| Network | Tailscale |
-| Local containers | Docker Desktop (**only if** local dev requires it) |
-| Window management | Rectangle |
-| Monitoring | Stats |
-| Input (optional) | Karabiner-Elements |
-| AI CLI (optional) | Claude Code, Gemini CLI, OpenAI CLI |
-| Runtimes | Node, Python, pnpm, uv |
-| Shell | Zsh + Starship + fzf |
+* Ghostty
+* iTerm2
 
-### Excluded
+Constraints:
 
-- Ubuntu Server / Contabo changes
-- Production Docker stack deployment
-- n8n / reverse proxy / monitoring server setup
-- Arch bare-metal installation
-- Kubernetes
+* Terminal.app remains the recovery terminal
+* Operator environment must never depend exclusively on a third-party terminal
+* Config stored under `shared/operator/` (or documented path) — secret-free
 
 ---
 
-## Phase 1 — Productivity Shell
+## Shell UX (MAC-2)
 
-Install and configure:
+May introduce (all must be reproducible and documented):
 
-- Raycast
-- Rectangle
-- Stats
+* Starship
+* zoxide
+* fzf polish (beyond MAC-1 baseline)
+* syntax highlighting
+* autosuggestions
 
-Verify: window snap, system stats visible, Raycast opens apps and repos.
-
----
-
-## Phase 2 — Terminal Stack
-
-Choose **one** primary terminal:
-
-- iTerm2, **or**
-- Ghostty
-
-Install:
-
-- Zsh (default on macOS — tune if needed)
-- Starship prompt
-- fzf
-- tmux (if not from MAC-1)
-
-Verify: prompt, history search, split panes.
+Avoid unmanaged plugin sprawl. Prefer a small, pinned set installed via Homebrew or a documented installer.
 
 ---
 
-## Phase 3 — Network & Access
+## Tailscale
 
-Install Tailscale.
+Belongs in MAC-2 unless MAC-1 urgently requires private reachability.
 
-Verify:
-
-```bash
-tailscale status
-```
-
-Reach lab/server endpoints when authorized (no production config changes from this mission).
-
-Optional: 1Password SSH Agent for key management.
-
----
-
-## Phase 4 — Local Development Runtimes
-
-Install as needed (evidence-based — not everything required day one):
-
-```bash
-# Examples via Homebrew / official installers
-node
-pnpm
-python
-uv
-```
-
-Verify: `node -v`, `python3 --version`, project-local tooling.
-
----
-
-## Phase 5 — Docker Desktop (conditional)
-
-Install **only if** local container workflows are required.
-
-Do **not** use Docker Desktop as a substitute for Ubuntu Server production stack.
-
-Verify: `docker run hello-world` (optional).
-
----
-
-## Phase 6 — AI CLI (optional)
-
-Install selectively based on operator preference:
-
-- Claude Code
-- Gemini CLI
-- OpenAI CLI
-
-Verify each tool authenticates and runs without storing secrets in repos.
-
----
-
-## Phase 7 — Karabiner (optional)
-
-Install Karabiner-Elements only if keyboard remapping is needed.
-
-Keep config in dotfiles or local backup — not secrets in repo.
-
----
-
-## Phase 8 — Evidence
-
-Capture to `shared/evidence/mac-2/`:
-
-| Check | Evidence |
-|-------|----------|
-| Raycast | Screenshot or version |
-| Terminal | `echo $SHELL`, Starship prompt |
-| Tailscale | `tailscale status` |
-| Node/Python | Version output |
-| Docker | `docker version` (if installed) |
-| gh + git | Still PASS from MAC-1 |
-
----
-
-## Completion Criteria
-
-**PASS** when:
-
-- Operator daily workflow is faster than Windows baseline.
-- Terminal + launcher + SSH + Git + Cursor remain stable from MAC-1.
-- Tailscale connects to required hosts.
-- No production infrastructure was modified during MAC-2.
-
----
-
-## Architecture Alignment
-
-MAC-2 strengthens the **operator console** layer only:
+Targets:
 
 ```text
-Mac (operator + dev UX)  →  SSH  →  Ubuntu Server (infra)
-                              ↘  →  Arch (compute, on-demand)
+Ubuntu Server
+Arch workstation
+future NAS
+private dashboards
 ```
 
-Git remains sync authority. Infra and compute roles unchanged.
+Do **not** introduce public SSH exposure merely to simplify Mac access.
+
+Evidence: Tailscale status, peer connectivity, `ssh lab` / `ssh arch` over Tailscale names.
 
 ---
 
-## Next After MAC-2
+## Runtime managers
 
-- Continue bare-metal Arch track from Mac as primary console.
-- Incremental dotfiles / SSH profile polish as evidence justifies.
+Prefer reproducible managers over unmanaged global installs.
+
+| Ecosystem | Preferred |
+|-----------|-----------|
+| Python | `uv` |
+| Node.js | `mise` or `fnm` (pick one; document) |
+| Node packages | `pnpm` via Corepack |
+
+Avoid overlapping managers without justification.
+
+**Gate:** document the selected strategy in this file (or a linked decision note) **before** implementation.
 
 ---
 
-*SmoothOperator™ · MAC-2 · Development Experience · Planned after MAC-1*
+## Operator command polish
+
+Stabilize MAC-1 aliases/functions and add deploy helpers when remote canonical scripts exist:
+
+```bash
+deploy-web
+deploy-pi
+```
+
+Wrappers only — production deploy logic stays on Ubuntu / in `asir0z-devopslab`.
+
+---
+
+## Secrets (MAC-2 options)
+
+* macOS Keychain (continue)
+* `gh auth` / SSH agent (continue)
+* **1Password SSH Agent** (optional upgrade)
+
+Still never commit secrets or put them in `.zshrc` / scripts / aliases.
+
+---
+
+## Explicit non-goals
+
+* Moving Docker / n8n / reverse proxy onto the Mac
+* Replacing Ubuntu as production authority
+* Mandatory Arch power-on for daily work
+* Premature new “dotfiles-only” repository (defer until evidence justifies)
+
+---
+
+## Evidence (preview)
+
+* Terminal choice + config path
+* Shell UX package list + versions
+* Tailscale peer checks
+* Runtime manager versions (`uv`, `mise`/`fnm`, `pnpm`)
+* Wrapper smoke tests (`lab-health`, `repos-status`)
+
+Path (future): `shared/evidence/mac-2/`
+
+---
+
+## Relationship to bare-metal
+
+Unchanged and independent:
+
+```text
+Windows disk shrink → gate → arch-install-spec → Arch installation
+```
+
+---
+
+*SmoothOperator™ · MAC-2 · Development Experience*

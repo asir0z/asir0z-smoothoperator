@@ -1,0 +1,30 @@
+# SmoothOperator™ operator gitconfig (secret-free)
+# Installed as ~/.gitconfig only when absent, or merged manually.
+
+[user]
+	name = Asır
+	email = asir01oz@gmail.com
+
+[init]
+	defaultBranch = master
+
+[core]
+	autocrlf = input
+	eol = lf
+	editor = nvim
+
+[pull]
+	rebase = false
+
+[fetch]
+	prune = true
+
+[push]
+	default = simple
+
+[alias]
+	st = status -sb
+	co = checkout
+	br = branch
+	ff = pull --ff-only
+	lg = log --oneline --decorate --graph -n 20

@@ -1,0 +1,32 @@
+# SmoothOperator™ — Mac operator SSH example
+# Copy to ~/.ssh/config only when missing (install-dotfiles.sh).
+# Fill HostName / User during execution. Never commit secrets.
+
+Host github
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+Host lab
+  HostName REPLACE_WITH_LAB_HOSTNAME_OR_TAILSCALE_NAME
+  User asir0z
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
+
+Host arch
+  HostName REPLACE_WITH_ARCH_HOSTNAME_OR_TAILSCALE_NAME
+  User asir0z
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
+
+# Optional parity aliases (uncomment when useful)
+# Host contabo
+#   HostName 169.58.62.107
+#   User root
+#   IdentityFile ~/.ssh/id_ed25519
+#   IdentitiesOnly yes
