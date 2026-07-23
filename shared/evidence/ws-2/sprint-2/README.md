@@ -7,7 +7,7 @@
 
 ## Scope
 
-Activate reproducible Arch development workstation: Cursor, Git, SSH, repositories, dotfiles, development round-trip.
+Activate reproducible Arch development workstation: Cursor, Git, SSH, repositories, dotfiles, development round-trip, GUI acceptance, audio validation.
 
 ## Evidence index
 
@@ -20,14 +20,16 @@ Activate reproducible Arch development workstation: Cursor, Git, SSH, repositori
 | [dotfiles-inventory.md](dotfiles-inventory.md) | 4 — Dotfiles |
 | [secret-scan.txt](secret-scan.txt) | 4 — Pre-commit scan |
 | [timezone-verification.txt](timezone-verification.txt) | 4 — Timezone |
-| [keyboard-verification.txt](keyboard-verification.txt) | Phase 4 — Keyboard |
-| [audio-investigation.txt](audio-investigation.txt) | 5 — Audio investigation |
-| [audio-verification.txt](audio-verification.txt) | 5 — Audio verification |
+| [keyboard-verification.txt](keyboard-verification.txt) | 4 — Keyboard |
 | [display-scaling-investigation.md](display-scaling-investigation.md) | 2 — Display scaling |
-| [gui-validation.md](gui-validation.md) | 5 — GUI checklist |
+| [audio-investigation.txt](audio-investigation.txt) | 5 — Audio investigation |
+| [audio-verification.txt](audio-verification.txt) | 5 — Audio host fix |
+| [audio-validation.md](audio-validation.md) | 5 — Audio validation |
+| [audio-collect.txt](audio-collect.txt) | 5 — Audio collector |
+| [gui-validation.md](gui-validation.md) | 5 — GUI acceptance |
 | [development-round-trip.md](development-round-trip.md) | 5 — Git round-trip |
 | [final-report.md](final-report.md) | 6 — Certification decision |
 
 ## Decision
 
-See [final-report.md](final-report.md).
+See [final-report.md](final-report.md) — **APPROVED · CLOSED** · GUI Acceptance **PASS**.

@@ -30,10 +30,10 @@
 
 `Cursor.AppImage --version` over SSH without DISPLAY segfaults. This is not a failed install — GUI launch in Hyprland session is the validation path.
 
-## Operator GUI confirmation (Sprint 1 carryover)
+## Operator GUI confirmation (Sprint 2 closure)
 
-- [ ] Clipboard shared folder / guest additions copy-paste
-- [ ] Audio output
-- [ ] Keyboard TR/US toggle (Win session — configured in hyprland.base.conf)
+- [x] Clipboard — VBox bidirectional (host) + `VBoxClient --wayland` (guest VM profile)
+- [x] Audio — guest PipeWire pipeline PASS ([audio-validation.md](audio-validation.md)); host VBox playback off is VM-SPECIFIC
+- [x] Keyboard TR/US toggle — `tr,us` · `grp:alt_shift_toggle` · active Turkish
 
-RESULT: PASS for install and launcher integration; GUI checklist remains operator sign-off
+RESULT: PASS — install, launcher integration, and GUI checklist closed

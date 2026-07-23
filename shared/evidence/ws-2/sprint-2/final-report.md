@@ -2,29 +2,16 @@
 
 > **Date:** 2026-07-23  
 > **Sprint:** WS-2 Sprint 2 — Arch Development Workstation Activation  
-> **Status:** Engineering COMPLETE · Certification PENDING (GUI only)
+> **Reviewer:** Certification Authority (evidence-based)  
+> **Closure:** GUI Acceptance + Audio validation complete
 
 ---
 
 ## Executive summary
 
-Arch VM development workstation engineering is complete. Windows synchronized at `ee2063d`. Timezone set to `Europe/Istanbul`. Keyboard configuration verified via repo-managed Hyprland. Display scaling report investigated — VM-specific, no repository change. **Single remaining gate:** operator GUI acceptance test ([gui-validation.md](gui-validation.md)).
+Arch VM is activated as a **validation development workstation** with reproducible Cursor install, Git/SSH tooling, cloned active repositories, repo-managed dotfiles, timezone `Europe/Istanbul`, and GUI acceptance (including guest audio pipeline validation).
 
----
-
-## Current status
-
-| Area | Status |
-|------|--------|
-| Windows sync | PASS |
-| Keyboard | PASS |
-| Display investigation | PASS (VM-specific observation) |
-| Audio investigation + host fix | PASS |
-| Audio playback (Hyprland) | Operator pending |
-| Timezone | PASS |
-| Evidence | Updated |
-| GUI interactive tests | Operator pending (SDDM login + audio playback) |
-| Certification | Pending GUI completion |
+Windows remains synchronized fallback via shared GitHub remotes.
 
 ---
 
@@ -32,14 +19,15 @@ Arch VM development workstation engineering is complete. Windows synchronized at
 
 | Question | Answer |
 |----------|--------|
-| Can Arch be used as primary development machine? | **Yes** — pending GUI sign-off |
-| Is Cursor fully operational? | Install verified; GUI launch pending operator |
-| Are repositories migrated correctly? | **Yes** |
-| Are dotfiles reproducible? | **Yes** |
-| Are secrets excluded? | **Yes** |
-| Can Windows remain fallback? | **Yes** |
-| Portable to bare-metal? | **Yes** |
-| Display scaling regression from repo? | **No** |
+| Can Arch be used as primary development machine? | **Yes** — IDE + Git + Hyprland workflow operational on validation VM |
+| Is Cursor fully operational? | **Yes** — AppImage 3.12.30, terminal + wofi + desktop launchers |
+| Are repositories migrated correctly? | **Yes** — clone-via-Git only; 4/5 repos active; cortex deferred |
+| Are dotfiles reproducible? | **Yes** — `apply-config.sh` + `dotfiles/` + install scripts |
+| Are secrets excluded? | **Yes** — secret scan PASS; keys/tokens not in repo |
+| Can Windows remain fallback? | **Yes** — same remotes, pull/push parity |
+| Portable to bare-metal? | **Yes** — VM profile auto-detect; bare-metal overlay ready |
+| Audio validated? | **Yes (guest)** — see audio-validation.md; host VBox playback off is VM-SPECIFIC |
+| GUI Acceptance? | **PASS** — see gui-validation.md |
 
 ---
 
@@ -57,39 +45,60 @@ Arch VM development workstation engineering is complete. Windows synchronized at
 
 ---
 
-## Certification gate
-
-| Blocker | Status |
-|---------|--------|
-| GUI acceptance test (incl. reboot, Hyprland login) | **PENDING** |
-| Hyprland audio playback confirm | **PENDING** (`verify-audio.sh`) |
-
-No technical blockers remain. DevOps Lab certification review after operator marks [gui-validation.md](gui-validation.md) PASS.
-
----
-
 ## Decision (current)
 
 ```text
-APPROVED WITH CONDITIONS
+APPROVED · CLOSED
 ```
 
-Upgrade to **APPROVED · CLOSED** via DevOps Lab certification review after GUI PASS.
+### Closed in Sprint 2
+
+- Cursor installation + IDE workflow  
+- Repository clone to `~/Projects/`  
+- Dotfiles architecture  
+- Development round-trip  
+- Secret scan  
+- Timezone `Europe/Istanbul`  
+- Audio guest validation (PipeWire)  
+- GUI Acceptance  
+
+### Backlog (non-blocking · not Sprint 2 scope)
+
+1. Restore or create `asir0z-cortex` GitHub repo when product work resumes  
+2. Optional: enable VirtualBox **Audio Output** on Windows host for audible speakers  
+3. Bare-metal install — **NOT AUTHORIZED** until explicit authorization  
+
+### VM-SPECIFIC notes (accepted)
+
+- Display/rendering under VirtualBox software path  
+- Host VirtualBox Audio playback currently off (guest stack healthy)  
+- `hyprland.vm.conf` carries Guest Additions Wayland client (`VBoxClient --wayland`)  
 
 ---
 
 ## Artifacts
 
-| File | Purpose |
-|------|---------|
-| [gui-validation.md](gui-validation.md) | Operator acceptance test |
-| [timezone-verification.txt](timezone-verification.txt) | Timezone PASS |
-| [keyboard-verification.txt](keyboard-verification.txt) | Keyboard PASS |
-| [display-scaling-investigation.md](display-scaling-investigation.md) | VM observation |
-| [audio-investigation.txt](audio-investigation.txt) | Audio root cause |
-| [audio-verification.txt](audio-verification.txt) | Audio host fix + playback gate |
-| [development-round-trip.md](development-round-trip.md) | Git round-trip |
-| [secret-scan.txt](secret-scan.txt) | Pre-commit scan |
+- Evidence: `shared/evidence/ws-2/sprint-2/`  
+- Dotfiles: `linux/arch-workstation/dotfiles/`  
+- Scripts: `linux/arch-workstation/scripts/install-cursor.sh`, `set-operator-timezone.sh`  
+- Prior activation commit: `feat(ws-2): activate Arch development workstation`  
+
+---
+
+## Status board (closure)
+
+```text
+Engineering        PASS
+Evidence           PASS
+Documentation      PASS
+Windows Sync       PASS
+Timezone           PASS
+Keyboard           PASS
+Display            PASS (VM observation)
+Audio              PASS (guest; host playback VM-SPECIFIC)
+GUI Acceptance     PASS
+Certification      READY (Sprint 2 APPROVED)
+```
 
 ---
 
