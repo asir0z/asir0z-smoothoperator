@@ -4,13 +4,13 @@
 Status: Accepted Architecture Direction
 Scope: Long-Term Platform Architecture
 Priority: Informational
-Implementation: Incremental
+Implementation: MAC-1 (operator bootstrap) AUTHORIZED
 Type: Platform Architecture Decision
 ```
 
 This document is **not** an operating-system preference. It describes the **long-term operational model** of the ecosystem — responsibility separation, not machine loyalty.
 
-This is **not** a mission. It introduces no immediate implementation work. It defines the architectural direction that future engineering decisions should follow.
+This document defines the architectural direction. **Implementation of the Mac operator workstation is mission MAC-1** — see [`mac/mac-1-operator-console/MAC-1-SPEC.md`](../../mac/mac-1-operator-console/MAC-1-SPEC.md).
 
 ---
 
@@ -250,11 +250,30 @@ Reference: `windows/win-1-baseline/WIN-1-INFRASTRUCTURE-SPEC.md`
 
 | Phase | Operator environment | Notes |
 |-------|---------------------|-------|
-| Bare-metal prep (now) | Windows | Disk shrink, install USB — per `shared/evidence/bare-metal/` |
-| Post-install validation | Arch + Windows fallback | Arch bootstrap; Windows secondary |
+| Bare-metal prep | Windows (daily) + **MAC-1** on Mac | MAC-1 AUTHORIZED; Windows until MAC-1 certified |
+| Post-install validation | Arch + Mac/Windows fallback | Arch bootstrap; Mac preferred if MAC-1 PASS |
 | Steady state (target) | Mac | Primary operator console per this document |
 
 Bare-metal install spec and shrink plan are **unchanged**. This document is reviewed and committed independently from disk shrink, Arch installation, bootstrap missions, and operational evidence.
+
+---
+
+## Implementation — MAC-1
+
+Operator-console bootstrap is authorized as **MAC-1** (macOS only · no infrastructure mutation):
+
+| Artifact | Path |
+|----------|------|
+| Mission | `shared/missions/MAC-1-OPERATOR-CONSOLE-BOOTSTRAP.md` |
+| Amendment | `shared/missions/MAC-1-SCOPE-AMENDMENT-TERMINAL-SHELL-SCRIPTS.md` |
+| Bootstrap | `scripts/bootstrap/mac-bootstrap.sh` |
+| Operator dotfiles | `shared/operator/` |
+| Ops wrappers | `scripts/ops/` (Mac) → Ubuntu canonical scripts |
+| Package / runbook | `mac/mac-1-operator-console/` |
+| Evidence | `shared/evidence/mac-1/` |
+| Certification | `shared/certification/MAC-1.md` |
+
+MAC-1 PASS is the gate for declaring Mac the **daily** primary operator console. Until then, Windows remains the active daily console.
 
 ---
 
@@ -281,15 +300,15 @@ This minimizes operational risk, improves flexibility, and ensures the ecosystem
 
 ---
 
-## Operational Roadmap (unchanged)
+## Operational Roadmap
 
-1. Disk shrink
-2. Arch installation (`arch-install-spec.md`)
+1. **MAC-1** — Mac operator console bootstrap (AUTHORIZED · operator execution)
+2. Disk shrink / Arch installation (`arch-install-spec.md`) when authorized
 3. Arch bootstrap
 4. Production validation
-5. Gradual transition of operator role from Windows to Mac
+5. Complete transition of daily operator role from Windows → Mac (after MAC-1 certification)
 
-This document formalizes the long-term architectural destination while preserving the existing bare-metal execution plan.
+This document formalizes the long-term architectural destination. Bare-metal Arch remains independently gated; MAC-1 does not require Arch to be online.
 
 ---
 

@@ -1,0 +1,11 @@
+# Fragment — configure-git.sh applies when global identity is unset
+[user]
+	name = Asır
+	email = asir01oz@gmail.com
+[init]
+	defaultBranch = master
+[core]
+	autocrlf = input
+	eol = lf
+[pull]
+	rebase = false

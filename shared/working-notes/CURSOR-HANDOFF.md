@@ -11,11 +11,12 @@
 Migration              CERTIFIED · FROZEN
 WIN-1 Infrastructure   CERTIFIED · FROZEN
 WIN-1 Core             ACTIVE (friction-driven)
+MAC-1                  AUTHORIZED · awaiting macOS evidence
 WS-2 Sprint 1          APPROVED WITH CONDITIONS
-WS-2 Sprint 2          APPROVED WITH CONDITIONS · GUI pending
+WS-2 Sprint 2          APPROVED
 Mission 20             OBSERVATION (DevOps Lab / Contabo)
 Arch VM                ACTIVE DEVELOPMENT WORKSTATION (validation)
-Windows                SAFE FALLBACK
+Windows                DAILY CONSOLE until MAC-1 PASS (then fallback)
 Bare-metal Arch        FUTURE TARGET · NOT AUTHORIZED
 ```
 

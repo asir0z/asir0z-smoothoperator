@@ -1,287 +1,303 @@
-# MISSION — MAC-1 OPERATOR CONSOLE BOOTSTRAP
+# MAC-1 — Operator Console Bootstrap
 
 ```text
-Status: Planned
-Scope: Operator Environment
-Priority: High
-Type: Operator Console Bootstrap (not infrastructure)
+Status:       AUTHORIZED ✅ · OPERATOR EXECUTION
+Scope:        Operator Environment (macOS) — full console baseline
+Priority:     High
+Platform:     SmoothOperator™ · Mac
+Type:         Workstation bootstrap — not infrastructure
+Date:         2026-07-23
+Amendment:    MAC-1-SCOPE-AMENDMENT-TERMINAL-SHELL-SCRIPTS.md (Approved)
 ```
 
-**Architecture reference:** [`shared/architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md`](../architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md)
+Package / runbook: [`mac/mac-1-operator-console/`](../../mac/mac-1-operator-console/)  
+Architecture: [`../architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md`](../architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md)
 
 ---
 
 ## Purpose
 
-This mission prepares the Mac to become the **primary operator console** for the entire engineering ecosystem.
+Prepare the Mac as the **primary operator console** for the engineering ecosystem — recoverable from Git-tracked configuration and bootstrap scripts after a clean macOS install.
 
-This is **not** an infrastructure mission.
-
-- No production servers are modified.
-- No DevOps services are deployed.
-
-The objective is to establish a clean, reproducible, and portable operator workstation.
+Not an infrastructure mission: no production server mutation, no DevOps service deployment, no Arch/Kubernetes changes.
 
 ---
 
-## Success Criteria
+## Success criteria
 
 At completion, the Mac can:
 
-- Access every Git repository.
-- Access every server through SSH.
-- Operate Cursor as the primary development environment.
-- Operate ChatGPT as the primary engineering assistant.
-- Build and review code.
-- Manage infrastructure remotely.
-- Work independently from the Arch workstation.
+* Run a reliable **zsh** operator environment
+* Fall back to **Terminal.app** (never depend exclusively on a third-party terminal)
+* Authenticate to GitHub (`gh` + SSH)
+* Clone, inspect, commit, and push repositories
+* Reach Ubuntu Server via `ssh lab`
+* Invoke **canonical remote** operational scripts over SSH
+* Run local verification and bootstrap scripts
+* Restore operator configuration from Git-tracked sources
+* Operate **without** Arch powered on
+
+```text
+Mac (wrappers · Git · Cursor · zsh)
+        │
+        ▼
+   ssh lab / arch / github
+        │
+        ▼
+Ubuntu Server  ← canonical production scripts
+```
 
 ---
 
-## Mission Scope
+## Native shell
 
-### Included
+Default shell: **zsh** (macOS default). Do **not** replace the login shell during MAC-1.
 
-- macOS updates
-- Homebrew
-- Git
-- SSH
-- Cursor
-- Terminal configuration
-- Repository cloning
-- Development tools
-- GitHub authentication
-
-### Excluded
-
-- Ubuntu infrastructure changes
-- Docker server deployment
-- n8n deployment
-- Arch installation
-- Kubernetes
-- Infrastructure migration
-
----
-
-## Phase 1 — Operating System
-
-Complete all available macOS updates.
-
-Enable:
-
-- FileVault
-- Firewall
-- Automatic security updates
-
-Verify:
-
-- Time synchronization
-- Correct hostname
-- Correct timezone (`Europe/Istanbul`)
-
----
-
-## Phase 2 — Package Manager
-
-Install Homebrew.
-
-Verify:
+Bash remains available for script compatibility.
 
 ```bash
-brew doctor
-brew update
-brew upgrade
+echo "$SHELL"
+zsh --version
+bash --version
 ```
 
-**PASS** when no blocking issues remain.
+---
+
+## Terminal
+
+* **Terminal.app** must remain usable as the recovery terminal.
+* Enhanced terminals (Ghostty, iTerm2) are **MAC-2** — optional.
 
 ---
 
-## Phase 3 — Development Tools
+## Required CLI tools
 
-Install:
-
-- Git
-- gh (GitHub CLI)
-- wget
-- curl
-- jq
-- tree
-- htop
-- ripgrep
-- fd
-- tmux
-- neovim (optional)
-
-Verify every executable.
-
----
-
-## Phase 4 — SSH
-
-Create:
+Install and verify via `scripts/bootstrap/mac-packages.sh`:
 
 ```text
-~/.ssh/
+git gh openssh curl wget jq yq tree ripgrep fd fzf tmux htop
+rsync coreutils gnu-sed findutils gawk make shellcheck shfmt
 ```
 
-Configure:
+Optional recommended: `bat eza btop watch ncdu neovim`
 
-- SSH keys
-- GitHub authentication
+### GNU tools policy
 
-Prepare config entries:
+Homebrew may install GNU tools with **prefixed** names (`gsed`, `gawk`, `gdate`, …).
 
-```text
-Host lab
-Host arch
-Host github.com
-```
-
-(No infrastructure changes yet — aliases only; endpoints filled when reachable.)
+* Do **not** silently override macOS system binaries unless explicitly documented.
+* Scripts that need GNU behavior must call prefixed binaries or set a documented PATH segment.
 
 ---
 
-## Phase 5 — Git
+## SSH operator layer
 
-Configure:
-
-- `user.name`
-- `user.email`
-- default branch
-- signing (optional)
-
-Authenticate GitHub.
-
-Verify:
-
-```bash
-git clone
-git fetch
-git push
-```
-
----
-
-## Phase 6 — Cursor
-
-Install Cursor.
-
-Enable:
-
-- Git integration
-- Terminal
-- Extensions (as needed)
-
-Clone repositories.
-
-Verify repository operations from Cursor.
-
----
-
-## Phase 7 — Workspace
-
-Recommended structure:
-
-```text
-~/Projects/
-    asir0z-smoothoperator/
-    asir0z-devopslab/
-    asir0z-product-intelligence/
-    asir0z-web/
-    asir0z-cortex/          # when repo restored
-    asir0z-project-pulse/   # when applicable
-```
-
-Git remains the synchronization authority.
-
----
-
-## Phase 8 — Remote Operations
-
-Verify remote workflows.
-
-```text
-Mac
- ↓ SSH
-Ubuntu Server (lab)
- ↓
-Infrastructure
-```
-
-No local infrastructure required on the Mac for this mission.
-
-Test (when endpoints available):
+Aliases (HostName filled only during operator execution):
 
 ```bash
 ssh lab
 ssh arch
+ssh github
 ```
 
----
-
-## Phase 9 — Evidence
-
-Capture to `shared/evidence/mac-1/`:
-
-| Artifact | Command / check |
-|----------|-----------------|
-| Homebrew | `brew doctor` |
-| Git | `git --version` |
-| GitHub CLI | `gh auth status` |
-| GitHub SSH | `ssh -T git@github.com` |
-| Cursor | Launch + open repo |
-| Clone | `git clone` of active repos |
-| Push | Test push to non-production branch |
-
----
-
-## Completion Criteria
-
-**PASS** when:
-
-- Mac fully replaces Windows as operator console for daily engineering work.
-- Git works.
-- SSH works.
-- Cursor works.
-- Repository management works.
-- Remote infrastructure management works (via SSH to lab/contabo).
-
----
-
-## Architecture Alignment
-
-| Layer | Role |
-|-------|------|
-| Infrastructure | Ubuntu Server |
-| Compute | Arch Linux |
-| Operator | Mac |
-| Sync | Git (single source of truth) |
-
-Production services remain independent from both Mac and Arch.
-
----
-
-## Next Missions
-
-| Mission | When |
-|---------|------|
-| **MAC-2** Development Experience | Immediately after MAC-1 PASS — [`MAC-2-DEVELOPMENT-EXPERIENCE.md`](MAC-2-DEVELOPMENT-EXPERIENCE.md) |
-| Arch bare-metal install | When shrink + prep gates PASS — `shared/evidence/bare-metal/arch-install-spec.md` |
-
-After MAC-1 completes, use the Mac as the primary operator console throughout remaining bare-metal setup.
-
----
-
-## Parallel Tracks (unchanged)
-
-MAC-1 does **not** block or replace:
+Required artifacts:
 
 ```text
-Fast Startup OFF → disk shrink → arch-install-spec.md
+~/.ssh/config
+~/.ssh/known_hosts
+~/.ssh/*.pub
 ```
 
-Windows remains valid for disk shrink until that phase completes.
+Permissions:
+
+```bash
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/config
+chmod 600 ~/.ssh/<private-key>
+chmod 644 ~/.ssh/<public-key>.pub
+```
+
+Private keys / secrets never committed. Template: `shared/operator/dotfiles/ssh-config.example`
+
+---
+
+## Shared operator scripts
+
+```text
+scripts/
+├── bootstrap/
+│   ├── mac-bootstrap.sh
+│   ├── mac-packages.sh
+│   └── mac-verify.sh
+├── ops/
+│   ├── production-health-check.sh   # Mac wrapper → ssh lab
+│   ├── server-status.sh
+│   ├── ssh-check.sh
+│   └── repo-status.sh
+├── deploy/
+│   └── remote-deploy-wrapper.sh
+└── lib/
+    ├── common.sh
+    ├── logging.sh
+    └── platform.sh
+```
+
+Mac wrappers simplify invocation; **Ubuntu remains production authority**.
+
+---
+
+## Script design rules
+
+* Shebang + strict mode where compatible (`set -Eeuo pipefail`)
+* Fail clearly · quote variables · validate commands
+* No hard-coded secrets
+* macOS BSD-compatible **or** explicit Homebrew GNU tools
+* ShellCheck where practical
+* Platform detection via `scripts/lib/platform.sh`
+
+---
+
+## Dotfiles (secret-free)
+
+```text
+shared/operator/
+├── README.md
+├── dotfiles/
+│   ├── zshrc
+│   ├── gitconfig
+│   ├── tmux.conf
+│   └── ssh-config.example
+└── scripts/
+    └── install-dotfiles.sh
+```
+
+### Zsh baseline (MAC-1)
+
+Stable operator functions only — **no large plugin framework**:
+
+* Git-aware prompt
+* History + completion
+* fzf integration (when installed)
+* Safe aliases
+* Repository navigation
+* SSH / operator wrappers (`lab-health`, `lab-ssh`, `repos-status`, …)
+
+MAC-2 may add Starship, zoxide, syntax highlighting, autosuggestions.
+
+---
+
+## Recommended operator commands
+
+| Command | Behavior |
+|---------|----------|
+| `lab-health` | `ssh lab '~/scripts/ops/production-health-check.sh'` |
+| `lab-status` | `ssh lab` host/uptime summary |
+| `lab-ssh` | interactive `ssh lab` |
+| `arch-ssh` | interactive `ssh arch` |
+| `repos-status` | local multi-repo status under `~/Projects` |
+| `repos-pull` | `git pull --ff-only` per clean repo (no force) |
+| `deploy-web` / `deploy-pi` | wrappers → remote deploy (MAC-2 polish OK) |
+
+---
+
+## Repository synchronization
+
+Git remains the sync authority. Support:
+
+```bash
+git clone
+git fetch --all --prune
+git pull --ff-only
+git status · git diff · git commit · git push
+```
+
+`scripts/ops/repo-status.sh` reports path, branch, dirty/clean, ahead/behind, remote failures — **never** auto-commit, reset, rebase, or force-push.
+
+---
+
+## Secrets
+
+Acceptable initial options: macOS Keychain · `gh auth` · SSH agent.
+
+Never store secrets in `.zshrc`, Git, plain-text notes, operator scripts, or aliases.
+
+---
+
+## Tailscale / runtimes
+
+* **Tailscale** → MAC-2 (unless immediate access requires it during MAC-1)
+* **Runtime managers** (uv, mise/fnm, pnpm) → MAC-2 after documented strategy
+
+---
+
+## Evidence (amended)
+
+Capture:
+
+```bash
+echo "$SHELL"
+zsh --version
+bash --version
+ssh -V
+rsync --version
+jq --version
+shellcheck --version
+shfmt --version
+tmux -V
+git --version
+gh auth status
+```
+
+Script verification:
+
+```bash
+bash -n scripts/bootstrap/mac-bootstrap.sh
+find scripts -name '*.sh' -print0 | xargs -0 -n1 shellcheck
+```
+
+Remote (only after SSH safely configured):
+
+```bash
+ssh lab 'hostname'
+ssh lab '~/scripts/ops/production-health-check.sh'
+```
+
+Evidence path: `shared/evidence/mac-1/`
+
+---
+
+## Phases (execution)
+
+| Phase | Title |
+|-------|-------|
+| 1 | OS updates · FileVault · Firewall · time/hostname/timezone |
+| 2 | Homebrew |
+| 3 | CLI toolchain (`mac-packages.sh`) |
+| 4 | SSH keys + aliases |
+| 5 | Git identity + GitHub auth |
+| 6 | Cursor |
+| 7 | `~/Projects` clones |
+| 8 | Dotfiles (`shared/operator`) + zsh baseline |
+| 9 | Remote ops wrappers · `ssh lab` · optional remote health |
+| 10 | Evidence (`mac-verify.sh`) |
+
+Operator runbook: [`mac/mac-1-operator-console/SETUP-GUIDE.md`](../../mac/mac-1-operator-console/SETUP-GUIDE.md)
+
+---
+
+## Explicit non-goals
+
+* Replacing Arch compute role
+* Migrating production onto the Mac
+* Installing Docker/Kubernetes as a server substitute
+* Changing Contabo / Ubuntu configuration from this mission
+* Large zsh plugin frameworks (→ MAC-2)
+
+---
+
+## Certification
+
+See [`../certification/MAC-1.md`](../certification/MAC-1.md).
 
 ---
 

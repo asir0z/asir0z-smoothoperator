@@ -61,13 +61,13 @@ Review questions:
 
 | Track | Status | Focus |
 |-------|--------|-------|
-| **SmoothOperator** | WIN-1 **execution OPEN** | Core ∥ Infrastructure · real friction |
-| **DevOps Lab** | Mission 20 **Ready** | Parity · cutover · observation |
+| **SmoothOperator** | WIN-1 Core **OPEN** · **MAC-1 AUTHORIZED** | Mac operator bootstrap · Windows friction |
+| **DevOps Lab** | Mission 20 **Observation** | Contabo cutover observation |
 | **Products** | Standby | After Contabo production |
 
 **Mission 20 goal:** *Production users cannot tell that infrastructure changed.*
 
-**Bottleneck today:** Windows operator environment (WIN-1) · Contabo runtime parity (Mission 20)
+**Operator console:** MAC-1 authorized on Mac — Windows remains daily console until MAC-1 certified.
 
 ---
 
@@ -79,7 +79,9 @@ Review questions:
 | [WIN-0.md](WIN-0.md) | APPROVED |
 | [PLATFORM-STATE.md](PLATFORM-STATE.md) | **Current canonical state** |
 | [MIGRATION.md](MIGRATION.md) | **100% · CERTIFIED · FROZEN ✅** |
-| [WIN-1.md](WIN-1.md) | AUTHORIZED · **EXECUTION OPEN ✅** |
+| [WIN-1.md](WIN-1.md) | AUTHORIZED · Infra **FROZEN** · Core **OPEN** |
+| [MAC-1.md](MAC-1.md) | AUTHORIZED ✅ · amended full console · awaiting macOS evidence |
+| Missions index | [`../missions/README.md`](../missions/README.md) |
 | [WIN-2.5.md](WIN-2.5.md) | SPEC APPROVED · WAITING FOR WIN-1 |
 | [TRANSITION-INFRASTRUCTURE-REVIEW.md](TRANSITION-INFRASTRUCTURE-REVIEW.md) | APPROVED ✅ |
 
