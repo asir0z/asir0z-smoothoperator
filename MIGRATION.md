@@ -19,11 +19,27 @@ WS-1 script behavior unchanged. Guest path remains `/mnt/bootstrap/*`.
 
 ### 1. Local folder
 
+Target canonical path:
+
 ```text
 C:\Projects\asir0z-smoothoperator
 ```
 
-Update Cursor workspace / shortcuts if they referenced the old path.
+If rename is blocked (Cursor lock), a **junction** may point `asir0z-smoothoperator` → `asir0z-engineering-platform` until reboot. Close IDE/terminals, then:
+
+```powershell
+Rename-Item C:\Projects\asir0z-engineering-platform C:\Projects\asir0z-smoothoperator
+```
+
+### 1b. VirtualBox bootstrap path (interim)
+
+If shared folder still maps to `...\engineering-platform\bootstrap`, a junction links it to `linux\bootstrap`:
+
+```powershell
+cmd /c mklink /J "C:\Projects\asir0z-engineering-platform\bootstrap" "C:\Projects\asir0z-engineering-platform\linux\bootstrap"
+```
+
+Update to final path when VM is powered off (see §3).
 
 ### 2. GitHub (when remote exists)
 
