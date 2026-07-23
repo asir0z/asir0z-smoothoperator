@@ -1,0 +1,33 @@
+# Disk Shrink Evidence — Before / After
+# Append operator output here. Do not shrink until pre-shrink checklist PASS in disk-shrink-plan.md
+
+=== BEFORE SHRINK ===
+Date:
+Operator: asir0z
+
+(paste Get-Partition / Get-Volume output)
+
+=== FAST STARTUP DISABLED ===
+Date:
+HiberbootEnabled: (expect 0x0)
+
+=== SHRINK EXECUTED ===
+Date:
+Requested shrink (GB):
+Actual unallocated (GB):
+Method: diskmgmt.msc / PowerShell
+
+=== AFTER SHRINK ===
+(paste Get-Partition / Get-Volume output)
+
+=== WINDOWS BOOT TEST ===
+Reboot after shrink: PASS / FAIL
+Notes:
+
+=== POST-SHRINK GATE (all three required) ===
+1. Windows boots:        PASS / FAIL
+2. Explorer normal:      PASS / FAIL
+3. Unallocated ~350 GB:  PASS / FAIL  (actual: ___ GB)
+
+=== RESULT ===
+PENDING

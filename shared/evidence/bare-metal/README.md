@@ -13,7 +13,9 @@
 ✅ DevOps Lab Certification
 ✅ USB ready (ARCH_202607)
 ✅ Hardware audit
-⏸️ BIOS/UEFI checklist (Phase A admin verify pending)
+✅ Phase A (admin)
+✅ Disk shrink plan (operator-approved)
+⏸️ Fast Startup off · shrink execution
 ```
 
 ---
@@ -83,10 +85,12 @@ Arch = canonical engineering laboratory. Windows = utility + fallback — not pr
 | Phase | Document | Status |
 |-------|----------|--------|
 | Inventory | [hardware-audit.md](hardware-audit.md) | ✅ Complete |
-| Prep | [bios-uefi-checklist.md](bios-uefi-checklist.md) | ⏸️ Phase A admin pending |
-| Prep | disk-shrink-plan.md | Pending |
-| Install | arch-install-spec.md | Pending |
-| Install | installation-evidence/ | Pending |
+| Prep | [bios-uefi-checklist.md](bios-uefi-checklist.md) | ✅ Phase A complete |
+| Prep | [disk-shrink-plan.md](disk-shrink-plan.md) | ✅ Operator-approved |
+| Prep | [shrink-evidence.txt](shrink-evidence.txt) | ⏸️ Shrink day |
+| Install | [arch-install-spec.md](arch-install-spec.md) | ✅ **Canonical install spec** |
+| Install | [installation-evidence/](installation-evidence/) | ⏸️ Install day |
+| Archive | [CURSOR-SESSION-ARCHIVE-da3c00b3.md](../working-notes/CURSOR-SESSION-ARCHIVE-da3c00b3.md) | ✅ Full Cursor chat summary |
 
 ---
 
@@ -102,11 +106,16 @@ Arch = canonical engineering laboratory. Windows = utility + fallback — not pr
 
 ---
 
-## Next action
+## Next actions
 
-Admin PowerShell → Phase A canonical four commands → checklist PASS → disk shrink plan.
+**Parallel tracks:**
 
-See [bios-uefi-checklist.md](bios-uefi-checklist.md).
+1. **Operator:** Fast Startup OFF → shrink → post-shrink 3-check → `shrink-evidence.txt`
+2. **Repo:** ✅ [arch-install-spec.md](arch-install-spec.md) complete — install after shrink PASS
+
+See [disk-shrink-plan.md](disk-shrink-plan.md) · [bios-uefi-checklist.md](bios-uefi-checklist.md).
+
+**Archive:** [CURSOR-SESSION-ARCHIVE-da3c00b3.md](../working-notes/CURSOR-SESSION-ARCHIVE-da3c00b3.md)
 
 ---
 

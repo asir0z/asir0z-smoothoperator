@@ -1,6 +1,7 @@
 # Bare-metal readiness — Arch + Windows dual-boot
 
-> **NOT authorized for execution yet.** VM remains canonical until operator opens bare-metal sprint.
+> **Execution spec:** [`shared/evidence/bare-metal/arch-install-spec.md`](../../shared/evidence/bare-metal/arch-install-spec.md) — canonical bare-metal install.  
+> **NOT authorized for execution** until shrink PASS + operator install day.
 
 ---
 
@@ -32,7 +33,7 @@ Configure **now** on VM with profiles that survive bare-metal install. **Apply**
 3. git clone into ~/Projects/*
 4. GPU drivers (inventory GPU first):
      AMD  → mesa vulkan-radeon
-     NVIDIA → nvidia-open-dkms
+     NVIDIA → nvidia-dkms (proprietary — see arch-install-spec.md)
 5. WORKSTATION_PROFILE=baremetal apply-config.sh
 6. Remove VirtualBox Guest Additions / vboxsf
 7. devops-lab SSH: switch from 127.0.0.1:2222 to Tailscale/direct

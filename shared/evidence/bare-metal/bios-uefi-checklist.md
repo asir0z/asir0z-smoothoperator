@@ -16,8 +16,8 @@
 |------|-----------------|-----------------|
 | Boot mode | UEFI (Windows confirmed) | ⏸️ |
 | BIOS version | 0401 (2023-05-16) | ⏸️ |
-| Secure Boot | Registry hint `1` (non-canonical) | ⏸️ admin `Confirm-SecureBootUEFI` |
-| BitLocker | Unknown — **critical gate** | ⏸️ admin `manage-bde -status C:` |
+| Secure Boot | **True** (canonical admin 2026-07-24) | ✅ — disable in BIOS for Yol 1 |
+| BitLocker | **Protection Off** · Fully Decrypted | ✅ — shrink safe |
 | SATA/NVMe mode | NVMe (implicit AHCI/NVMe) | ⏸️ |
 | fTPM | AMD PSP present — state unknown | ⏸️ |
 | EXPO/XMP | RAM at 4800 MT/s (6000 kit) | ⏸️ |
@@ -26,7 +26,7 @@
 **Overall status:**
 
 ```text
-PENDING — Phase A canonical admin verification required (single blocking gate)
+Phase A PASS (2026-07-24 admin) — Phase B/C BIOS session + Fast Startup off before shrink remain
 ```
 
 ---
@@ -80,18 +80,11 @@ bcdedit | Select-String bootmgfw
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v HiberbootEnabled
 ```
 
-### A0. Non-admin pre-read (Cursor session 2026-07-23 — not PASS)
+### A0. Non-admin pre-read (Cursor 2026-07-23 — superseded)
 
-| Check | Result | Grade |
-|-------|--------|-------|
-| Registry `UEFISecureBootEnabled` | `1` | Indicative — Secure Boot likely on |
-| `manage-bde -status C:` | Access denied | **Blocked — admin required** |
-| `bcdedit` | Access denied | **Blocked — admin required** |
-| `HiberbootEnabled` | `0x1` (Enabled) | Confirmed — disable before shrink |
-| `BiosFirmwareType` | Uefi | Confirmed |
-| `C:\Windows\Boot\EFI` | Exists | UEFI layout present |
+Superseded by **A1–A4 canonical admin run** 2026-07-24. Evidence: [phase-a-output.txt](phase-a-output.txt)
 
-### A1. Secure Boot
+### A1. Secure Boot — ✅ PASS
 
 ```powershell
 Confirm-SecureBootUEFI
@@ -99,7 +92,9 @@ Confirm-SecureBootUEFI
 
 | Result | Record here |
 |--------|-------------|
-| True / False / Unsupported | ⏸️ |
+| True / False / Unsupported | **True** |
+
+**Install action (Yol 1):** Disable Secure Boot in BIOS before Arch install (currently **on**).
 
 **Arch impact:**
 
@@ -114,18 +109,19 @@ Confirm-SecureBootUEFI
 - [x] Disable Secure Boot **for install** — **Yol 1 (recommended)** — re-enable later if desired
 - [ ] Undecided — blocked until A1 complete
 
-### A2. BitLocker (C:)
+### A2. BitLocker (C:) — ✅ PASS
 
 ```powershell
 manage-bde -status C:
-Get-BitLockerVolume -MountPoint C:
 ```
 
 | Item | Record here |
 |------|-------------|
-| Protection status | ⏸️ |
-| Encryption % | ⏸️ |
-| Method | ⏸️ |
+| Protection status | **Protection Off** |
+| Conversion status | **Fully Decrypted** |
+| Encryption % | **0.0%** |
+| Method | **None** |
+| Lock status | Unlocked |
 
 **If `Protection Status: Protection On`:** suspend before shrink — **mandatory**. Prefer **suspend** over full disable; re-enable after partitioning.
 
@@ -147,7 +143,7 @@ manage-bde -protectors -get C:
 | Action | Status |
 |--------|--------|
 | Recovery key documented (offline) | ⏸️ |
-| BitLocker suspended before shrink | ⏸️ N/A until shrink phase |
+| BitLocker suspended before shrink | **N/A** — not enabled |
 | Full disable avoided (suspend preferred) | Policy ✅ |
 
 ### A3. Fast Startup (dual-boot hygiene)
@@ -159,7 +155,7 @@ powercfg /a
 
 | Item | Target | Actual |
 |------|--------|--------|
-| Fast Startup | **Off** before partition work | ⏸️ |
+| Fast Startup | **Off** before partition work | **On** (`0x1`) — disable before shrink |
 
 ### A4. UEFI boot path (canonical)
 
@@ -175,18 +171,18 @@ path \EFI\Microsoft\Boot\bootmgfw.efi
 
 | Item | Expected | Actual |
 |------|----------|--------|
-| `bootmgfw.efi` in bcdedit output | Present | ⏸️ |
+| `bootmgfw.efi` in bcdedit output | Present | ✅ `\EFI\Microsoft\Boot\bootmgfw.efi` |
 | BiosFirmwareType (supplementary) | Uefi | ✅ (non-admin) |
 
 ### A5. Windows-side checklist summary
 
 | # | Check | PASS / FAIL / N/A | Notes |
 |---|-------|---------------------|-------|
-| A1 | Secure Boot state recorded | ⏸️ | |
-| A2 | BitLocker state recorded | ⏸️ | |
-| A3 | Fast Startup off (before shrink) | ⏸️ | |
-| A4 | UEFI boot confirmed | ⏸️ | |
-| A5 | Recovery key accessible (if BitLocker) | ⏸️ | |
+| A1 | Secure Boot state recorded | ✅ PASS | True — disable in BIOS for install |
+| A2 | BitLocker state recorded | ✅ PASS | Protection Off · Fully Decrypted |
+| A3 | Fast Startup off (before shrink) | ⏸️ | Enabled — disable before shrink |
+| A4 | UEFI boot confirmed | ✅ PASS | bootmgfw.efi |
+| A5 | Recovery key accessible (if BitLocker) | N/A | BitLocker not enabled |
 
 ---
 
@@ -317,9 +313,9 @@ lspci -k | grep -A3 -E 'VGA|3D'
 
 | Decision | Choice | Date | Notes |
 |----------|--------|------|-------|
-| Secure Boot for install | **Yol 1 — disable for install** (recommended) | 2026-07-24 | Pending A1 canonical confirm |
-| BitLocker action before shrink | **Suspend if On** (not full disable) | 2026-07-24 | Pending A2 admin output |
-| Fast Startup before shrink | **Disable** | 2026-07-24 | Currently Enabled (`0x1`) |
+| Secure Boot for install | **Yol 1 — disable in BIOS** (currently **On**) | 2026-07-24 | Canonical: True |
+| BitLocker action before shrink | **N/A** — Protection Off | 2026-07-24 | Shrink safe |
+| Fast Startup before shrink | **Disable** (still On) | 2026-07-24 | Action before shrink |
 | EXPO profile for install | Leave as-is (recommended) | | Reduce variables |
 | Reuse existing EFI partition | **Yes** (planned) | | ~100 MB ESP part 1 — monitor free space |
 | Windows reset timing | **After** bare-metal validation | | Not in this phase |
