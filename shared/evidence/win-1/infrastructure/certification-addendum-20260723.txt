@@ -1,0 +1,12 @@
+WIN-1 Infrastructure Baseline — certification addendum
+Date: 2026-07-23
+
+MISSION         WIN-1 Infrastructure Baseline
+CERTIFICATION   APPROVED ✅
+BASELINE        FROZEN
+REMOTE          SYNCHRONIZED ✅
+
+Commit:  8b57fe8 cert(win-1): approve infrastructure baseline
+Remote:  origin/master @ github.com/asir0z/asir0z-smoothoperator
+
+FROZEN baseline is canonical on local + remote.

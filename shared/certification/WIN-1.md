@@ -52,8 +52,10 @@ MISSION:        WIN-1 Infrastructure Baseline
 STATUS:         APPROVED ✅
 CERTIFICATION:  PASSED
 LIFECYCLE:      FROZEN BASELINE
+REMOTE:         SYNCHRONIZED ✅
 DATE:           2026-07-23
 REVIEWER:       Certification Authority
+COMMIT:         8b57fe8 · origin/master
 ```
 
 Evidence: [`shared/evidence/win-1/infrastructure/infrastructure-baseline-20260723.md`](../evidence/win-1/infrastructure/infrastructure-baseline-20260723.md)

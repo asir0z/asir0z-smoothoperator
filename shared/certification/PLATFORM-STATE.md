@@ -83,6 +83,8 @@ Operator priority *(2026-07-23)*:
 
 Infrastructure baseline evidence: [`shared/evidence/win-1/infrastructure/infrastructure-baseline-20260723.md`](../evidence/win-1/infrastructure/infrastructure-baseline-20260723.md)
 
+Remote: `8b57fe8` on `origin/master` — **SYNCHRONIZED ✅**
+
 Certification: [`WIN-1.md`](WIN-1.md)
 
 ---
