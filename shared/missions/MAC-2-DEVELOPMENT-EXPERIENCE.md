@@ -1,7 +1,7 @@
 # MAC-2 — Complete Operator Engineering Workstation
 
 ```text
-Status:     DEFERRED · SCOPE EXPANSION APPROVED · SOFTWARE BASELINE APPROVED
+Status:     DEFERRED · DESIGN FROZEN · SCOPE + BASELINE APPROVED
 Depends on: MAC-1 PASS ✅ · OFFLINE-1 PASS · Arch install · Arch bootstrap
 Scope:      Daily engineering workstation (not UX-only)
 Platform:   SmoothOperator™ · Mac
@@ -9,12 +9,15 @@ Type:       Workstation enhancement — not infrastructure
 Date:       2026-07-23
 Expanded:   2026-07-24
 Baseline:   2026-07-24 — MAC-2-SOFTWARE-BASELINE.md (Approved)
+Design freeze: 2026-07-24 — no further MAC design docs until implementation
 Deferred:   until OFFLINE-1 → Arch install → Arch bootstrap
 Prior:      MAC-1-SCOPE-AMENDMENT-TERMINAL-SHELL-SCRIPTS.md (Approved)
 Expansion:  MAC-2-SCOPE-EXPANSION-ENGINEERING-WORKSTATION.md (Approved)
 ```
 
-> **Scheduling (2026-07-24):** Scope + software baseline are approved; **implementation stays deferred**. Critical path remains OFFLINE-1 → Arch install → Arch bootstrap → **then** MAC-2.
+> **Scheduling (2026-07-24):** Scope + software baseline approved; **Mac design track FROZEN**. No more “what to install” docs. Next MAC work is **implementation only** after Arch bootstrap.
+>
+> **Implementation order (when active):** Brewfile → bootstrap → verify → dotfiles → helpers → evidence.
 
 **Software baseline:** [`MAC-2-SOFTWARE-BASELINE.md`](MAC-2-SOFTWARE-BASELINE.md) — Ghostty · Spark · Raycast/Rectangle/Stats · uv · mise/pnpm · Tailscale · Brewfile deliverables.
 

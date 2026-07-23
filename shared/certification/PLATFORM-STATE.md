@@ -125,12 +125,15 @@ BOOTSTRAP:  scripts/bootstrap/mac-bootstrap.sh
 EVIDENCE:   shared/evidence/mac-1/mac-1-evidence-20260724.md
 COLLECTOR:  shared/evidence/mac-1/verification-20260724-023724.txt
 CERT:       MAC-1.md
-MAC-2:      DEFERRED · scope + software baseline APPROVED
+MAC-2:      DEFERRED · DESIGN FROZEN · scope + software baseline APPROVED
             → after OFFLINE-1 · Arch install · Arch bootstrap
+            → implementation only (Brewfile → bootstrap → verify → dotfiles → helpers → evidence)
             → shared/missions/MAC-2-DEVELOPMENT-EXPERIENCE.md
             → expansion: MAC-2-SCOPE-EXPANSION-ENGINEERING-WORKSTATION.md
             → baseline:  MAC-2-SOFTWARE-BASELINE.md
 ```
+
+Mac design track is **frozen** — no further MAC planning docs until MAC-2 implementation activates. Critical path: **OFFLINE-1**.
 
 **Split:** Mac = wrappers/aliases · Ubuntu = canonical production scripts · Arch = on-demand compute.
 

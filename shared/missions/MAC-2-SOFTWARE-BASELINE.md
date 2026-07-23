@@ -145,9 +145,12 @@ Goal: a brand-new Mac becomes an identical engineering workstation using only Gi
 ## Current status
 
 ```text
-Status:         APPROVED SOFTWARE BASELINE
+Status:         APPROVED SOFTWARE BASELINE · DESIGN FROZEN
 Implementation: DEFERRED
 Active work:    OFFLINE-1 (unchanged)
+
+When MAC-2 activates, implement in order: Brewfile → bootstrap → verify → dotfiles → helpers → evidence.
+No further design documents required before that.
 ```
 
 ---
