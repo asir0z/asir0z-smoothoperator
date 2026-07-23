@@ -7,7 +7,7 @@
 
 ## Scope
 
-Activate reproducible Arch development workstation: Cursor, Git, SSH, repositories, dotfiles, development round-trip.
+Activate reproducible Arch development workstation: Cursor, Git, SSH, repositories, dotfiles, development round-trip, GUI acceptance, audio validation.
 
 ## Evidence index
 
@@ -19,10 +19,12 @@ Activate reproducible Arch development workstation: Cursor, Git, SSH, repositori
 | [repository-inventory.md](repository-inventory.md) | 3 — Repositories |
 | [dotfiles-inventory.md](dotfiles-inventory.md) | 4 — Dotfiles |
 | [secret-scan.txt](secret-scan.txt) | 4 — Pre-commit scan |
-| [gui-validation.md](gui-validation.md) | 5 — GUI checklist |
+| [gui-validation.md](gui-validation.md) | 5 — GUI acceptance |
+| [audio-validation.md](audio-validation.md) | 5 — Audio investigation |
+| [audio-collect.txt](audio-collect.txt) | 5 — Audio collector |
 | [development-round-trip.md](development-round-trip.md) | 5 — Git round-trip |
 | [final-report.md](final-report.md) | 6 — Certification decision |
 
 ## Decision
 
-See [final-report.md](final-report.md).
+See [final-report.md](final-report.md) — **APPROVED** · GUI Acceptance **PASS**.

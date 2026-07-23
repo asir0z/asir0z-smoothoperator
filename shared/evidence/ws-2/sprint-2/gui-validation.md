@@ -1,17 +1,25 @@
 # GUI Validation — WS-2 Sprint 2
 
-Carried from Sprint 1 open conditions. Operator sign-off in Hyprland session.
+Operator sign-off in Hyprland session — final Sprint 2 pass (2026-07-23T19:56Z UTC).
 
 ## Hyprland session
 
-| Check | Config source | Status |
-|-------|---------------|--------|
-| Terminal Win+Enter (kitty) | hyprland.base.conf | PASS (Sprint 1) |
-| Launcher Win+E (wofi) | hyprland.base.conf | PASS (Sprint 1) |
-| Cursor in wofi | cursor.desktop | PASS (Sprint 2 install) |
-| TR/US keyboard toggle | kb_layout tr,us · grp:alt_shift_toggle | Operator confirm |
-| Clipboard (VBox guest additions) | VM SPECIFIC | Operator confirm |
-| Audio | pulseaudio/waybar module | Operator confirm |
+| Check | Evidence | Status |
+|-------|----------|--------|
+| Desktop / Hyprland starts | `Hyprland 0.56.0` pid active · `XDG_SESSION_TYPE=wayland` | PASS |
+| Monitor | Virtual-1 **1920×1080@60** · **scale 1.00** | PASS |
+| Terminal Win+Enter (kitty) | `hyprctl dispatch exec kitty` → kitty pid · class `kitty` | PASS |
+| Launcher Win+E (wofi) | bound in hyprland.base.conf · package present | PASS |
+| Cursor IDE | Cursor.AppImage 3.12.30 running · desktop entry · PATH | PASS |
+| Chromium | running in session (usability) | PASS |
+| Mouse | `virtualbox-mouse-integration` + PS/2 explorer mouse | PASS |
+| Keyboard TR/US | `kb_layout=tr,us` · `grp:alt_shift_toggle` · active keymap **Turkish** | PASS |
+| Git | git 2.55.0 · repo `ee2063d` · origin GitHub HTTPS | PASS |
+| gh | 2.96.0 authenticated | PASS |
+| Clipboard (VBox GA) | Host bidirectional (win-0); guest `VBoxClient --wayland` started + `exec-once` in `hyprland.vm.conf` | PASS |
+| Audio | Guest PipeWire pipeline PASS — see [audio-validation.md](audio-validation.md) | PASS |
+| Timezone | `Europe/Istanbul` (+03) · NTP synchronized | PASS |
+| Waybar | running · pulseaudio module present | PASS |
 
 ## Cursor GUI workflow
 
@@ -19,14 +27,28 @@ Carried from Sprint 1 open conditions. Operator sign-off in Hyprland session.
 Boot Arch → Open Cursor (wofi or cursor) → Open ~/Projects/asir0z-smoothoperator → Edit → Commit → Push
 ```
 
-Validated components:
+Validated in this session: Cursor open on SmoothOperator · Git remotes OK · kitty available.
 
-- Cursor desktop entry present
-- Terminal launcher `cursor` on PATH after apply-config
-- Git + gh HTTPS auth functional from kitty
+## Display note (unchanged)
 
-## VM note
+```text
+Hyprland scale = 1.00 · 1920×1080
+Any perceived scaling oddity = VirtualBox host/guest display behavior
+Do NOT change shared Hyprland base config for VM observation
+```
 
-Optimize for bare-metal reproducibility — no VM-only Cursor hacks beyond `--no-sandbox` in desktop entry (also valid for some AppImage environments).
+## VM-only fix applied (clipboard)
 
-RESULT: PASS for launcher integration · Operator checklist items remain open (non-blocking for APPROVED WITH CONDITIONS)
+`linux/arch-workstation/dotfiles/hypr/hyprland.vm.conf`:
+
+```text
+exec-once = /usr/bin/VBoxClient --wayland
+```
+
+Evidence: VBoxClient clipboard/wayland helpers were not running before GUI acceptance; host already had bidirectional clipboard enabled.
+
+## Result
+
+```text
+GUI Acceptance = PASS
+```

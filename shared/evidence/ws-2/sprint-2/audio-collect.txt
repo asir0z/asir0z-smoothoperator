@@ -1,0 +1,48 @@
+WS-2 Sprint 2 — Audio collector
+Collected: 2026-07-23T19:54:45Z UTC · host arch-workstation · user asir0z
+
+=== VIRT ===
+systemd-detect-virt: oracle
+DMI: innotek GmbH / VirtualBox
+
+=== TIMEZONE (session) ===
+Europe/Istanbul (+03) · NTP active · synchronized
+
+=== USER SERVICES ===
+pipewire.socket: enabled
+pipewire-pulse.socket: enabled
+wireplumber.service: enabled / active
+pipewire.service: active (socket-activated)
+pipewire-pulse.service: active (socket-activated)
+
+=== PACKAGES ===
+pipewire 1:1.6.8-1
+wireplumber 0.5.15-1
+pipewire-pulse 1:1.6.8-1
+pipewire-alsa 1:1.6.8-1
+alsa-utils: not installed (optional)
+
+=== PACTL ===
+Server: PulseAudio (on PipeWire 1.6.8)
+Default Sink: alsa_output.pci-0000_00_05.0.analog-stereo
+Mute: no
+Volume: 40%
+Active Port: analog-output;output-amplifier-on
+
+=== HARDWARE ===
+PCI: 00:05.0 Intel 82801AA AC'97 Audio Controller
+ALSA: card0 I82801AAICH (snd_intel8x0)
+/dev/snd: present · session ACL rw for asir0z
+
+=== PLAYBACK TEST ===
+paplay /tmp/ws2-audio-test-440.wav → exit 0
+sink state: SUSPENDED → IDLE
+
+=== HOST CROSS-REF (win-0) ===
+Arch-Engineering-Workstation Audio: Null/AC97 (enabled, playback off)
+
+=== CONCLUSION ===
+Guest pipeline OPERATIONAL. Inaudible speakers = host VirtualBox playback off.
+No Arch config change indicated.
+
+RESULT: PASS (guest)

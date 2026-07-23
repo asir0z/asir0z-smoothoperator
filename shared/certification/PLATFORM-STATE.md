@@ -93,7 +93,7 @@ Certification: [`WIN-1.md`](WIN-1.md)
 
 ```text
 Sprint 1   APPROVED WITH CONDITIONS ✅
-Sprint 2   APPROVED WITH CONDITIONS ✅
+Sprint 2   APPROVED ✅
 Arch VM    DEVELOPMENT WORKSTATION (validation)
 Bare-metal install   NOT AUTHORIZED
 ```
@@ -101,15 +101,13 @@ Bare-metal install   NOT AUTHORIZED
 Sprint 1 evidence: [`shared/evidence/ws-2/readiness-audit/`](../evidence/ws-2/readiness-audit/) · commit `0875b25`  
 Sprint 2 evidence: [`shared/evidence/ws-2/sprint-2/`](../evidence/ws-2/sprint-2/)
 
-**Sprint 2 closed:** Cursor · repositories · dotfiles · dev round-trip · secret scan
+**Sprint 2 closed:** Cursor · repositories · dotfiles · dev round-trip · secret scan · timezone · audio (guest) · GUI Acceptance
 
-**Open conditions (operator):**
+**Backlog (not blocking):**
 
-1. Timezone → `Europe/Istanbul` (`scripts/set-operator-timezone.sh`)  
-2. GUI confirm: clipboard · audio · keyboard layout  
-3. `asir0z-cortex` repo unavailable on GitHub — defer until restored  
-
-**Backlog (not blocking):** bootstrap automount · VM-specific
+1. `asir0z-cortex` repo unavailable on GitHub — defer until restored  
+2. Optional host: enable VirtualBox Audio Output for audible speakers (guest stack already PASS)  
+3. bootstrap automount · other VM-specific friction  
 
 **SSH key policy:** private keys never in repo, bootstrap, or evidence — operator-controlled transfer only.
 
@@ -214,7 +212,7 @@ Unless new evidence changes state:
 | WIN-1 Infrastructure | **100% · CERTIFIED · FROZEN BASELINE** |
 | WIN-1 Core | **OPEN** — Observed Friction driven |
 | WS-2 Sprint 1 | **APPROVED WITH CONDITIONS** |
-| WS-2 Sprint 2 | **APPROVED WITH CONDITIONS** |
+| WS-2 Sprint 2 | **APPROVED** |
 | Mission 20 | **Observation** (Contabo cutover 2026-07-23) |
 | WIN-1A | BLOCKED until Mission 20 observation PASS |
 | Foundation / Governance / Lifecycle | **FROZEN** |
@@ -226,7 +224,7 @@ Historical only (do not revert): `95% Migration` · `P0 Pending` · `WIN-1 block
 
 | Track | Focus |
 |-------|-------|
-| **SmoothOperator** | WIN-1 Infra **FROZEN ✅** · Core **OPEN** · WS-2 Sprint 1 **APPROVED WITH CONDITIONS** |
+| **SmoothOperator** | WIN-1 Infra **FROZEN ✅** · Core **OPEN** · WS-2 Sprint 2 **APPROVED ✅** |
 | **DevOps Lab** | Mission 20 **Observation** |
 | **Products** | Standby until Contabo production |
 
