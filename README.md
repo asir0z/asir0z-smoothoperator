@@ -16,8 +16,10 @@ Personal engineering workstation — reproducible bootstrap, separate from [asir
 # system layer (root TTY or sudo)
 mount -t vboxsf bootstrap /mnt/bootstrap 2>/dev/null || true
 sudo bash /mnt/bootstrap/run-ws1-system.sh
+#   → dev-stack.sh (packages, idempotent)
+#   → install-ssh-authorized-key.sh (machine-specific)
 
-# evidence (asir0z — not root)
+# evidence (asir0z — not root) — expect WS-1 RESULT: PASS
 bash /mnt/bootstrap/verify/verify-ws1.sh | tee ~/ws-1-evidence.txt
 
 # user layer (asir0z — not root)
@@ -26,7 +28,7 @@ git config --global user.name "Asır"
 git config --global user.email "asir01oz@gmail.com"
 ```
 
-`run-ws1-system.sh` strips CRLF, runs `dev-stack.sh`, installs Windows SSH pubkey for passwordless `ssh arch-ws`.
+`run-ws1-system.sh` strips CRLF before running child scripts.
 
 Shared folder `bootstrap` maps to this repo's `bootstrap/` directory only — not the repo root.
 

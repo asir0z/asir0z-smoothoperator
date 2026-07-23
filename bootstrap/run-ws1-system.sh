@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # WS-1 system layer — one-shot for root (TTY or ssh).
-# Mounts bootstrap share, strips CRLF, runs dev-stack.sh.
+# Flow: CRLF strip → dev-stack.sh → install-ssh-authorized-key.sh
 set -euo pipefail
 
 if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
@@ -14,13 +14,14 @@ if ! mountpoint -q "$MNT"; then
   mount -t vboxsf bootstrap "$MNT"
 fi
 
-for f in dev-stack.sh run-ws1-system.sh; do
+for f in dev-stack.sh run-ws1-system.sh install-ssh-authorized-key.sh verify/verify-ws1.sh; do
   if [[ -f "$MNT/$f" ]]; then
     sed -i 's/\r$//' "$MNT/$f"
   fi
 done
 
 bash "$MNT/dev-stack.sh"
+bash "$MNT/install-ssh-authorized-key.sh"
 
 echo
 echo "System layer complete."
