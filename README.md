@@ -45,8 +45,9 @@ VBox share `bootstrap` → host path `...\asir0z-smoothoperator\linux\bootstrap\
 
 | Sprint | Status |
 |--------|--------|
-| **WIN-0** Current State Audit | 📋 spec ready — `windows/win-0-audit/` |
-| **WIN-1** Engineering Baseline | ⏸️ after WIN-0 acceptance |
+| **WIN-0** Current State Audit | 📋 spec — `windows/win-0-audit/` |
+| **WIN-1** Engineering Baseline | 📋 spec — `windows/win-1-baseline/` |
+| **WIN-1.1** Legacy VM removal (`DevOps-Lab-Ubuntu`) | ⏸️ blocked until Contabo Host Acceptance (DevOps Lab gate) |
 
 ---
 
