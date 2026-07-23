@@ -32,3 +32,13 @@ ip a
 Record `ip` from NAT — port-forward from host if needed (same pattern as DevOps Lab NAT :2222).
 
 Hyprland and developer stack come **after** base system boots reliably.
+
+```bash
+# shared folder: /mnt/bootstrap → host .../linux/bootstrap/
+sudo bash /mnt/bootstrap/hyprland-stack.sh
+sudo reboot
+```
+
+Log in via SDDM → Hyprland. SSH stays on host `:2223`.
+
+WS-1 (FROZEN): `sudo bash /mnt/bootstrap/run-ws1-system.sh` — see `shared/evidence/ws-1/`.

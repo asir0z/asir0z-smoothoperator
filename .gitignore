@@ -1,2 +1,4 @@
+linux/install/*.iso
+linux/install/*.iso.*
 install/*.iso
 install/*.iso.*

@@ -30,7 +30,7 @@ echo "$SUDO_PW" | sudo -S bash /mnt/bootstrap/run-ws1-system.sh
   Write-Host "Running WS-1 evidence capture..."
   $ev = Invoke-SSHCommand -SessionId $session.SessionId -Command "bash /mnt/bootstrap/verify/verify-ws1.sh" -TimeOut 120
   Write-Host $ev.Output
-  $evPath = Join-Path $PSScriptRoot "..\bootstrap\evidence\ws-1-evidence-$(Get-Date -Format yyyyMMdd-HHmmss).txt"
+  $evPath = Join-Path $PSScriptRoot "..\..\shared\evidence\ws-1-evidence-$(Get-Date -Format yyyyMMdd-HHmmss).txt"
   New-Item -ItemType Directory -Force -Path (Split-Path $evPath) | Out-Null
   $ev.Output | Out-File -FilePath $evPath -Encoding utf8
   Write-Host "Evidence saved: $evPath"

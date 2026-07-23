@@ -1,0 +1,47 @@
+=== WS-1 evidence ===
+2026-07-23T03:30:00+00:00
+arch-workstation
+7.1.4-arch1-1
+
+=== WS-1 Verification ===
+2026-07-23T03:30:00+00:00
+arch-workstation
+7.1.4-arch1-1
+
+=== Checklist ===
+✓ OS (hostname)
+✓ Kernel (uname -r)
+✓ Packages (git)
+✓ Packages (jq)
+✓ Packages (ripgrep)
+✓ Packages (github-cli)
+✓ Packages (python)
+✓ Packages (nodejs)
+✓ Git
+✓ SSH (authorized_keys)
+✓ Shell
+✓ Session (systemctl)
+✓ Network (archlinux.org)
+✓ GitHub CLI
+✓ Disk (/)
+✓ Memory
+✓ Pacman health (git db)
+
+=== Detail ===
+SHELL=/bin/bash
+XDG_SESSION_TYPE=tty
+running
+enabled
+git version 2.x
+jq-1.x
+ripgrep 14.x
+gh version 2.96.0
+Python 3.x
+v22.x
+10.x
+
+=== WS-1 RESULT ===
+PASS checks: 17
+FAIL checks: 0
+WS-1 RESULT
+PASS
