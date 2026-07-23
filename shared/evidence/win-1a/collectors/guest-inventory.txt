@@ -1,0 +1,159 @@
+=== TIMESTAMP ===
+2026-07-23T03:50:35+00:00
+=== HOST ===
+asir0z-devopslab
+=== OS ===
+Ubuntu 24.04.4 LTS
+=== UPTIME ===
+ 03:50:35 up  6:21,  1 user,  load average: 0.09, 0.03, 0.22
+=== DISK ===
+Filesystem                         Size  Used Avail Use% Mounted on
+tmpfs                              795M  1.4M  793M   1% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv   19G   15G  3.4G  82% /
+tmpfs                              3.9G     0  3.9G   0% /dev/shm
+tmpfs                              5.0M     0  5.0M   0% /run/lock
+/dev/sda2                          2.0G  104M  1.7G   6% /boot
+tmpfs                              795M   12K  795M   1% /run/user/1000
+=== MEMORY ===
+               total        used        free      shared  buff/cache   available
+Mem:           7.8Gi       1.1Gi       1.5Gi       1.3Mi       5.5Gi       6.7Gi
+Swap:          3.8Gi          0B       3.8Gi
+=== DOCKER PS ===
+NAMES        IMAGE                            STATUS                 PORTS
+asir0z-web   asir0z-web:packaged              Up 5 hours (healthy)   3000/tcp
+n8n          n8nio/n8n:1.123.66               Up 6 hours (healthy)   127.0.0.1:5678->5678/tcp
+gotenberg    gotenberg/gotenberg:8-chromium   Up 6 hours (healthy)   127.0.0.1:3001->3000/tcp
+lab-proxy    nginx:1.27.4-alpine              Up 6 hours             0.0.0.0:18080->80/tcp, [::]:18080->80/tcp
+=== DOCKER VOLUMES ===
+DRIVER    VOLUME NAME
+local     n8n_data
+=== DOCKER SYSTEM DF ===
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          5         4         3.932GB   86.95kB (0%)
+Containers      4         4         78.41MB   0B (0%)
+Local Volumes   1         1         3.645MB   0B (0%)
+Build Cache     36        0         3.93GB    3.93GB
+=== SYSTEMD ===
+  cloudflared.service         loaded active running Cloudflare Tunnel client
+  containerd.service          loaded active running containerd container runtime
+  docker.service              loaded active running Docker Application Container Engine
+  ssh.service                 loaded active running OpenBSD Secure Shell server
+  tailscaled.service          loaded active running Tailscale node agent
+=== LISTEN PORTS ===
+State  Recv-Q Send-Q               Local Address:Port  Peer Address:PortProcess
+LISTEN 0      4096                     127.0.0.1:20241      0.0.0.0:*          
+LISTEN 0      4096                  100.66.213.5:50537      0.0.0.0:*          
+LISTEN 0      4096                    127.0.0.54:53         0.0.0.0:*          
+LISTEN 0      4096                     127.0.0.1:3001       0.0.0.0:*          
+LISTEN 0      4096                     127.0.0.1:5678       0.0.0.0:*          
+LISTEN 0      4096                       0.0.0.0:18080      0.0.0.0:*          
+LISTEN 0      4096                 127.0.0.53%lo:53         0.0.0.0:*          
+LISTEN 0      4096                       0.0.0.0:22         0.0.0.0:*          
+LISTEN 0      4096   [fd7a:115c:a1e0::a436:d506]:54367         [::]:*          
+LISTEN 0      4096                          [::]:18080         [::]:*          
+LISTEN 0      4096                          [::]:22            [::]:*          
+=== SERVICES ===
+total 28
+drwx---rwx  7 asir0z asir0z 4096 Jul 22 21:34 .
+drwxr-x--- 29 asir0z asir0z 4096 Jul 22 22:44 ..
+drwxrwxr-x  2 asir0z asir0z 4096 Jul 22 21:34 asir0z-web
+drwxrwxr-x  2 asir0z asir0z 4096 Jul 22 01:07 cloudflared
+drwx---rwx  2 asir0z asir0z 4096 Jul 21 23:16 n8n
+drwxrwxr-x  2 asir0z asir0z 4096 Jul 22 01:14 product-intelligence
+drwx---rwx  2 asir0z asir0z 4096 Jul 21 18:09 proxy
+--- /home/asir0z/services/asir0z-web/ ---
+total 20
+drwxrwxr-x 2 asir0z asir0z 4096 Jul 22 21:34 .
+drwx---rwx 7 asir0z asir0z 4096 Jul 22 21:34 ..
+-rw-rw-r-- 1 asir0z asir0z 1217 Jul 22 21:34 compose.yaml
+-rw-rw-r-- 1 asir0z asir0z  510 Jul 22 21:34 .env
+-rw-rw-r-- 1 asir0z asir0z  510 Jul 22 21:34 .env.example
+--- /home/asir0z/services/cloudflared/ ---
+total 12
+drwxrwxr-x 2 asir0z asir0z 4096 Jul 22 01:07 .
+drwx---rwx 7 asir0z asir0z 4096 Jul 22 21:34 ..
+-rw-rw-r-- 1 asir0z asir0z  774 Jul 22 01:07 config.yml.example
+--- /home/asir0z/services/n8n/ ---
+total 24
+drwx---rwx 2 asir0z asir0z 4096 Jul 21 23:16 .
+drwx---rwx 7 asir0z asir0z 4096 Jul 22 21:34 ..
+-rw-rw-r-- 1 asir0z asir0z  359 Jul 21 18:09 compose.yaml
+-rw------- 1 asir0z asir0z  364 Jul 21 23:16 .env
+-rw-rw-r-- 1 asir0z asir0z  292 Jul 21 18:09 .env.example
+-rw-rw-r-- 1 asir0z asir0z  678 Jul 21 18:09 README.md
+--- /home/asir0z/services/product-intelligence/ ---
+total 28
+drwxrwxr-x 2 asir0z asir0z 4096 Jul 22 01:14 .
+drwx---rwx 7 asir0z asir0z 4096 Jul 22 21:34 ..
+-rw-rw-r-- 1 asir0z asir0z 1210 Jul 21 23:39 compose.yaml
+-rw------- 1 asir0z asir0z  365 Jul 22 01:14 .env
+-rw------- 1 asir0z asir0z  364 Jul 22 01:14 .env.bak.20260722-011455
+-rw-rw-r-- 1 asir0z asir0z  626 Jul 21 23:45 .env.example
+-rw-rw-r-- 1 asir0z asir0z 1770 Jul 21 23:39 README.md
+--- /home/asir0z/services/proxy/ ---
+total 16
+drwx---rwx 2 asir0z asir0z 4096 Jul 21 18:09 .
+drwx---rwx 7 asir0z asir0z 4096 Jul 22 21:34 ..
+-rw-rw-r-- 1 asir0z asir0z  302 Jul 21 18:09 compose.yaml
+-rw-rw-r-- 1 asir0z asir0z 2308 Jul 22 21:34 nginx.conf
+=== SCRIPTS TOP ===
+cloudflared
+deploy
+n8n
+observability
+ops
+product-intelligence
+=== BACKUPS ===
+2.8M	/home/asir0z/backups
+/home/asir0z/backups
+/home/asir0z/backups/n8n
+/home/asir0z/backups/n8n/20260722-000037
+/home/asir0z/backups/n8n/20260722-012136
+/home/asir0z/backups/n8n/20260721-200904
+/home/asir0z/backups/n8n/20260721-214705
+/home/asir0z/backups/n8n/20260722-004638
+=== CLOUDFLARED ===
+active
+total 16
+drwx------  2 asir0z asir0z 4096 Jul 22 01:13 .
+drwxr-x--- 29 asir0z asir0z 4096 Jul 22 22:44 ..
+-r--------  1 asir0z asir0z  175 Jul 22 01:13 102a8781-9d37-4f6d-8657-e329e37756a8.json
+-rw-------  1 asir0z asir0z  282 Jul 22 01:09 cert.pem
+=== TAILSCALE ===
+100.66.213.5    asir0z-devopslab-1  asir01oz@  linux    -                                                   
+100.108.19.122  asir0z-devopslab    asir01oz@  linux    offline, last seen 2d ago                           
+100.87.31.7     asrs-macbook-air    asir01oz@  macOS    offline, last seen 10m ago                          
+100.67.68.105   desktop-p53s8b0     asir01oz@  windows  active; direct 192.168.1.55:41641, tx 4876 rx 3940  
+=== GIT REPOS ===
+=== ENV PATHS ===
+/home/asir0z/services/product-intelligence/.env
+/home/asir0z/services/asir0z-web/.env
+/home/asir0z/services/n8n/.env
+=== CRON ===
+none
+=== HEALTH CHECK ===
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/package.json
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/credentials/
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/credentials/ApifyOAuth2Api.credentials.js.map
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/credentials/ApifyOAuth2Api.credentials.js
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/credentials/ApifyApi.credentials.js.map
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/credentials/ApifyOAuth2Api.credentials.d.ts
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/credentials/ApifyApi.credentials.d.ts
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/credentials/ApifyApi.credentials.js
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/nodes/
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/nodes/Apify/
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/nodes/Apify/Apify.properties.js
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/nodes/Apify/Apify.methods.js.map
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/nodes/Apify/Apify.node.js.map
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/nodes/Apify/Apify.node.d.ts
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/nodes/Apify/Apify.properties.js.map
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/nodes/Apify/ApifyTrigger.node.json
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/nodes/Apify/properties.json
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/nodes/Apify/Apify.node.js
+  ./nodes/node_modules/@apify/n8n-nodes-apify/dist/nodes/Apify/Apify.methods.d.ts
+  write /dev/stdout: broken pipe
+
+=== summary ===
+PASS=14 WARN=1 FAIL=0
+RESULT=WARN

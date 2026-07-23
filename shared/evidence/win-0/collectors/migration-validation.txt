@@ -1,0 +1,27 @@
+WIN-0 Migration Validation — 2026-07-23
+========================================
+
+Folder rename asir0z-engineering-platform → asir0z-smoothoperator: FAILED (path in use)
+
+Test-Path results:
+  C:\Projects\asir0z-smoothoperator\.git                          → False
+  C:\Projects\asir0z-engineering-platform\.git                    → True
+  linux/bootstrap/run-ws1-system.sh                               → True
+  shared/evidence/ws-1/verification.txt                           → True
+  windows/win-0-audit/WIN-0-SPEC.md                               → True
+  windows/win-0-audit/WINDOWS-HEALTH-REPORT.template.md           → True
+
+Git status (engineering-platform):
+  Branch: master @ e7d2ee4
+  Remote: (none)
+  Untracked: bootstrap/ (duplicate of linux/bootstrap)
+
+GitHub ls-remote:
+  asir0z-engineering-platform → Repository not found
+  asir0z-smoothoperator       → Repository not found
+
+VBox shared folder (Arch-Engineering-Workstation):
+  bootstrap → C:\Projects\asir0z-engineering-platform\linux\bootstrap
+
+Arch VM state: powered off
+DevOps-Lab-Ubuntu state: running

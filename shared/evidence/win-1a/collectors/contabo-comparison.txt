@@ -1,0 +1,10 @@
+=== CONTABO DEEP ===
+vmi3459972
+Linux vmi3459972 6.8.0-136-generic #136-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 21:53:05 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1       193G  2.8G  190G   2% /
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+DRIVER    VOLUME NAME
+no services
+no ops scripts
+no backups

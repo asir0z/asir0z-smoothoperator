@@ -1,3 +1,6 @@
+> **Superseded by:** `shared/certification/WS-1.md`  
+> Retained for historical continuity in evidence bundle.
+
 # WS-1 Certification Record
 
 ```text

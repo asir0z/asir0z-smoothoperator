@@ -6,21 +6,37 @@ Separate from [asir0z-devopslab](https://github.com/asir0z/asir0z-devopslab) (pr
 
 ```text
 SmoothOperator™
-├── windows/     WIN-0, WIN-1, …
+├── windows/     WIN-0, WIN-1, WIN-1A, WIN-2.5, …
 ├── linux/       WS-1 (FROZEN), WS-2, …
-└── shared/      evidence, certification records
+├── shared/
+│   ├── evidence/        raw audit output, logs, screenshots
+│   └── certification/   reviewer decisions (WS-1.md, WIN-0.md, …)
+└── scripts/     operational helpers (migration completion)
 ```
+
+---
+
+## Status (2026-07-23)
+
+> **P0 Close-out is PRIORITY 1.** No execution sprint until Migration **100% · FROZEN**. See `P0-CLOSEOUT.md`.
+
+| Initiative | Status |
+|------------|--------|
+| **P0** Migration close-out | ⏳ **PRIORITY 1** — `P0-CLOSEOUT.md` |
+| **Migration** | 95% · APPROVED — FROZEN gate open |
+| **WS-1** | ✅ CERTIFIED · FROZEN |
+| **WIN-0** | ✅ APPROVED |
+| **Transition Infrastructure** | ✅ APPROVED |
+| **WIN-1** | 🟢 AUTHORIZED · **exec blocked** until Migration FROZEN |
+| **WIN-1A** | 🚫 BLOCKED (Mission 20 + observation) |
+| **WIN-2.5** | 📋 SPEC APPROVED · **WAITING FOR WIN-1** |
+| **WS-2** Developer Experience | 🔒 waiting |
 
 ---
 
 ## Linux — Arch workstation
 
 **VM:** `Arch-Engineering-Workstation` · SSH: `ssh arch-ws` (`127.0.0.1:2223`)
-
-| Sprint | Status |
-|--------|--------|
-| **WS-1** Developer Stack | ✅ FROZEN — see `shared/evidence/ws-1/` |
-| **WS-2** Developer Experience | ⏸️ after WIN-1 |
 
 Bootstrap scripts: `linux/bootstrap/`  
 VM install: `linux/install/create-vm.ps1`  
@@ -37,17 +53,25 @@ bash /mnt/bootstrap/run-ws1-system.sh
 bash /mnt/bootstrap/verify/verify-ws1.sh | tee ~/ws-1-evidence.txt
 ```
 
-VBox share `bootstrap` → host path `...\asir0z-smoothoperator\linux\bootstrap\`
+VBox share `bootstrap` → host path `C:\Projects\asir0z-smoothoperator\linux\bootstrap\`
 
 ---
 
-## Windows
+## Windows roadmap
 
-| Sprint | Status |
-|--------|--------|
-| **WIN-0** Current State Audit | 📋 spec — `windows/win-0-audit/` |
-| **WIN-1** Engineering Baseline | 📋 spec — `windows/win-1-baseline/` |
-| **WIN-1.1** Legacy VM removal (`DevOps-Lab-Ubuntu`) | ⏸️ blocked until Contabo Host Acceptance (DevOps Lab gate) |
+```text
+P0 FROZEN → WIN-1 (Core ∥ Infra) → WIN-2.5 → WS-2 → Mission 20 → WIN-1A
+```
+
+| Sprint | Doc |
+|--------|-----|
+| **P0** | `P0-CLOSEOUT.md` · `shared/certification/MIGRATION.md` |
+| Transition VM | `shared/evidence/win-1a/TRANSITION-INFRASTRUCTURE-REPORT.md` |
+| WIN-1 | `shared/certification/WIN-1.md` |
+| WIN-2.5 | `shared/certification/WIN-2.5.md` · `windows/win-2.5-workflow-convergence/` |
+| WIN-1A | `windows/win-1-baseline/WIN-1A-TRANSITION-VM-REMOVAL.md` |
+| Mission 20 | `asir0z-devopslab/missions/phase-2/MISSION-20-PRODUCTION-RUNTIME-MIGRATION.md` |
+| WS-2 | (pending) |
 
 ---
 
@@ -61,14 +85,12 @@ VBox share `bootstrap` → host path `...\asir0z-smoothoperator\linux\bootstrap\
 
 ---
 
-## Repository migration (2026-07-23)
+## Repository migration
 
-Renamed from `asir0z-engineering-platform` → `asir0z-smoothoperator`.  
-If VirtualBox shared folder still points at the old host path, update (VM powered off):
+Canonical name: **`asir0z-smoothoperator`** · product: **SmoothOperator™**
 
-```powershell
-& "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" sharedfolder add "Arch-Engineering-Workstation" `
-  --name bootstrap --hostpath "C:\Projects\asir0z-smoothoperator\linux\bootstrap" --automount
-```
+Legacy name `engineering-platform` appears only in migration history (`MIGRATION.md`).
 
-See `MIGRATION.md` for full checklist.
+**Pending (operational):** close Cursor → run `scripts/complete-migration.ps1` → GitHub create/push.
+
+See `MIGRATION.md` and `shared/certification/MIGRATION.md`. **Close-out:** [`P0-CLOSEOUT.md`](P0-CLOSEOUT.md).

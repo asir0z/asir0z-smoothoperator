@@ -1,6 +1,16 @@
 # Migration — engineering-platform → SmoothOperator™
 
+> **Status:** 95% complete · see `shared/certification/MIGRATION.md`
+
 **Date:** 2026-07-23
+
+## Canonical names
+
+| Context | Name |
+|---------|------|
+| Product | **SmoothOperator™** |
+| Repository | **asir0z-smoothoperator** |
+| Legacy | `engineering-platform` — this document only |
 
 ## What changed
 
@@ -10,72 +20,82 @@
 | `bootstrap/` | `linux/bootstrap/` |
 | `install/` | `linux/install/` |
 | `bootstrap/base-install.md` | `linux/arch-vm/base-install.md` |
-| (none) | `shared/evidence/ws-1/` |
+| (none) | `shared/evidence/` + `shared/certification/` |
 | (none) | `windows/win-0-audit/` |
 
 WS-1 script behavior unchanged. Guest path remains `/mnt/bootstrap/*`.
 
-## Operator checklist
+---
 
-### 1. Local folder
+## Operator sequence
 
-Target canonical path:
+### Step 1 — Local rename (operational)
 
-```text
-C:\Projects\asir0z-smoothoperator
-```
-
-If rename is blocked (Cursor lock), a **junction** may point `asir0z-smoothoperator` → `asir0z-engineering-platform` until reboot. Close IDE/terminals, then:
+Close **all** Cursor windows and terminals using `C:\Projects\asir0z-engineering-platform`.
 
 ```powershell
-Rename-Item C:\Projects\asir0z-engineering-platform C:\Projects\asir0z-smoothoperator
+cd C:\Projects
+Rename-Item asir0z-engineering-platform asir0z-smoothoperator
+Test-Path C:\Projects\asir0z-smoothoperator\.git   # must be True
 ```
 
-### 1b. VirtualBox bootstrap path (interim)
-
-If shared folder still maps to `...\engineering-platform\bootstrap`, a junction links it to `linux\bootstrap`:
+Or run the bundled script:
 
 ```powershell
-cmd /c mklink /J "C:\Projects\asir0z-engineering-platform\bootstrap" "C:\Projects\asir0z-engineering-platform\linux\bootstrap"
+& C:\Projects\asir0z-engineering-platform\scripts\complete-migration.ps1
+# (script renames, validates paths, updates VBox shared folder)
 ```
 
-Update to final path when VM is powered off (see §3).
-
-### 2. GitHub (when remote exists)
-
-Rename repository on GitHub: `asir0z-engineering-platform` → `asir0z-smoothoperator`
-
-Then:
+### Step 2 — Local validation
 
 ```powershell
 cd C:\Projects\asir0z-smoothoperator
-git remote set-url origin git@github.com:asir0z/asir0z-smoothoperator.git
+git status
+git log --oneline -3
+Test-Path linux/bootstrap/run-ws1-system.sh
+Test-Path shared/evidence/ws-1/verification.txt
+Test-Path shared/certification/WIN-0.md
+```
+
+VBox (Arch VM powered off):
+
+```powershell
+& "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" showvminfo "Arch-Engineering-Workstation" |
+  Select-String "Shared folders" -Context 0,3
+# Host path must be: C:\Projects\asir0z-smoothoperator\linux\bootstrap
+```
+
+### Step 3 — GitHub (after local validation)
+
+Create or rename repository on GitHub → **`asir0z-smoothoperator`**
+
+Do **not** create a second repo; preserve history on the existing remote if one exists.
+
+```powershell
+cd C:\Projects\asir0z-smoothoperator
+git remote add origin https://github.com/asir0z/asir0z-smoothoperator.git
+# or: git remote set-url origin ...
 git push -u origin master
 ```
 
-### 3. VirtualBox shared folder
+### Step 4 — Reopen workspace
 
-VM **powered off**:
+Open Cursor on `C:\Projects\asir0z-smoothoperator` only.
 
-```powershell
-$VBox = "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe"
-& $VBox sharedfolder remove "Arch-Engineering-Workstation" --name bootstrap 2>$null
-& $VBox sharedfolder add "Arch-Engineering-Workstation" `
-  --name bootstrap `
-  --hostpath "C:\Projects\asir0z-smoothoperator\linux\bootstrap" `
-  --automount
-```
+Update `shared/certification/MIGRATION.md` → **100% COMPLETE**.
 
-Share name stays `bootstrap` — WS-1 guest commands unchanged.
+---
 
-### 4. SSH config
+## SSH config
 
 No change: `Host arch-ws` → `127.0.0.1:2223`
 
-## Validation
+## Validation checklist
 
-- [ ] `git log --oneline` shows full history
+- [ ] `Test-Path C:\Projects\asir0z-smoothoperator\.git`
 - [ ] `linux/bootstrap/run-ws1-system.sh` exists
 - [ ] `shared/evidence/ws-1/verification.txt` shows PASS
 - [ ] VBox shared folder host path updated
-- [ ] `ssh arch-ws` works
+- [ ] `git remote -v` → `asir0z-smoothoperator`
+- [ ] `git push -u origin master` succeeded
+- [ ] `ssh arch-ws` works (after Arch VM start)

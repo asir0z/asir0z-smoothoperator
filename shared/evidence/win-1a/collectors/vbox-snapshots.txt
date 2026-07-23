@@ -1,0 +1,19 @@
+   Name: clean-install (UUID: fed349a3-e7b0-4c52-be0c-e58c02767a4b)
+      Name: pre-handarte-bootstrap (UUID: b4c1aea9-168a-4802-b121-517324a9977e)
+      Description: Certified baseline before Phase 1 system administration and Handarte tooling
+         Name: post-mission-03-remote-access (UUID: 3b330401-cfc2-45fb-9d33-444d2fe5b9a5)
+         Description: MISSION-03 execution complete; SSH key + Tailscale; pending cert
+            Name: post-mission-11-compose-foundations (UUID: a8b22d26-7f72-46eb-b7cb-bdadba8368ef)
+            Description: MISSION-11 certified ┬À Docker Foundations complete ┬À commit 1ec9f84 ┬À before MISSION-12
+               Name: pre-production-services (UUID: 6c216772-9da9-4a11-bbcf-30fb6d45e335)
+               Description: Container Platform Foundation complete ┬À MISSION-13 certified ┬À before Production Services era
+                  Name: post-mission-14-certified (UUID: 47609787-4ad4-431d-9837-2770a3ae006c)
+                  Description: MISSION-14 certified n8n+proxy+n8n_data ┬À Git 998d07c ┬À 2026-07-21
+                     Name: production-baseline-2026-07-22 (UUID: 84bcb754-3cc5-45ea-beb1-bf57391add8c)
+                     Description: Product Intelligence production certified ┬À PI cutover APPROVED ┬À Cloudflare HTTPS ┬À Git ca5938f
+                        Name: production-baseline-vm-tuned-2026-07-22 (UUID: cda7d5cb-016c-4db6-9dc1-9090c4d7600c)
+                        Description: Certified production platform after VirtualBox CPU, RAM, disk, and hardware tuning. Soft-lockup remediation validation completed. Production services restored and HTTPS verified. Git repository synchronized.
+                           Name: pre-asir0z-web-deploy-2026-07-22 (UUID: d2f4c962-3938-4a5d-b5a0-281e5676984b)
+                           Description: Production services healthy (n8n+PI+proxy+cloudflared) immediately before Mission 17 asir0z-web deployment.
+                              Name: post-mission-17-production-baseline-2026-07-23 (UUID: 4f56f552-eb29-4e74-a577-bc7bb77191c6) *
+                              Description: Mission 18 baseline: n8n + asir0z-web + proxy + cloudflared healthy
