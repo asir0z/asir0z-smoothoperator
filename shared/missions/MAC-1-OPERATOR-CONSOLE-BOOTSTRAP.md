@@ -1,13 +1,16 @@
 # MAC-1 — Operator Console Bootstrap
 
 ```text
-Status:       AUTHORIZED ✅ · OPERATOR EXECUTION
+Status:       CERTIFIED ✅ · PASS
 Scope:        Operator Environment (macOS) — full console baseline
-Priority:     High
+Priority:     High (closed)
 Platform:     SmoothOperator™ · Mac
 Type:         Workstation bootstrap — not infrastructure
 Date:         2026-07-23
+Certified:    2026-07-24
 Amendment:    MAC-1-SCOPE-AMENDMENT-TERMINAL-SHELL-SCRIPTS.md (Approved)
+Evidence:     shared/evidence/mac-1/mac-1-evidence-20260724.md
+Cert:         shared/certification/MAC-1.md
 ```
 
 Package / runbook: [`mac/mac-1-operator-console/`](../../mac/mac-1-operator-console/)  

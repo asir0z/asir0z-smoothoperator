@@ -1,14 +1,17 @@
 # MAC-2 — Development Experience
 
 ```text
-Status:     PLANNED
-Depends on: MAC-1 PASS (or operator waiver with evidence)
+Status:     DEFERRED
+Depends on: MAC-1 PASS ✅ · Arch install · Arch bootstrap
 Scope:      Operator UX · private network · runtimes
 Platform:   SmoothOperator™ · Mac
 Type:       Workstation enhancement — not infrastructure
 Date:       2026-07-23
+Deferred:   2026-07-24 — after OFFLINE-1 → Arch install → Arch bootstrap
 Amendment:  MAC-1-SCOPE-AMENDMENT-TERMINAL-SHELL-SCRIPTS.md (Approved)
 ```
+
+> **Scheduling note (2026-07-24):** MAC-1 is certified. MAC-2 is comfort/DX (Ghostty, Raycast, Starship, …). Disk partitioning (OFFLINE-1) is the critical path — do **not** start MAC-2 until Arch bare-metal + bootstrap are done.
 
 ---
 

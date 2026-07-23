@@ -1,11 +1,12 @@
 # MISSION — OFFLINE-1 NTFS SHRINK & PARTITION PREPARATION
 
 ```text
-Status: AUTHORIZED
+Status: ACTIVE ✅ · AUTHORIZED
 Scope: Bare-Metal Preparation
-Priority: Critical (blocks Arch installation)
+Priority: Critical (blocks Arch installation) — CURRENT PLATFORM PRIORITY
 Type: Evidence-Based Operation Specification
 Prerequisite: Windows online shrink exhausted (EDR)
+Activated: 2026-07-24 (after MAC-1 CERTIFIED)
 ```
 
 **Authorizing decision:** [`shared/evidence/bare-metal/decisions/WINDOWS-ONLINE-SHRINK-EXHAUSTED.md`](../evidence/bare-metal/decisions/WINDOWS-ONLINE-SHRINK-EXHAUSTED.md)  

@@ -116,33 +116,47 @@ Sprint 2 evidence: [`shared/evidence/ws-2/sprint-2/`](../evidence/ws-2/sprint-2/
 ## MAC-1 — Mac Operator Console
 
 ```text
-STATUS:     AUTHORIZED ✅ · AWAITING macOS EVIDENCE
+STATUS:     CERTIFIED ✅ · PASS (2026-07-24)
 SCOPE:      Full operator console (shell · CLI · SSH · wrappers · Git · Cursor)
 AMENDMENT:  Terminal/shell/scripts — Approved
 MISSION:    shared/missions/MAC-1-OPERATOR-CONSOLE-BOOTSTRAP.md
 PACKAGE:    mac/mac-1-operator-console/
 BOOTSTRAP:  scripts/bootstrap/mac-bootstrap.sh
-EVIDENCE:   shared/evidence/mac-1/
+EVIDENCE:   shared/evidence/mac-1/mac-1-evidence-20260724.md
+COLLECTOR:  shared/evidence/mac-1/verification-20260724-023724.txt
 CERT:       MAC-1.md
-MAC-2:      PLANNED (shared/missions/MAC-2-DEVELOPMENT-EXPERIENCE.md)
+MAC-2:      DEFERRED until after Arch install + bootstrap
 ```
 
 **Split:** Mac = wrappers/aliases · Ubuntu = canonical production scripts · Arch = on-demand compute.
 
 Architecture: [`MAC-PRIMARY-OPERATOR-CONSOLE.md`](../architecture/MAC-PRIMARY-OPERATOR-CONSOLE.md) · Missions: [`../missions/README.md`](../missions/README.md)
 
-Windows stays the **current daily console** until MAC-1 evidence is certified. Arch bare-metal remains separately gated.
+Mac is the **primary operator console**. Windows is **fallback**. Arch bare-metal is gated by OFFLINE-1.
 
-Operator priority *(updated)*:
+Operator priority *(updated 2026-07-24)*:
 
 ```text
-1. MAC-1 full console bootstrap  ← AUTHORIZED (operator execution)
-2. WIN-1 Core                    ← friction-driven on Windows fallback
-3. Arch bare-metal               ← when authorized (independent)
-4. Mission 20 observation        ← DevOps Lab
-5. MAC-2 development experience  ← after MAC-1 PASS
+1. MAC-1 full console bootstrap  ← CERTIFIED ✅
+2. OFFLINE-1 offline NTFS shrink ← ACTIVE (critical path)
+3. Arch install (arch-install-spec.md)
+4. Arch bootstrap
+5. Mission 20 observation        ← DevOps Lab (parallel)
+6. MAC-2 development experience  ← DEFERRED (after Arch bootstrap)
+7. WIN-1 Core                    ← friction-driven on Windows fallback
 ```
 
+### OFFLINE-1 — Active bare-metal mission
+
+```text
+STATUS:     ACTIVE ✅ · AUTHORIZED
+MISSION:    shared/missions/OFFLINE-1-NTFS-SHRINK.md
+EDR:        shared/evidence/bare-metal/decisions/WINDOWS-ONLINE-SHRINK-EXHAUSTED.md
+EVIDENCE:   shared/evidence/bare-metal/offline-shrink-evidence.txt
+NEXT:       arch-install-spec.md on OFFLINE-1 PASS
+```
+
+Do **not** reopen Windows online shrink without new evidence.
 ---
 
 ## Mission 20 (DevOps Lab)
@@ -247,7 +261,8 @@ Unless new evidence changes state:
 | WS-2 Sprint 2 | **APPROVED** |
 | Mission 20 | **Observation** (Contabo cutover 2026-07-23) |
 | WIN-1A | BLOCKED until Mission 20 observation PASS |
-| MAC-1 | **AUTHORIZED** — awaiting macOS operator evidence |
+| MAC-1 | **CERTIFIED ✅ · PASS** (2026-07-24) |
+| OFFLINE-1 | **ACTIVE ✅ · AUTHORIZED** — current critical path |
 | Foundation / Governance / Lifecycle | **FROZEN** |
 | Review trigger | **Observed Friction** or new evidence only |
 
@@ -257,7 +272,7 @@ Historical only (do not revert): `95% Migration` · `P0 Pending` · `WIN-1 block
 
 | Track | Focus |
 |-------|-------|
-| **SmoothOperator** | WIN-1 Infra **FROZEN ✅** · Core **OPEN** · WS-2 Sprint 2 **APPROVED ✅** · **MAC-1 AUTHORIZED** |
+| **SmoothOperator** | WIN-1 Infra **FROZEN ✅** · Core **OPEN** · WS-2 Sprint 2 **APPROVED ✅** · **MAC-1 CERTIFIED ✅** · **OFFLINE-1 ACTIVE** · MAC-2 **DEFERRED** |
 | **DevOps Lab** | Mission 20 **Observation** |
 | **Products** | Standby until Contabo production |
 

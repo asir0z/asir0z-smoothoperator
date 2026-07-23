@@ -11,17 +11,19 @@ Certification   →  Decision
 
 ---
 
-## Platform state (2026-07-23)
+## Platform state (2026-07-24)
 
 ```text
 Foundation        FROZEN ✅
 Governance        FROZEN ✅
 Lifecycle         FROZEN ✅
 Migration         100% · CERTIFIED · FROZEN ✅
+MAC-1             CERTIFIED ✅ · PASS
+OFFLINE-1         ACTIVE ✅ · AUTHORIZED
 Execution         ACTIVE ✅
 ```
 
-Bootstrap era closed. **Operational maturity** phase active.
+Bootstrap era closed. **Operational maturity** phase active. Critical path: offline NTFS shrink → Arch.
 
 ---
 
@@ -61,13 +63,13 @@ Review questions:
 
 | Track | Status | Focus |
 |-------|--------|-------|
-| **SmoothOperator** | WIN-1 Core **OPEN** · **MAC-1 AUTHORIZED** | Mac operator bootstrap · Windows friction |
+| **SmoothOperator** | **MAC-1 CERTIFIED ✅** · **OFFLINE-1 ACTIVE** · WIN-1 Core **OPEN** · MAC-2 **DEFERRED** | Offline NTFS shrink · Arch bare-metal |
 | **DevOps Lab** | Mission 20 **Observation** | Contabo cutover observation |
 | **Products** | Standby | After Contabo production |
 
 **Mission 20 goal:** *Production users cannot tell that infrastructure changed.*
 
-**Operator console:** MAC-1 authorized on Mac — Windows remains daily console until MAC-1 certified.
+**Operator console:** Mac is primary (MAC-1 certified). Windows is fallback.
 
 ---
 
@@ -80,7 +82,7 @@ Review questions:
 | [PLATFORM-STATE.md](PLATFORM-STATE.md) | **Current canonical state** |
 | [MIGRATION.md](MIGRATION.md) | **100% · CERTIFIED · FROZEN ✅** |
 | [WIN-1.md](WIN-1.md) | AUTHORIZED · Infra **FROZEN** · Core **OPEN** |
-| [MAC-1.md](MAC-1.md) | AUTHORIZED ✅ · amended full console · awaiting macOS evidence |
+| [MAC-1.md](MAC-1.md) | **CERTIFIED ✅ · PASS** (2026-07-24) |
 | Missions index | [`../missions/README.md`](../missions/README.md) |
 | [WIN-2.5.md](WIN-2.5.md) | SPEC APPROVED · WAITING FOR WIN-1 |
 | [TRANSITION-INFRASTRUCTURE-REVIEW.md](TRANSITION-INFRASTRUCTURE-REVIEW.md) | APPROVED ✅ |

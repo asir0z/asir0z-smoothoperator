@@ -1,0 +1,244 @@
+=== MAC-1 mac-verify ===
+UTC:      2026-07-23T23:37:24Z
+Host:     Mac.home
+User:     asir0z
+REPO:     /Users/asir0z/Projects/asir0z-smoothoperator
+uname:    Darwin Mac.home 27.0.0 Darwin Kernel Version 27.0.0: Tue Jul 14 21:41:19 PDT 2026; root:xnu-13432.0.94.501.4~1/RELEASE_ARM64_T8112 arm64
+
+[PASS] platform                                     Darwin
+SHELL=/bin/zsh
+[PASS] shell.default                                /bin/zsh
+[PASS] shell.zsh                                    zsh 5.9 (arm64-apple-darwin26.0)
+[PASS] shell.bash                                   GNU bash, version 3.2.57(1)-release (arm64-apple-darwin26)
+[PASS] hostname.computer                            Asır’s MacBook Air
+[PASS] timezone                                     Europe/Istanbul
+[PASS] filevault                                    On
+[PASS] terminal.app                                 present
+[PASS] brew                                         Homebrew 6.0.12
+--- brew doctor ---
+✔︎ JSON API packages.arm64_golden_gate.jws.json
+Please note that these warnings are just used to help the Homebrew maintainers
+with debugging if you file an issue. If everything you use Homebrew for is
+working fine: please don't worry or file an issue; just ignore this. Thanks!
+
+Warning: You are using macOS 27.
+We do not provide support for this pre-release version.
+
+This is a Tier 2 configuration:
+  https://docs.brew.sh/Support-Tiers#tier-2
+You can report issues with Tier 2 configurations to Homebrew/* repositories!
+Read the above document before opening any issues or PRs.
+
+
+[WARN] brew.doctor                                  exit 1
+[PASS] tool.git                                     git version 2.55.0 
+[PASS] tool.gh                                      gh version 2.96.0 (2026-07-02) 
+[PASS] tool.openssh                                 OpenSSH_10.4p1, OpenSSL 3.6.3 9 Jun 2026
+[PASS] tool.curl                                    curl 8.7.1 (x86_64-apple-darwin26.0) libcurl/8.7.1 (SecureTransport) LibreSSL/3.3.6 zlib/1.2.12 nghttp2/1.69.0 
+[PASS] tool.wget                                    GNU Wget 1.25.0 built on darwin25.4.0. 
+[PASS] tool.jq                                      jq-1.8.2 
+[PASS] tool.yq                                      yq (https://github.com/mikefarah/yq/) version v4.53.3 
+[PASS] tool.tree                                    tree v2.3.2 © 1996 - 2026 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro 
+[PASS] tool.ripgrep                                 ripgrep 15.2.0 
+[PASS] tool.fd                                      fd 10.4.2 
+[PASS] tool.fzf                                     0.74.1 (Homebrew) 
+[PASS] tool.tmux                                    tmux 3.7b
+[PASS] tool.htop                                    htop 3.5.2 
+[PASS] tool.rsync                                   rsync  version 3.4.4  protocol version 32
+[PASS] tool.coreutils                               date (GNU coreutils) 9.11 
+[PASS] tool.gnu-sed                                 gsed (GNU sed) 4.10 
+[PASS] tool.findutils                               find (GNU findutils) 4.11.0 
+[PASS] tool.gawk                                    GNU Awk 5.4.1, API 4.1, PMA Avon 8-g1, (GNU MPFR 4.2.2, GNU MP 6.3.0) 
+[PASS] tool.make                                    GNU Make 3.81 
+[PASS] tool.shellcheck                              ShellCheck - shell script analysis tool 
+[PASS] tool.shfmt                                   3.13.1 
+[PASS] optional.bat                                 present
+[PASS] optional.eza                                 present
+[PASS] optional.btop                                present
+[PASS] optional.watch                               present
+[PASS] optional.ncdu                                present
+[PASS] optional.neovim                              present
+[PASS] ssh.dir                                      mode 700
+[PASS] ssh.pubkey                                   present
+[PASS] ssh.config.hosts                             github lab arch
+--- ssh -T git@github.com ---
+Hi asir0z! You've successfully authenticated, but GitHub does not provide shell access.
+[PASS] ssh.github                                   authenticated
+--- ssh lab ---
+vmi3459972
+root
+[PASS] ssh.lab                                      reachable
+--- ssh arch ---
+ssh: Could not resolve hostname replace_with_arch_hostname_or_tailscale_name: nodename nor servname provided, or not known
+[WARN] ssh.arch                                     unreachable rc=255
+[PASS] git.version                                  git version 2.55.0
+[PASS] git.identity                                 Asır <asir01oz@gmail.com>
+--- gh auth status ---
+github.com
+  ✓ Logged in to github.com account asir0z (keyring)
+  - Active account: true
+  - Git operations protocol: ssh
+  - Token: gho_************************************
+  - Token scopes: 'admin:public_key', 'gist', 'read:org', 'repo'
+[PASS] gh.auth                                      authenticated
+[PASS] projects.root                                /Users/asir0z/Projects
+--- Projects ---
+asir0z-devopslab
+asir0z-product-intelligence
+asir0z-smoothoperator
+asir0z-web
+[PASS] repo.asir0z-smoothoperator                   977b22f
+[PASS] repo.asir0z-devopslab                        728ed37
+[PASS] repo.asir0z-web                              4eb21fd
+[PASS] repo.asir0z-product-intelligence             a6e1eaa
+[SKIP] repo.asir0z-project-pulse                    optional/deferred
+[SKIP] repo.asir0z-cortex                           optional/deferred
+[PASS] git.fetch.smoothoperator                     ok
+[PASS] dotfiles.zshrc                               operator markers present
+[PASS] cursor.app                                   /Applications/Cursor.app
+--- bash -n bootstrap scripts ---
+[PASS] syntax.mac-bootstrap.sh                      ok
+[PASS] syntax.mac-packages.sh                       ok
+[PASS] syntax.mac-verify.sh                         ok
+--- shellcheck scripts/**/*.sh ---
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/bootstrap/mac-bootstrap.sh line 9:
+source "${SCRIPT_DIR}/../lib/common.sh"
+       ^-- SC1091 (info): Not following: ../lib/common.sh was not specified as input (see shellcheck -x).
+
+For more information:
+  https://www.shellcheck.net/wiki/SC1091 -- Not following: ../lib/common.sh w...
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/bootstrap/mac-packages.sh line 9:
+source "${SCRIPT_DIR}/../lib/common.sh"
+       ^-- SC1091 (info): Not following: ../lib/common.sh was not specified as input (see shellcheck -x).
+
+For more information:
+  https://www.shellcheck.net/wiki/SC1091 -- Not following: ../lib/common.sh w...
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/bootstrap/mac-verify.sh line 8:
+source "${SCRIPT_DIR}/../lib/common.sh"
+       ^-- SC1091 (info): Not following: ../lib/common.sh was not specified as input (see shellcheck -x).
+
+For more information:
+  https://www.shellcheck.net/wiki/SC1091 -- Not following: ../lib/common.sh w...
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/deploy/remote-deploy-wrapper.sh line 14:
+source "${SCRIPT_DIR}/../lib/common.sh"
+       ^-- SC1091 (info): Not following: ../lib/common.sh was not specified as input (see shellcheck -x).
+
+For more information:
+  https://www.shellcheck.net/wiki/SC1091 -- Not following: ../lib/common.sh w...
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/lib/common.sh line 7:
+  return 0 2>/dev/null || exit 0
+                          ^----^ SC2317 (info): Command appears to be unreachable. Check usage (or ignore if invoked indirectly).
+
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/lib/common.sh line 13:
+source "${_SO_LIB_DIR}/logging.sh"
+       ^-------------------------^ SC1091 (info): Not following: logging.sh was not specified as input (see shellcheck -x).
+
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/lib/common.sh line 15:
+source "${_SO_LIB_DIR}/platform.sh"
+       ^--------------------------^ SC1091 (info): Not following: platform.sh was not specified as input (see shellcheck -x).
+
+For more information:
+  https://www.shellcheck.net/wiki/SC1091 -- Not following: logging.sh was not...
+  https://www.shellcheck.net/wiki/SC2317 -- Command appears to be unreachable...
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/lib/platform.sh line 6:
+  return 0 2>/dev/null || exit 0
+                          ^----^ SC2317 (info): Command appears to be unreachable. Check usage (or ignore if invoked indirectly).
+
+For more information:
+  https://www.shellcheck.net/wiki/SC2317 -- Command appears to be unreachable...
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/lib/logging.sh line 6:
+  return 0 2>/dev/null || exit 0
+                          ^----^ SC2317 (info): Command appears to be unreachable. Check usage (or ignore if invoked indirectly).
+
+For more information:
+  https://www.shellcheck.net/wiki/SC2317 -- Command appears to be unreachable...
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/ops/server-status.sh line 8:
+source "${SCRIPT_DIR}/../lib/common.sh"
+       ^-- SC1091 (info): Not following: ../lib/common.sh was not specified as input (see shellcheck -x).
+
+For more information:
+  https://www.shellcheck.net/wiki/SC1091 -- Not following: ../lib/common.sh w...
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/ops/ssh-check.sh line 8:
+source "${SCRIPT_DIR}/../lib/common.sh"
+       ^-- SC1091 (info): Not following: ../lib/common.sh was not specified as input (see shellcheck -x).
+
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/ops/ssh-check.sh line 33:
+      out="$(so_ssh "$host" 'printf "%s %s\n" "$(hostname)" "$(whoami)"' 2>&1)"
+                            ^-- SC2016 (info): Expressions don't expand in single quotes, use double quotes for that.
+
+For more information:
+  https://www.shellcheck.net/wiki/SC1091 -- Not following: ../lib/common.sh w...
+  https://www.shellcheck.net/wiki/SC2016 -- Expressions don't expand in singl...
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/ops/production-health-check.sh line 9:
+source "${SCRIPT_DIR}/../lib/common.sh"
+       ^-- SC1091 (info): Not following: ../lib/common.sh was not specified as input (see shellcheck -x).
+
+For more information:
+  https://www.shellcheck.net/wiki/SC1091 -- Not following: ../lib/common.sh w...
+
+In /Users/asir0z/Projects/asir0z-smoothoperator/scripts/ops/repo-status.sh line 9:
+source "${SCRIPT_DIR}/../lib/common.sh"
+       ^-- SC1091 (info): Not following: ../lib/common.sh was not specified as input (see shellcheck -x).
+
+For more information:
+  https://www.shellcheck.net/wiki/SC1091 -- Not following: ../lib/common.sh w...
+[WARN] shellcheck                                   findings present
+[PASS] shfmt                                        3.13.1
+--- remote production-health-check (lab) ---
+[INFO] Invoking remote health on lab
+[INFO] Canonical script: $HOME/scripts/ops/production-health-check.sh (Ubuntu)
+[INFO] This file is a Mac wrapper only — no production logic here.
+=== production-health-check ===
+2026-07-24T02:37:35+03:00
+origin=http://127.0.0.1:18080
+
+--- cloudflared ---
+PASS: cloudflared: active
+PASS: cloudflared: enabled
+
+--- containers ---
+PASS: container lab-proxy: running (no healthcheck)
+PASS: container asir0z-web: running (no healthcheck)
+PASS: container n8n: running + healthy
+PASS: container gotenberg: running + healthy
+
+--- disk ---
+PASS: disk /: 4% used
+
+--- deploy trace ---
+WARN: deploy trace: missing /root/asir0z-web/DEPLOYED_COMMIT.txt
+
+--- origin (loopback) ---
+PASS: origin asir0z.com /api/health: HTTP 200 JSON health ok
+PASS: origin n8n.asir0z.com /: HTTP 200 (http://127.0.0.1:18080/)
+
+--- public https ---
+PASS: public asir0z.com/: HTTP 308 → Location /en
+PASS: public asir0z.com/en: HTTP 200 (https://asir0z.com/en)
+PASS: public www.asir0z.com/: HTTP 308 → Location /en
+PASS: public n8n.asir0z.com/: HTTP 200 (https://n8n.asir0z.com/)
+
+--- backup ---
+FAIL: backup: no valid directory under /root/backups/n8n
+
+=== summary ===
+PASS=13 WARN=1 FAIL=1
+RESULT=FAIL
+[WARN] remote.lab.health                            rc=1 (server script may be absent)
+
+=== SUMMARY ===
+PASS=56 FAIL=0 WARN=4 SKIP=2
+RESULT: PASS (review WARN/SKIP before certification)
