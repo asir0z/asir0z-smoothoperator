@@ -10,25 +10,26 @@ Layer:      Documentation root for Mac Engineering Station
 
 | Layer | Status |
 |-------|--------|
-| Foundation | ✅ Canonical |
-| Governance | ✅ Canonical |
-| Standards (catalog) | ⏳ Seed |
-| Capability Templates | ✅ Ready |
-| Interface Templates | ✅ Ready |
+| Foundation | ✅ Canonical · **FROZEN** |
+| Governance | ✅ Canonical · Hold Directive **ACTIVE** |
+| Standards (catalog) | ⏳ Seed · templates frozen |
+| Capability Templates | ✅ Ready · **no new CAP specs** until implementation need |
+| Interface Templates | ✅ Ready · **no new IFACE specs** until implementation need |
 | ADR Template | ✅ Ready |
 | Evidence Standard | ✅ Ready |
 | Certification Standard | ✅ Ready |
 | First certification (MAC-01) | ✅ Recorded |
 | First capability / interface specs | ⏸️ Deferred until MAC-2 implementation need |
 | Active mission | **OFFLINE-1** (Phase B) |
-| MAC-2 | Deferred · Design Frozen |
+| MAC-2 | Deferred · Design Frozen · **Implementation Hold** |
+
+**Hold directive:** [`governance/IMPLEMENTATION-HOLD-DIRECTIVE.md`](governance/IMPLEMENTATION-HOLD-DIRECTIVE.md)
 
 **Rule:** New capability and interface documents are written only from **working implementations**, not speculative contracts.
 
 ```text
 OFFLINE-1 Phase B → Arch Install → Arch Bootstrap → MAC-2 → then first CAP/IFACE
 ```
-
 ## Hierarchy (accepted · do not collapse)
 
 ```text

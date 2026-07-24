@@ -12,6 +12,8 @@ Foundation: [`../foundation/MAC-ENGINEERING-STATION-FOUNDATION-v1.0.md`](../foun
 
 Governance defines **process**. It does not define packages, Brewfiles, or tool choices.
 
+**Active hold:** [`IMPLEMENTATION-HOLD-DIRECTIVE.md`](IMPLEMENTATION-HOLD-DIRECTIVE.md) — freeze docs architecture; critical path OFFLINE-1 → Arch → MAC-2; no speculative CAP/IFACE.
+
 ---
 
 ## Document hierarchy
