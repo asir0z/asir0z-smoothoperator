@@ -6,6 +6,29 @@ Repo:       asir0z-smoothoperator
 Layer:      Documentation root for Mac Engineering Station
 ```
 
+## Documentation Status
+
+| Layer | Status |
+|-------|--------|
+| Foundation | ✅ Canonical |
+| Governance | ✅ Canonical |
+| Standards (catalog) | ⏳ Seed |
+| Capability Templates | ✅ Ready |
+| Interface Templates | ✅ Ready |
+| ADR Template | ✅ Ready |
+| Evidence Standard | ✅ Ready |
+| Certification Standard | ✅ Ready |
+| First certification (MAC-01) | ✅ Recorded |
+| First capability / interface specs | ⏸️ Deferred until MAC-2 implementation need |
+| Active mission | **OFFLINE-1** (Phase B) |
+| MAC-2 | Deferred · Design Frozen |
+
+**Rule:** New capability and interface documents are written only from **working implementations**, not speculative contracts.
+
+```text
+OFFLINE-1 Phase B → Arch Install → Arch Bootstrap → MAC-2 → then first CAP/IFACE
+```
+
 ## Hierarchy (accepted · do not collapse)
 
 ```text
