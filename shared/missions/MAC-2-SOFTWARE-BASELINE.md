@@ -94,6 +94,14 @@ mas "Amphetamine", id: 937984704
 
 **Optional** (document operational value before install): BetterDisplay · Karabiner
 
+### Media (operator comfort)
+
+| App | Install | Brewfile |
+|-----|---------|----------|
+| **Spotify** | `brew install --cask spotify` | `cask "spotify"` |
+
+Native on Apple Silicon. Not required for engineering work — optional comfort app kept reproducible via Brewfile.
+
 ### Networking
 
 * Tailscale
