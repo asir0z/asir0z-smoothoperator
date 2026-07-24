@@ -56,6 +56,10 @@ VBox share `bootstrap` → host path `C:\Projects\asir0z-smoothoperator\linux\bo
 
 **MAC-1** bootstraps a **full** Mac operator console: zsh, Terminal.app, CLI toolchain, SSH, Git, Cursor, Git-tracked dotfiles, and wrappers that call Ubuntu canonical ops over SSH. No infrastructure mutation.
 
+Mac Engineering Station documentation hierarchy (Foundation → Certification):
+
+[`docs/README.md`](docs/README.md)
+
 ```bash
 # On the Mac:
 cd ~/Projects/asir0z-smoothoperator

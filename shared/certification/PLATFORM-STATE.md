@@ -141,6 +141,8 @@ Architecture: [`MAC-PRIMARY-OPERATOR-CONSOLE.md`](../architecture/MAC-PRIMARY-OP
 
 Mac is the **primary operator console**. Windows is **fallback**. Arch bare-metal is gated by OFFLINE-1.
 
+Mac Engineering Station docs (derived canonical set): [`../../docs/README.md`](../../docs/README.md) · Foundation [`../../docs/foundation/MAC-ENGINEERING-STATION-FOUNDATION-v1.0.md`](../../docs/foundation/MAC-ENGINEERING-STATION-FOUNDATION-v1.0.md) · CERT-MAC-01 [`../../docs/certifications/MAC-01-BASELINE-VERIFICATION.md`](../../docs/certifications/MAC-01-BASELINE-VERIFICATION.md)
+
 Operator priority *(updated 2026-07-24)*:
 
 ```text
