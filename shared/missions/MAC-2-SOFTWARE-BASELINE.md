@@ -103,10 +103,20 @@ mas "Amphetamine", id: 937984704
 
 ### Mail
 
-| Client | Role |
-|--------|------|
-| **Spark** | Approved — cross-device consistency · unified accounts · operator workflow |
-| Apple Mail | Native fallback |
+| Client | Role | Install |
+|--------|------|---------|
+| **Spark** (Readdle) | Approved — cross-device · unified accounts · operator workflow | `brew install --cask readdle-spark` |
+| Apple Mail | Native fallback | system |
+
+**Cask name is `readdle-spark`.** Do **not** use `spark` / `spark-app` — those are unrelated (shortcut manager).
+
+Brewfile:
+
+```ruby
+cask "readdle-spark"
+```
+
+App path: `/Applications/Spark Desktop.app`
 
 ### AI tooling (optional · clients only)
 
