@@ -78,6 +78,20 @@ No large shell frameworks unless justified.
 
 **Approved:** Raycast · Rectangle · Stats  
 
+**Keep-awake (operator sessions):**
+
+| App | Install path | Notes |
+|-----|--------------|--------|
+| **Amphetamine** | Mac App Store via **`mas`** (id `937984704`) | Official app — **no Homebrew cask exists** (`brew install --cask amphetamine` fails) |
+| KeepingYouAwake | `brew install --cask keepingyouawake` | Homebrew-native alternative if MAS/`mas` unwanted |
+
+Brewfile shape for Amphetamine (when MAC-2 implements):
+
+```ruby
+brew "mas"
+mas "Amphetamine", id: 937984704
+```
+
 **Optional** (document operational value before install): BetterDisplay · Karabiner
 
 ### Networking
